@@ -21,4 +21,10 @@ public class DesertRepository implements DesertDAO {
         DesertEntity saved = desertJpaRepository.saveAndFlush(toSave);
         return desertMapper.mapFromEntity(saved);
     }
+
+    @Override
+    public Integer saveDesertAndReturnId(DesertEntity desertEntity) {
+        return desertJpaRepository.saveAndFlush(desertEntity).getDesertId();
+    }
+
 }

@@ -16,11 +16,13 @@ public class DesertFixtures {
                         .name("Apple pie")
                         .composition("apple, flour")
                         .price(new BigDecimal("11.00"))
+                .quantity(0)
                 .build());
         deserts.add(Desert.builder()
                         .name("Cheesecake")
                         .composition("white cheese, raisins")
                         .price(new BigDecimal("12.00"))
+                .quantity(0)
                 .build());
         return deserts;
     }

@@ -33,4 +33,6 @@ public class MainMealEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
+//    @OneToMany
+//    private MenuEntity menu;
 }

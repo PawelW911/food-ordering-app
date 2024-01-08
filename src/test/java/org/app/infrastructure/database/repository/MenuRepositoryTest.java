@@ -1,11 +1,12 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.domain.MainMeal;
+import org.app.domain.Menu;
 import org.app.infrastructure.configuration.PersistenceContainerTestConfiguration;
-import org.app.infrastructure.database.entity.MainMealEntity;
+import org.app.infrastructure.database.entity.MenuEntity;
 import org.app.infrastructure.database.repository.jpa.MainMealJpaRepository;
-import org.app.util.MainMealFixtures;
+import org.app.infrastructure.database.repository.jpa.MenuJpaRepository;
+import org.app.util.MenuFixtures;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
+
 import java.util.List;
 
 @SpringBootTest
@@ -20,25 +22,22 @@ import java.util.List;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceContainerTestConfiguration.class)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class MainMealRepositoryTest {
+public class MenuRepositoryTest {
 
-    private final MainMealRepository mainMealRepository;
-    private final MainMealJpaRepository mainMealJpaRepository;
+    private final MenuRepository menuRepository;
+    private final MenuJpaRepository menuJpaRepository;
 
     @Test
-    void correctlySaveMainMeal() {
+    void correctlySaveMenu() {
         // given
-        MainMeal mainMeal = MainMealFixtures.someMainMealForPolishFood().stream().toList().get(0);
+        Menu menu = MenuFixtures.someMenuPolishFood();
 
         // when
-        List<MainMealEntity> allMainMealBeforeSave = mainMealJpaRepository.findAll();
-        mainMealRepository.saveMainMeal(mainMeal);
-        List<MainMealEntity> allMainMealAfterSave = mainMealJpaRepository.findAll();
+        List<MenuEntity> allMenuBeforeSave = menuJpaRepository.findAll();
+        menuRepository.saveMenu(menu);
+        List<MenuEntity> allMenuAfterSave = menuJpaRepository.findAll();
 
         // then
-        Assertions.assertThat(allMainMealBeforeSave).hasSize(allMainMealAfterSave.size() - 1);
+        Assertions.assertThat(allMenuBeforeSave).hasSize(allMenuAfterSave.size()-1);
     }
-
-
-
 }

@@ -10,7 +10,7 @@ CREATE TABLE restaurant
     menu_id                         INT             NOT NULL,
     restaurant_street_delivery_id   INT             NOT NULL,
     address_id                      INT             NOT NULL,
-    opinion_id                      INT             NOT NULL,
+    opinion_id                      INT,
     owner_id                        INT             NOT NULL,
     PRIMARY KEY (restaurant_id),
     UNIQUE (unique_code),

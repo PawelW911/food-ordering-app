@@ -21,4 +21,10 @@ public class DrinkRepository implements DrinkDAO {
         DrinkEntity saved = drinkJpaRepository.saveAndFlush(toSave);
         return drinkMapper.mapFromEntity(saved);
     }
+
+    @Override
+    public Integer saveDrinkAndReturnId(DrinkEntity drinkEntity) {
+        return drinkJpaRepository.saveAndFlush(drinkEntity).getDrinkId();
+    }
+
 }

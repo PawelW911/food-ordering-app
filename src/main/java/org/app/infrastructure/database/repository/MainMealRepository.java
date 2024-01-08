@@ -22,4 +22,9 @@ public class MainMealRepository implements MainMealDAO {
         return mainMealMapper.mapFromEntity(saved);
     }
 
+    @Override
+    public Integer saveMainMealAndReturnId(MainMealEntity mainMealEntity) {
+        return mainMealJpaRepository.saveAndFlush(mainMealEntity).getMainMealId();
+    }
+
 }

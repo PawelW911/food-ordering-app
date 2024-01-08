@@ -21,6 +21,10 @@ public class MenuEntity {
     @Column(name = "menu_id")
     private Integer menuId;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "main_meal_id")
+    Set<MainMealEntity> mainMeals;
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "appetizer_id")
     Set<AppetizerEntity> appetizers;
@@ -30,10 +34,6 @@ public class MenuEntity {
     Set<SoupEntity> soups;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "main_meal_id")
-    Set<MainMealEntity> mainMeals;
-
-    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "desert_id")
     Set<DesertEntity> deserts;
 
@@ -41,8 +41,8 @@ public class MenuEntity {
     @JoinColumn(name = "drink_id")
     Set<DrinkEntity> drinks;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "menu")
-    private RestaurantEntity restaurant;
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "menu")
+//    private RestaurantEntity restaurant;
 
 
 }

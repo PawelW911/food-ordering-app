@@ -16,11 +16,13 @@ public class MainMealFixtures {
                         .name("Pork chop with potatoes")
                         .composition("Pork chop, potatoes, salad")
                         .price(new BigDecimal("32.00"))
+                .quantity(0)
                 .build());
         mainMeals.add(MainMeal.builder()
                         .name("Dumplings with meat")
                         .composition("meat")
                         .price(new BigDecimal("23.00"))
+                .quantity(0)
                 .build());
         return mainMeals;
     }

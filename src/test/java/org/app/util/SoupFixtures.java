@@ -16,11 +16,13 @@ public class SoupFixtures {
                         .name("Zurek")
                         .composition("Potato, sausage")
                         .price(new BigDecimal("8.00"))
+                .quantity(0)
                 .build());
         soups.add(Soup.builder()
                         .name("Chicken broth")
                         .composition("Chicken, pasta")
                         .price(new BigDecimal("7.00"))
+                .quantity(0)
                 .build());
         return soups;
     }

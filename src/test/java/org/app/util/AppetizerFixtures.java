@@ -17,11 +17,13 @@ public class AppetizerFixtures {
                 .name("Tatar")
                 .composition("Raw beef, onion")
                 .price(new BigDecimal("20.00"))
+                        .quantity(0)
                 .build());
         appetizers.add(Appetizer.builder()
                 .name("Herring in cream")
                 .composition("Herring, cream, onion")
                 .price(new BigDecimal("12.00"))
+                .quantity(0)
                 .build());
 
         return appetizers;

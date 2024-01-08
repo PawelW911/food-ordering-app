@@ -33,7 +33,7 @@ public class RestaurantRepositoryTest {
         // when
         restaurantRepository.saveRestaurant(restaurant);
         RestaurantEntity restaurantEntity = restaurantJpaRepository.findByUniqueCode(restaurant.getUniqueCode());
-
+        System.out.println(restaurantEntity.toString());
         // then
         Assertions.assertThatObject(restaurantEntity).isNotNull();
     }
