@@ -5,5 +5,9 @@ CREATE TABLE appetizer
     composition     TEXT            NOT NULL,
     price           NUMERIC(6,2)    NOT NULL,
     quantity        INT             NOT NULL,
-    PRIMARY KEY (appetizer_id)
+    menu_id         INT             NOT NULL,
+    PRIMARY KEY (appetizer_id),
+    CONSTRAINT fk_appetizer_menu
+            FOREIGN KEY (menu_id)
+                REFERENCES menu (menu_id)
 );

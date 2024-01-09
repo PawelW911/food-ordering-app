@@ -5,5 +5,9 @@ CREATE TABLE soup
     composition     TEXT            NOT NULL,
     price           NUMERIC(6,2)    NOT NULL,
     quantity        INT             NOT NULL,
-    PRIMARY KEY (soup_id)
+    menu_id         INT             NOT NULL,
+    PRIMARY KEY (soup_id),
+    CONSTRAINT fk_soup_menu
+            FOREIGN KEY (menu_id)
+                REFERENCES menu (menu_id)
 );

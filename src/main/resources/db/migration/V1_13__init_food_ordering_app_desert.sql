@@ -5,5 +5,9 @@ CREATE TABLE desert
     composition     TEXT            NOT NULL,
     price           NUMERIC(6,2)    NOT NULL,
     quantity        INT             NOT NULL,
-    PRIMARY KEY (desert_id)
+    menu_id         INT             NOT NULL,
+    PRIMARY KEY (desert_id),
+    CONSTRAINT fk_desert_menu
+            FOREIGN KEY (menu_id)
+                REFERENCES menu (menu_id)
 );

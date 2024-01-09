@@ -21,28 +21,25 @@ public class MenuEntity {
     @Column(name = "menu_id")
     private Integer menuId;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "main_meal_id")
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     Set<MainMealEntity> mainMeals;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "appetizer_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     Set<AppetizerEntity> appetizers;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "soup_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     Set<SoupEntity> soups;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "desert_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     Set<DesertEntity> deserts;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "drink_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     Set<DrinkEntity> drinks;
-
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "menu")
-//    private RestaurantEntity restaurant;
-
 
 }

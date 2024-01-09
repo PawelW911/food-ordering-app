@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,6 +33,10 @@ public class AppetizerEntity {
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id")
+    RestaurantEntity restaurant;
 
 
 }

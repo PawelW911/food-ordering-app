@@ -5,5 +5,9 @@ CREATE TABLE main_meal
     composition     TEXT            NOT NULL,
     price           NUMERIC(6,2)    NOT NULL,
     quantity        INT             NOT NULL,
-    PRIMARY KEY (main_meal_id)
+    menu_id         INT             NOT NULL,
+    PRIMARY KEY (main_meal_id),
+    CONSTRAINT fk_main_meal_menu
+        FOREIGN KEY (menu_id)
+            REFERENCES menu (menu_id)
 );

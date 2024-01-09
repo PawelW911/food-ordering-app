@@ -33,5 +33,9 @@ public class DesertEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id")
+    RestaurantEntity restaurant;
+
 
 }

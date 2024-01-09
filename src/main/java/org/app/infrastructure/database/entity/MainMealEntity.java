@@ -33,6 +33,7 @@ public class MainMealEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
-//    @OneToMany
-//    private MenuEntity menu;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id")
+    RestaurantEntity restaurant;
 }
