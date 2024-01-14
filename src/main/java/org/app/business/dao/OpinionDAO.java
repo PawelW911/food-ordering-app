@@ -1,2 +1,7 @@
-package org.app.business.dao;public interface OpinionDAO {
+package org.app.business.dao;
+
+import org.app.domain.Opinion;
+
+public interface OpinionDAO {
+    Opinion saveOpinion(Opinion opinion);
 }

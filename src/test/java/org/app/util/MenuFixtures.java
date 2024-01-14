@@ -10,6 +10,9 @@ public class MenuFixtures {
 
     public static Menu someMenuPolishFood() {
         return Menu.builder()
+                .name("Polish food")
+                .description("Traditional polish dishes.")
+                .restaurant(RestaurantFixtures.someRestaurant1())
                 .appetizers(AppetizerFixtures.someAppetizersForPolishFood())
                 .soups(SoupFixtures.someSoupsForPolishFood())
                 .mainMeals(MainMealFixtures.someMainMealForPolishFood())

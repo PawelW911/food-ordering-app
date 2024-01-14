@@ -21,9 +21,9 @@ public class StreetDeliveryRepository implements StreetDeliveryDAO {
 
     @Override
     public Set<StreetDelivery> saveStreetDeliveries(Set<StreetDelivery> streetDeliveries) {
-        Set<StreetDeliveryEntity> streetDeliveryEntitiesToSave = streetDeliveries.stream()
+        List<StreetDeliveryEntity> streetDeliveryEntitiesToSave = streetDeliveries.stream()
                 .map(streetDeliveryMapper::mapToEntity)
-                .collect(Collectors.toSet());
+                .toList();
 
         List<StreetDeliveryEntity> streetDeliveryEntitiesSaved =
                 streetDeliveryJpaRepository.saveAllAndFlush(streetDeliveryEntitiesToSave);

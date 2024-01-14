@@ -5,7 +5,7 @@ import lombok.*;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "email")
+@EqualsAndHashCode
 @ToString(of = {"customerId", "name", "surname", "email", "phone", "address", "opinion", "order"})
 public class Customer {
 
@@ -16,6 +16,6 @@ public class Customer {
     String phone;
     Address address;
     Opinion opinion;
-    Order order;
+    FoodOrder order;
 
 }

@@ -3,7 +3,8 @@ package org.app.business.dao;
 import org.app.domain.MainMeal;
 import org.app.infrastructure.database.entity.MainMealEntity;
 
+import java.util.List;
+
 public interface MainMealDAO {
-    MainMeal saveMainMeal(MainMeal mainMeal);
-    Integer saveMainMealAndReturnId(MainMealEntity mainMealEntity);
+    List<MainMeal> saveMainMeals(List<MainMeal> mainMeal);
 }

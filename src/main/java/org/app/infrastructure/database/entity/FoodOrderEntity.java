@@ -43,24 +43,19 @@ public class FoodOrderEntity {
     @JoinColumn(name = "customer_id")
     CustomerEntity customer;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "appetizer_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<AppetizerEntity> appetizers;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "soup_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<SoupEntity> soups;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "main_meal_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<MainMealEntity> mainMeals;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "desert_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<DesertEntity> deserts;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "drink_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<DrinkEntity> drinks;
 
 }

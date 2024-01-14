@@ -3,7 +3,8 @@ package org.app.business.dao;
 import org.app.domain.Desert;
 import org.app.infrastructure.database.entity.DesertEntity;
 
+import java.util.List;
+
 public interface DesertDAO {
-    Desert saveDesert(Desert desert);
-    Integer saveDesertAndReturnId(DesertEntity desertEntity);
+    List<Desert> saveDeserts(List<Desert> desert);
 }

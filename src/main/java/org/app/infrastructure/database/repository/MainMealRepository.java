@@ -8,6 +8,8 @@ import org.app.infrastructure.database.repository.jpa.MainMealJpaRepository;
 import org.app.infrastructure.database.repository.mapper.MainMealMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class MainMealRepository implements MainMealDAO {
@@ -16,15 +18,14 @@ public class MainMealRepository implements MainMealDAO {
     private final MainMealMapper mainMealMapper;
 
     @Override
-    public MainMeal saveMainMeal(MainMeal mainMeal) {
-        MainMealEntity toSave = mainMealMapper.mapToEntity(mainMeal);
-        MainMealEntity saved = mainMealJpaRepository.saveAndFlush(toSave);
-        return mainMealMapper.mapFromEntity(saved);
-    }
-
-    @Override
-    public Integer saveMainMealAndReturnId(MainMealEntity mainMealEntity) {
-        return mainMealJpaRepository.saveAndFlush(mainMealEntity).getMainMealId();
+    public List<MainMeal> saveMainMeals(List<MainMeal> mainMeals) {
+        List<MainMealEntity> toSave = mainMeals.stream()
+                .map(mainMealMapper::mapToEntity)
+                .toList();
+        List<MainMealEntity> saved = mainMealJpaRepository.saveAllAndFlush(toSave);
+        return saved.stream()
+                .map(mainMealMapper::mapFromEntity)
+                .toList();
     }
 
 }

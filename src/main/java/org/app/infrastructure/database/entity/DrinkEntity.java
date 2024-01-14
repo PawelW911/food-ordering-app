@@ -36,8 +36,12 @@ public class DrinkEntity {
     @Column(name = "alcohol_free")
     private Boolean alcoholFree;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "restaurant_id")
-    RestaurantEntity restaurant;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id")
+    MenuEntity menu;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "food_order_id")
+    FoodOrderEntity foodOrder;
 
 }

@@ -4,7 +4,8 @@ package org.app.business.dao;
 import org.app.domain.Drink;
 import org.app.infrastructure.database.entity.DrinkEntity;
 
+import java.util.List;
+
 public interface DrinkDAO {
-    Drink saveDrink(Drink drink);
-    Integer saveDrinkAndReturnId(DrinkEntity drinkEntity);
+    List<Drink> saveDrinks(List<Drink> drink);
 }

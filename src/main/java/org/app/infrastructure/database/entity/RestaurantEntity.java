@@ -39,29 +39,25 @@ public class RestaurantEntity {
     @Column(name = "opening_hours")
     private String openingHours;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menu_id")
-    MenuEntity menu;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private MenuEntity menu;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "restaurant_street_delivery",
-            joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name = "street_delivery_id"))
-    Set<StreetDeliveryEntity> streetDelivery;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private Set<StreetDeliveryEntity> streetDelivery;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     AddressEntity address;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "opinion_id")
+    @Transient
+    @OneToMany(fetch = FetchType.LAZY)
     Set<OpinionEntity> opinions;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     OwnerEntity owner;
 
+    @Transient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     Set<FoodOrderEntity> orders;
 

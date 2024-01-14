@@ -5,7 +5,7 @@ import lombok.*;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "email")
+@EqualsAndHashCode
 @ToString(of = {"ownerId", "name", "surname", "email", "phone", "restaurant"})
 public class Owner {
 

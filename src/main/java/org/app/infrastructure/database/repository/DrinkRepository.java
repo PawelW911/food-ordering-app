@@ -8,6 +8,8 @@ import org.app.infrastructure.database.repository.jpa.DrinkJpaRepository;
 import org.app.infrastructure.database.repository.mapper.DrinkMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class DrinkRepository implements DrinkDAO {
@@ -16,15 +18,15 @@ public class DrinkRepository implements DrinkDAO {
     private final DrinkMapper drinkMapper;
 
     @Override
-    public Drink saveDrink(Drink drink) {
-        DrinkEntity toSave = drinkMapper.mapToEntity(drink);
-        DrinkEntity saved = drinkJpaRepository.saveAndFlush(toSave);
-        return drinkMapper.mapFromEntity(saved);
+    public List<Drink> saveDrinks(List<Drink> drinks) {
+        List<DrinkEntity> toSave = drinks.stream()
+                .map(drinkMapper::mapToEntity)
+                .toList();
+        List<DrinkEntity> saved = drinkJpaRepository.saveAllAndFlush(toSave);
+        return saved.stream()
+                .map(drinkMapper::mapFromEntity)
+                .toList();
     }
 
-    @Override
-    public Integer saveDrinkAndReturnId(DrinkEntity drinkEntity) {
-        return drinkJpaRepository.saveAndFlush(drinkEntity).getDrinkId();
-    }
 
 }

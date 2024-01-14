@@ -7,11 +7,13 @@ import java.util.Set;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "menuId")
+@EqualsAndHashCode
 @ToString(of = {"menuId", "appetizers", "soups", "mainMeals", "deserts", "drinks", "restaurant"})
 public class Menu {
 
     Integer menuId;
+    String name;
+    String description;
     Set<Appetizer> appetizers;
     Set<Soup> soups;
     Set<MainMeal> mainMeals;

@@ -14,4 +14,13 @@ public class AddressFixtures {
                 .city("Warszawa")
                 .build();
     }
+
+    public static Address someAddress2() {
+        return Address.builder()
+                .street("Katowicka")
+                .localNumber("56")
+                .postalCode("00-452")
+                .city("Warszawa")
+                .build();
+    }
 }

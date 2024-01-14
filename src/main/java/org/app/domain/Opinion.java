@@ -8,7 +8,7 @@ import java.time.OffsetDateTime;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "opinionId")
+@EqualsAndHashCode
 @ToString(of = {"opinionId", "text", "stars", "dateTime", "customer"})
 public class Opinion {
 
@@ -16,5 +16,6 @@ public class Opinion {
     String text;
     Integer stars;
     OffsetDateTime dateTime;
-    CustomerEntity customer;
+    Customer customer;
+    Restaurant restaurant;
 }

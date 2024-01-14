@@ -7,7 +7,7 @@ import java.util.Set;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "uniqueCode")
+@EqualsAndHashCode
 @ToString(of = {
         "restaurantId", "uniqueCode", "name", "typeFood",
         "email", "phone", "openingHours", "menu",
@@ -26,5 +26,6 @@ public class Restaurant {
     Set<StreetDelivery> streetDelivery;
     Address address;
     Set<Opinion> opinions;
-    Set<Order> orders;
+    Set<FoodOrder> orders;
+    Owner owner;
 }

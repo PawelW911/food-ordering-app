@@ -39,5 +39,11 @@ public class OpinionEntity {
     @JoinColumn(name = "customer_id")
     CustomerEntity customer;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id")
+    RestaurantEntity restaurant;
+
+
+
 
 }

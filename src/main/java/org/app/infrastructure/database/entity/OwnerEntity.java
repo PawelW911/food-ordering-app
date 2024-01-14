@@ -33,6 +33,7 @@ public class OwnerEntity {
     @Column(name = "phone")
     private String phone;
 
+    @Transient
     @OneToMany(fetch = FetchType.LAZY)
     Set<RestaurantEntity> restaurants;
 

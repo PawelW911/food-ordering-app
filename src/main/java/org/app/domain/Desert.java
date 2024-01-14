@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "desertId")
+@EqualsAndHashCode
 @ToString(of = {"desertId", "name", "composition", "price", "quantity"})
 public class Desert {
 
@@ -16,4 +16,6 @@ public class Desert {
     String composition;
     BigDecimal price;
     Integer quantity;
+    Menu menu;
+    FoodOrder foodOrder;
 }

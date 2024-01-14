@@ -1,9 +1,9 @@
 package org.app.business.dao;
 
 import org.app.domain.Appetizer;
-import org.app.infrastructure.database.entity.AppetizerEntity;
+
+import java.util.List;
 
 public interface AppetizerDAO {
-    Appetizer saveAppetizer(Appetizer appetizer);
-    Integer saveAppetizerAndReturnId(AppetizerEntity appetizerEntity);
+    List<Appetizer> saveAppetizers(List<Appetizer> appetizer);
 }

@@ -27,19 +27,23 @@ public class MenuEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
     Set<MainMealEntity> mainMeals;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
     Set<AppetizerEntity> appetizers;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
     Set<SoupEntity> soups;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
     Set<DesertEntity> deserts;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
     Set<DrinkEntity> drinks;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    RestaurantEntity restaurant;
 
 }

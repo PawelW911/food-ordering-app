@@ -5,8 +5,13 @@ CREATE TABLE opinion
     stars           INT CHECK (stars BETWEEN 1 AND 5)   NOT NULL,
     date_time       TIMESTAMP WITH TIME ZONE            NOT NULL,
     customer_id     INT                                 NOT NULL,
+    restaurant_id     INT                                 NOT NULL,
     PRIMARY KEY (opinion_id),
     CONSTRAINT fk_opinion_customer
         FOREIGN KEY (customer_id)
-            REFERENCES customer (customer_id)
+            REFERENCES customer (customer_id),
+    CONSTRAINT fk_opinion_restaurant
+        FOREIGN KEY (restaurant_id)
+            REFERENCES restaurant (restaurant_id)
+
 );

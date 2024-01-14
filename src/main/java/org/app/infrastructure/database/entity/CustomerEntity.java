@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.Set;
 
+@With
 @Getter
 @Setter
 @EqualsAndHashCode(of = "email")
@@ -33,9 +34,9 @@ public class CustomerEntity {
     @Column(name = "phone")
     private String phone;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
-    AddressEntity address;
+    private AddressEntity address;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private Set<OpinionEntity> opinions;

@@ -8,6 +8,8 @@ import org.app.infrastructure.database.repository.jpa.SoupJpaRepository;
 import org.app.infrastructure.database.repository.mapper.SoupMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class SoupRepository implements SoupDAO {
@@ -16,15 +18,14 @@ public class SoupRepository implements SoupDAO {
     private final SoupMapper soupMapper;
 
     @Override
-    public Soup saveSoup(Soup soup) {
-        SoupEntity toSave = soupMapper.mapToEntity(soup);
-        SoupEntity saved = soupJpaRepository.saveAndFlush(toSave);
-        return soupMapper.mapFromEntity(saved);
-    }
-
-    @Override
-    public Integer saveSoupAndReturnId(SoupEntity soupEntity) {
-        return soupJpaRepository.saveAndFlush(soupEntity).getSoupId();
+    public List<Soup> saveSoups(List<Soup> soups) {
+        List<SoupEntity> toSave = soups.stream()
+                .map(soupMapper::mapToEntity)
+                .toList();
+        List<SoupEntity> saved = soupJpaRepository.saveAllAndFlush(toSave);
+        return saved.stream()
+                .map(soupMapper::mapFromEntity)
+                .toList();
     }
 
 }

@@ -14,9 +14,10 @@ public class RestaurantFixtures {
                 .typeFood("Polish traditional food")
                 .email("polish-food@gmail.com")
                 .phone("+48 643 764 532")
-                .menu(MenuFixtures.someMenuPolishFood())
+                .openingHours("12:00-22:00")
                 .streetDelivery(StreetDeliveryFixtures.someStreetDelivery1())
-                .address(AddressFixtures.someAddress1())
+                .address(AddressFixtures.someAddress2())
+                .owner(OwnerFixtures.someOwner1())
                 .build();
     }
 }
