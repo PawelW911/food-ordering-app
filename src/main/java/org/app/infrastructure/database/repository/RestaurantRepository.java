@@ -2,8 +2,9 @@ package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.app.business.dao.RestaurantDAO;
+import org.app.domain.Owner;
 import org.app.domain.Restaurant;
-import org.app.infrastructure.database.entity.AddressEntity;
+import org.app.domain.StreetDelivery;
 import org.app.infrastructure.database.entity.OwnerEntity;
 import org.app.infrastructure.database.entity.RestaurantEntity;
 import org.app.infrastructure.database.repository.jpa.RestaurantJpaRepository;
@@ -12,12 +13,15 @@ import org.app.infrastructure.database.repository.mapper.OwnerMapper;
 import org.app.infrastructure.database.repository.mapper.RestaurantMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class RestaurantRepository implements RestaurantDAO {
 
     RestaurantJpaRepository restaurantJpaRepository;
     OwnerRepository ownerRepository;
+    StreetDeliveryRepository streetDeliveryRepository;
     RestaurantMapper restaurantMapper;
     OwnerMapper ownerMapper;
     AddressMapper addressMapper;
@@ -28,5 +32,19 @@ public class RestaurantRepository implements RestaurantDAO {
         RestaurantEntity toSave = restaurantMapper.mapToEntity(restaurant,addressMapper.mapToEntity(restaurant.getAddress()), ownerEntity);
         RestaurantEntity saved = restaurantJpaRepository.saveAndFlush(toSave);
         return restaurantMapper.mapFromEntity(saved);
+    }
+
+    @Override
+    public List<Restaurant> findRestaurantByStreetDelivery(StreetDelivery streetDelivery) {
+        List<RestaurantEntity> restaurantEntities =
+                restaurantJpaRepository.findByStreetsDelivery(streetDeliveryRepository.streetDeliveryIsAvailable(streetDelivery));
+        return restaurantEntities.stream().map(restaurantMapper::mapFromEntity).toList();
+    }
+
+    @Override
+    public List<Restaurant> findAvailableRestaurantByOwner(Owner ownerExample) {
+        List<RestaurantEntity> restaurantEntities =
+                restaurantJpaRepository.findByOwner(ownerRepository.findByEmail(ownerExample.getEmail()));
+        return restaurantEntities.stream().map(restaurantMapper::mapFromEntity).toList();
     }
 }

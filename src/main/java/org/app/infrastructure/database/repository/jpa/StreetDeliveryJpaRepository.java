@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface StreetDeliveryJpaRepository extends JpaRepository<StreetDeliveryEntity, Integer> {
 
 
+
+    StreetDeliveryEntity findByStreetAndCity(String street, String city);
 }
