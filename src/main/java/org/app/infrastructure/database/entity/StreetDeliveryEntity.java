@@ -27,12 +27,8 @@ public class StreetDeliveryEntity {
     @Column(name = "city")
     private String city;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "restaurant_street_delivery",
-            joinColumns = @JoinColumn(name = "street_delivery_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id")
-    )
+
+    @ManyToMany(mappedBy = "streetsDelivery")
     private Set<RestaurantEntity> restaurant;
 
 

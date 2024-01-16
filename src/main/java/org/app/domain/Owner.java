@@ -2,6 +2,8 @@ package org.app.domain;
 
 import lombok.*;
 
+import java.util.Set;
+
 @With
 @Value
 @Builder
@@ -14,5 +16,5 @@ public class Owner {
     String surname;
     String email;
     String phone;
-    Restaurant restaurant;
+    Set<Restaurant> restaurant;
 }
