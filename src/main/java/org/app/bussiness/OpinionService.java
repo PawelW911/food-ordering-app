@@ -1,7 +1,7 @@
 package org.app.bussiness;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.OpinionDAO;
+import org.app.bussiness.dao.OpinionDAO;
 import org.app.domain.Opinion;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

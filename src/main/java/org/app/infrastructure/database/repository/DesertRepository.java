@@ -1,7 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.DesertDAO;
+import org.app.bussiness.dao.DesertDAO;
 import org.app.domain.Desert;
 import org.app.infrastructure.database.entity.DesertEntity;
 import org.app.infrastructure.database.repository.jpa.DesertJpaRepository;

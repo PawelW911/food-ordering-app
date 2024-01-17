@@ -1,7 +1,6 @@
 package org.app.bussiness;
 
-import org.app.business.dao.MenuDAO;
-import org.app.domain.Appetizer;
+import org.app.bussiness.dao.MenuDAO;
 import org.app.domain.Menu;
 import org.app.util.MenuFixtures;
 import org.junit.jupiter.api.Assertions;
@@ -11,8 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.HashSet;
 
 @ExtendWith(MockitoExtension.class)
 public class MenuServiceTest {

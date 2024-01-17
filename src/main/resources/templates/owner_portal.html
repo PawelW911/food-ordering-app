@@ -11,7 +11,7 @@
 </head>
 <div class="container">
 
-    <h2>Your restaurants</h2>
+    <h1>Your restaurants</h1>
 
     <div>
         <table class="table">
@@ -29,5 +29,19 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<div class="container">
+    <h2>What do you want? Add new restaurant or manage the existing one?</h2>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <a th:href="@{/restaurant/add_new_restaurant}" class="btn btn-info" role="button">Add new restaurant</a>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a th:href="@{/restaurant/manage}" class="btn btn-info" role="button">Manage existing restaurant</a>
+        </div>
+    </div>
+
 </div>
 </html>

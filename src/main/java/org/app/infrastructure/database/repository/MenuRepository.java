@@ -1,20 +1,13 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.MenuDAO;
+import org.app.bussiness.dao.MenuDAO;
 import org.app.domain.*;
-import org.app.infrastructure.database.entity.AddressEntity;
 import org.app.infrastructure.database.entity.MenuEntity;
-import org.app.infrastructure.database.entity.OwnerEntity;
 import org.app.infrastructure.database.repository.jpa.MenuJpaRepository;
 import org.app.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import org.app.infrastructure.database.repository.mapper.*;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor

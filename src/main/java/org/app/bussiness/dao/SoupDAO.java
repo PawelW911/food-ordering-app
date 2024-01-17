@@ -1,4 +1,4 @@
-package org.app.business.dao;
+package org.app.bussiness.dao;
 
 import org.app.domain.Soup;
 import org.app.infrastructure.database.entity.SoupEntity;

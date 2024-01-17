@@ -1,6 +1,6 @@
 package org.app.bussiness;
 
-import org.app.business.dao.AppetizerDAO;
+import org.app.bussiness.dao.AppetizerDAO;
 import org.app.domain.Appetizer;
 import org.app.util.AppetizerFixtures;
 import org.junit.jupiter.api.Assertions;

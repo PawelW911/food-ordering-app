@@ -1,6 +1,6 @@
 package org.app.bussiness;
 
-import org.app.business.dao.DesertDAO;
+import org.app.bussiness.dao.DesertDAO;
 import org.app.domain.Desert;
 import org.app.util.DesertFixtures;
 import org.junit.jupiter.api.Assertions;

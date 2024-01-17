@@ -1,7 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.FoodOrderDAO;
+import org.app.bussiness.dao.FoodOrderDAO;
 import org.app.domain.FoodOrder;
 import org.app.infrastructure.database.entity.FoodOrderEntity;
 import org.app.infrastructure.database.repository.jpa.CustomerJpaRepository;

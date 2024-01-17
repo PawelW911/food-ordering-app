@@ -1,6 +1,6 @@
 package org.app.bussiness;
 
-import org.app.business.dao.RestaurantDAO;
+import org.app.bussiness.dao.RestaurantDAO;
 import org.app.domain.Owner;
 import org.app.domain.Restaurant;
 import org.app.domain.StreetDelivery;

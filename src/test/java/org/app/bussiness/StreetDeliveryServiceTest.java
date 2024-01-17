@@ -1,7 +1,6 @@
 package org.app.bussiness;
 
-import org.app.business.dao.OwnerDAO;
-import org.app.business.dao.StreetDeliveryDAO;
+import org.app.bussiness.dao.StreetDeliveryDAO;
 import org.app.domain.StreetDelivery;
 import org.app.util.StreetDeliveryFixtures;
 import org.junit.jupiter.api.Assertions;

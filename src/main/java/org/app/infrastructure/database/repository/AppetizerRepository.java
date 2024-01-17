@@ -1,7 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.AppetizerDAO;
+import org.app.bussiness.dao.AppetizerDAO;
 import org.app.domain.Appetizer;
 import org.app.infrastructure.database.entity.AppetizerEntity;
 import org.app.infrastructure.database.repository.jpa.AppetizerJpaRepository;
