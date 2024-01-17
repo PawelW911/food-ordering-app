@@ -21,5 +21,5 @@ public class RestaurantDTO {
     Address address;
     Set<Opinion> opinions;
     Set<FoodOrder> orders;
-    Owner owner;
+    String ownerEmail;
 }

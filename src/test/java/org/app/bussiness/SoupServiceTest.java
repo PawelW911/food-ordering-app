@@ -1,6 +1,6 @@
 package org.app.bussiness;
 
-import org.app.business.dao.SoupDAO;
+import org.app.bussiness.dao.SoupDAO;
 import org.app.domain.Soup;
 import org.app.util.SoupFixtures;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +12,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.Set;
 
 @ExtendWith(MockitoExtension.class)
 public class SoupServiceTest {

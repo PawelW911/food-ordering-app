@@ -1,4 +1,4 @@
-package org.app.business.dao;
+package org.app.bussiness.dao;
 
 import org.app.domain.Owner;
 import org.app.infrastructure.database.entity.OwnerEntity;

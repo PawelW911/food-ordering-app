@@ -1,14 +1,10 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.CustomerDAO;
-import org.app.domain.Address;
+import org.app.bussiness.dao.CustomerDAO;
 import org.app.domain.Customer;
-import org.app.infrastructure.database.entity.AddressEntity;
 import org.app.infrastructure.database.entity.CustomerEntity;
-import org.app.infrastructure.database.repository.jpa.AddressJpaRepository;
 import org.app.infrastructure.database.repository.jpa.CustomerJpaRepository;
-import org.app.infrastructure.database.repository.mapper.AddressMapper;
 import org.app.infrastructure.database.repository.mapper.CustomerMapper;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package org.app.bussiness;
 
-import org.app.business.dao.DrinkDAO;
+import org.app.bussiness.dao.DrinkDAO;
 import org.app.domain.Drink;
 import org.app.util.DrinkFixtures;
 import org.junit.jupiter.api.Assertions;

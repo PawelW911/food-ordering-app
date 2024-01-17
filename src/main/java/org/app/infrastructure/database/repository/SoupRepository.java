@@ -1,7 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.SoupDAO;
+import org.app.bussiness.dao.SoupDAO;
 import org.app.domain.Soup;
 import org.app.infrastructure.database.entity.SoupEntity;
 import org.app.infrastructure.database.repository.jpa.SoupJpaRepository;

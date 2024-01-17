@@ -1,7 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.DrinkDAO;
+import org.app.bussiness.dao.DrinkDAO;
 import org.app.domain.Drink;
 import org.app.infrastructure.database.entity.DrinkEntity;
 import org.app.infrastructure.database.repository.jpa.DrinkJpaRepository;

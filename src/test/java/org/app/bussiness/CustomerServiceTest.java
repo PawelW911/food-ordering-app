@@ -1,6 +1,6 @@
 package org.app.bussiness;
 
-import org.app.business.dao.CustomerDAO;
+import org.app.bussiness.dao.CustomerDAO;
 import org.app.domain.Customer;
 import org.app.util.CustomerFixtures;
 import org.junit.jupiter.api.Assertions;

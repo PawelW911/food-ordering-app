@@ -1,7 +1,7 @@
 package org.app.bussiness;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.FoodOrderDAO;
+import org.app.bussiness.dao.FoodOrderDAO;
 import org.app.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

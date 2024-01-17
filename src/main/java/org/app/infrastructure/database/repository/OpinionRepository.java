@@ -1,7 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.OpinionDAO;
+import org.app.bussiness.dao.OpinionDAO;
 import org.app.domain.Opinion;
 import org.app.infrastructure.database.entity.OpinionEntity;
 import org.app.infrastructure.database.repository.jpa.CustomerJpaRepository;

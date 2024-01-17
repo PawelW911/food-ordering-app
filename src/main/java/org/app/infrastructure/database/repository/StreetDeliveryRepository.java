@@ -1,7 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.business.dao.StreetDeliveryDAO;
+import org.app.bussiness.dao.StreetDeliveryDAO;
 import org.app.domain.StreetDelivery;
 import org.app.infrastructure.database.entity.StreetDeliveryEntity;
 import org.app.infrastructure.database.repository.jpa.StreetDeliveryJpaRepository;

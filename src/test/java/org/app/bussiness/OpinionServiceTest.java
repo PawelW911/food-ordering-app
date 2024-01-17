@@ -1,8 +1,7 @@
 package org.app.bussiness;
 
-import org.app.business.dao.OpinionDAO;
+import org.app.bussiness.dao.OpinionDAO;
 import org.app.domain.Opinion;
-import org.app.util.CustomerFixtures;
 import org.app.util.OpinionFixtures;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
