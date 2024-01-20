@@ -5,6 +5,7 @@ import org.app.infrastructure.database.entity.AddressEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
 import org.app.infrastructure.database.entity.RestaurantEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -22,6 +23,7 @@ public interface RestaurantMapper {
                 .build();
     }
 
+    @Mapping(target = "menu", ignore = true)
     Restaurant mapFromEntity(RestaurantEntity restaurantEntity);
 
     default Restaurant mapFromEntity(RestaurantEntity restaurantEntity, AddressMapper addressMapper, OwnerMapper ownerMapper) {

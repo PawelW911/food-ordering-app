@@ -73,4 +73,19 @@ public class RestaurantRepositoryTest extends CleanDatabaseBeforeRepositoryTestA
         // then
         Assertions.assertThat(restaurants).hasSize(1);
     }
+
+    @Test
+    void correctlyFindRestaurantByUniqueCode() {
+        saveOwner();
+        saveRestaurant();
+        // given
+        String uniqueCode = RestaurantFixtures.someRestaurant1().getUniqueCode();
+
+        // when
+        Restaurant restaurant = restaurantRepository.findByUniqueCode(uniqueCode);
+
+        // then
+        Assertions.assertThatObject(restaurant).isNotNull();
+        Assertions.assertThat(restaurant.getUniqueCode()).isEqualTo(uniqueCode);
+    }
 }

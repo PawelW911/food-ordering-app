@@ -24,7 +24,7 @@
             <tbody>
             <tr th:each="restaurant : ${availableRestaurantDTOs}">
                 <td th:text="${restaurant.uniqueCode}"></td>
-                <td th:text="${restaurant.name}"></td>
+                <td th:text="${restaurant.restaurantName}"></td>
             </tr>
             </tbody>
         </table>
@@ -33,15 +33,35 @@
 
 <div class="container">
     <h2>What do you want? Add new restaurant or manage the existing one?</h2>
+
+<!--    <div class="row mt-5">-->
+<!--        <div class="col-md-4">-->
+<!--            <label for="restaurantName">Select restaurant:</label>-->
+<!--            <select id="restaurantName" th:field="*{restaurantName}" name="selectedRestaurant">-->
+<!--                <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${availableRestaurantDTOs}" th:text="${availableRestaurantDTOs}"></option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="row mt-5">
         <div class="col-md-4">
             <a th:href="@{/restaurant/add_new_restaurant}" class="btn btn-info" role="button">Add new restaurant</a>
         </div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <a th:href="@{/restaurant/manage}" class="btn btn-info" role="button">Manage existing restaurant</a>
+                <a th:href="@{/restaurant/manage}" class="btn btn-info" role="button">Manage existing restaurant</a>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form th:action="@{/restaurant/manage}" method="post">
+                <label for="restaurantName">Select restaurant:</label>
+                <select id="restaurantName" th:field="*{restaurantName}" name="selectedRestaurant">
+                    <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${availableRestaurantDTOs}" th:text="${availableRestaurantDTOs}"></option>
+                </select>
+                </form>
+            </div>
         </div>
     </div>
-
 </div>
 </html>

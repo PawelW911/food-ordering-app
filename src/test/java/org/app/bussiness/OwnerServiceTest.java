@@ -33,4 +33,18 @@ public class OwnerServiceTest {
         Assertions.assertNotNull(owner);
 
     }
+
+    @Test
+    void checkFindOwnerByEmail() {
+        // given
+        String email = OwnerFixtures.someOwner2().getEmail();
+
+        Mockito.when(ownerDAO.findByEmail(Mockito.anyString())).thenReturn(OwnerFixtures.someOwner2());
+
+        // when
+        Owner owner = ownerService.findByEmail(email);
+
+        // then
+        Assertions.assertNotNull(owner);
+    }
 }

@@ -17,6 +17,9 @@ public class OwnerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCon
     private final OwnerJpaRepository ownerJpaRepository;
     private final OwnerRepository ownerRepository;
     
+    void saveOwner() {
+        ownerRepository.saveOwner(OwnerFixtures.someOwner2());
+    }
 
     @Test
     void correctlySaveOwner() {
@@ -30,6 +33,21 @@ public class OwnerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCon
 
         // then
         Assertions.assertThatObject(ownerEntity).isNotNull();
+    }
+
+    @Test
+    void CorrectlyFindOwnerByEmail() {
+        saveOwner();
+        // given
+        String email = OwnerFixtures.someOwner2().getEmail();
+
+        // when
+        Owner owner = ownerRepository.findByEmail(email);
+
+        // then
+        Assertions.assertThatObject(owner).isNotNull();
+        Assertions.assertThat(owner.getEmail()).isEqualTo(email);
+
     }
 
 }

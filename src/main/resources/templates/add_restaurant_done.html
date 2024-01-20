@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+    <title>Food Ordering Application</title>
+</head>
+<div class="container">
+    <h1>The addition of the restaurant was a success</h1>
+</div>
+<div class="container">
+    <h2>Restaurant details</h2>
+    <br>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>Unique code</th>
+                <th>Name</th>
+                <th>Type food</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Opening hours</th>
+            </tr>
+            </thead>
+            <tbody>
+                <td th:if="${restaurantUniqueCode}" th:text="${restaurantUniqueCode}"></td>
+                <td th:if="${restaurantName}" th:text="${restaurantName}"></td>
+                <td th:if="${restaurantTypeFood}" th:text="${restaurantTypeFood}"></td>
+                <td th:if="${restaurantEmail}" th:text="${restaurantEmail}"></td>
+                <td th:if="${restaurantPhone}" th:text="${restaurantPhone}"></td>
+                <td th:if="${restaurantOpeningHours}" th:text="${restaurantOpeningHours}"></td>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <h4>Address details</h4>
+    <br>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>Street</th>
+                <th>Local number</th>
+                <th>Postal code</th>
+                <th>City</th>
+            </tr>
+            </thead>
+            <tbody>
+                <td th:if="${restaurantAddressStreet}" th:text="${restaurantAddressStreet}"></td>
+                <td th:if="${restaurantAddressLocalNumber}" th:text="${restaurantAddressLocalNumber}"></td>
+                <td th:if="${restaurantAddressPostalCode}" th:text="${restaurantAddressPostalCode}"></td>
+                <td th:if="${restaurantAddressCity}" th:text="${restaurantAddressCity}"></td>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <h3>Please enter menu details.</h3>
+    <form action="#" th:action="@{/restaurant/add_menu}" method="POST" th:object="${menuDTO}">
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="menuName">Name:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="menuName" th:field="*{menuName}">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="menuDescription">Description:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <textarea id="menuDescription" name="menuDescription" rows="4" cols="50" th:field="*{menuDescription}" placeholder="Enter the description..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <input type="submit" value="Add menu" class="btn btn-success">
+            </div>
+        </div>
+    </form>
+</div>
+
+</html>
