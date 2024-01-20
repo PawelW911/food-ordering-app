@@ -28,7 +28,7 @@ public class RestaurantRepository implements RestaurantDAO {
 
     @Override
     public Restaurant saveRestaurant(Restaurant restaurant) {
-        OwnerEntity ownerEntity = ownerRepository.findByEmail(restaurant.getOwner().getEmail());
+        OwnerEntity ownerEntity = ownerRepository.findByEmailAndReturnEntity(restaurant.getOwner().getEmail());
         RestaurantEntity toSave = restaurantMapper.mapToEntity(restaurant,addressMapper.mapToEntity(restaurant.getAddress()), ownerEntity);
         RestaurantEntity saved = restaurantJpaRepository.saveAndFlush(toSave);
         return restaurantMapper.mapFromEntity(saved);
@@ -44,7 +44,12 @@ public class RestaurantRepository implements RestaurantDAO {
     @Override
     public List<Restaurant> findAvailableRestaurantByOwner(Owner ownerExample) {
         List<RestaurantEntity> restaurantEntities =
-                restaurantJpaRepository.findByOwner(ownerRepository.findByEmail(ownerExample.getEmail()));
+                restaurantJpaRepository.findByOwner(ownerRepository.findByEmailAndReturnEntity(ownerExample.getEmail()));
         return restaurantEntities.stream().map(restaurantMapper::mapFromEntity).toList();
+    }
+
+    @Override
+    public Restaurant findByUniqueCode(String uniqueCode) {
+        return restaurantMapper.mapFromEntity(restaurantJpaRepository.findByUniqueCode(uniqueCode));
     }
 }

@@ -1,7 +1,7 @@
 CREATE TABLE restaurant
 (
     restaurant_id                   SERIAL          NOT NULL,
-    unique_code                     VARCHAR(32)     NOT NULL,
+    unique_code                     VARCHAR(128)     NOT NULL,
     name                            VARCHAR(32)     NOT NULL,
     type_food                       VARCHAR(32)     NOT NULL,
     email                           VARCHAR(32)     NOT NULL,

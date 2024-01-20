@@ -16,4 +16,8 @@ public class OwnerService {
     public Owner saveNewOwner(Owner owner) {
         return ownerDAO.saveOwner(owner);
     }
+
+    public Owner findByEmail(String email) {
+        return ownerDAO.findByEmail(email);
+    }
 }

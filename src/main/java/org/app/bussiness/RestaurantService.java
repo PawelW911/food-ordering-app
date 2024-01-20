@@ -28,4 +28,8 @@ public class RestaurantService {
     public List<Restaurant> findAvailableRestaurantByOwner(Owner owner) {
         return restaurantDAO.findAvailableRestaurantByOwner(owner);
     }
+
+    public Restaurant findByUniqueCode(String uniqueCode) {
+        return restaurantDAO.findByUniqueCode(uniqueCode);
+    }
 }

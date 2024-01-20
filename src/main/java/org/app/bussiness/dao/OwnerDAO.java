@@ -8,5 +8,7 @@ public interface OwnerDAO {
 
     OwnerEntity saveOwnerAndReturnEntity(Owner owner);
 
-    OwnerEntity findByEmail(String email);
+    OwnerEntity findByEmailAndReturnEntity(String email);
+
+    Owner findByEmail(String email);
 }

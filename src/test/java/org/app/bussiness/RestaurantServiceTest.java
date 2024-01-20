@@ -69,4 +69,20 @@ public class RestaurantServiceTest {
         // then
         Assertions.assertEquals(1, restaurants.size());
     }
+
+    @Test
+    void checkCorrectlyFindRestaurantByUniqueCode() {
+        // given
+        Restaurant restaurantExample = RestaurantFixtures.someRestaurant1();
+        String uniqueCode = restaurantExample.getUniqueCode();
+
+        Mockito.when(restaurantDAO.findByUniqueCode(Mockito.anyString())).thenReturn(restaurantExample);
+
+        // when
+        Restaurant restaurant = restaurantService.findByUniqueCode(uniqueCode);
+
+        // then
+        Assertions.assertNotNull(restaurant);
+        Assertions.assertEquals(uniqueCode, restaurant.getUniqueCode());
+    }
 }
