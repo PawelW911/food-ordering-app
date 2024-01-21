@@ -14,7 +14,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class RestaurantDTO {
 
-    // zmien ta klase
     String uniqueCode;
     String restaurantName;
     String restaurantTypeFood;
