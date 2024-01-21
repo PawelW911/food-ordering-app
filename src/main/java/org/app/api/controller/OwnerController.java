@@ -1,5 +1,6 @@
 package org.app.api.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.app.api.dto.OwnerDTO;
 import org.app.api.dto.RestaurantDTO;
@@ -10,6 +11,8 @@ import org.app.domain.Owner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -18,20 +21,23 @@ import java.util.List;
 public class OwnerController {
 
     public static final String OWNER = "/owner";
+    public static final String CHOOSE_RESTAURANT = "/choose_restaurant";
 
     private final RestaurantService restaurantService;
     private final RestaurantDTOMapper restaurantDTOMapper;
     private final OwnerDTOMapper ownerDTOMapper;
 
+    protected static String uniqueCodeNow;
+
     @GetMapping(value = OWNER)
     public String ownerPage(Model model) {
-            Owner ownerExample = Owner.builder()
-                    .name("Tomek")
-                    .surname("Kowalski")
-                    .email("tomek1@gmail.com")
-                    .phone("+48 565 642 543")
-                    .build();
-            OwnerDTO ownerDTO = ownerDTOMapper.mapToDTO(ownerExample);
+        Owner ownerExample = Owner.builder()
+                .name("Tomek")
+                .surname("Kowalski")
+                .email("tomek1@gmail.com")
+                .phone("+48 565 642 543")
+                .build();
+        OwnerDTO ownerDTO = ownerDTOMapper.mapToDTO(ownerExample);
 
         List<RestaurantDTO> availableRestaurant = restaurantService
                 .findAvailableRestaurantByOwner(ownerDTOMapper.mapFromDTO(ownerDTO))
@@ -40,8 +46,17 @@ public class OwnerController {
                 .toList();
 
         model.addAttribute("availableRestaurantDTOs", availableRestaurant);
+        model.addAttribute("uniqueCode", uniqueCodeNow);
 
         return "owner_portal";
+    }
+
+    @PostMapping(value = OWNER + CHOOSE_RESTAURANT)
+    public String chooseRestaurantToManage(
+            @Valid @ModelAttribute("uniqueCode") String uniqueCode
+    ) {
+        uniqueCodeNow = uniqueCode;
+        return "redirect:/restaurant/manage";
     }
 
 }
