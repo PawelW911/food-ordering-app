@@ -10,10 +10,17 @@
     <title>Food Ordering Application</title>
 </head>
 <div class="container">
-    <p>
-        <b>
-            <span th:if="${uniqueCode}" th:text="${uniqueCode}">NAME:</span>
-        </b>
-    </p>
+    <h1>Panel manage restaurant</h1>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <a th:href="@{/restaurant/manage/menu}" class="btn btn-info" role="button">Manage menu</a>
+        </div>
+        <div class="col-md-4">
+            <a th:href="@{/restaurant/manage/street_delivery}" class="btn btn-info" role="button">Manage streets delivery</a>
+        </div>
+        <div class="col-md-4">
+            <a th:href="@{/restaurant/manage/food_order}" class="btn btn-info" role="button">Manage food orders</a>
+        </div>
+    </div>
 </div>
 </html>

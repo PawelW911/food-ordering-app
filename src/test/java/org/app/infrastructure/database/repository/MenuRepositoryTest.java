@@ -2,9 +2,11 @@ package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.app.domain.Menu;
+import org.app.domain.Restaurant;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.MenuEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
+import org.app.infrastructure.database.entity.RestaurantEntity;
 import org.app.infrastructure.database.repository.jpa.*;
 import org.app.infrastructure.database.repository.mapper.CustomerMapper;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
@@ -30,6 +32,9 @@ public class MenuRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndConf
         ownerJpaRepository.saveAndFlush(ownerEntity);
         restaurantRepository.saveRestaurant(RestaurantFixtures.someRestaurant1());
     }
+    private Integer saveMenu() {
+        return menuRepository.saveMenu(MenuFixtures.someMenuPolishFood()).getMenuId();
+    }
 
     @Test
     void correctlySaveMenu() {
@@ -45,5 +50,20 @@ public class MenuRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndConf
 
         // then
         Assertions.assertThat(allMenuBeforeSave).hasSize(allMenuAfterSave.size()-1);
+    }
+
+    @Test
+    void correctlyFindMenuById() {
+        saveRestaurantAndOwner();
+        // given
+        Integer menuId = saveMenu();
+        Restaurant restaurant = restaurantRepository
+                .findByUniqueCode(RestaurantFixtures.someRestaurant1().getUniqueCode());
+        // when
+        Menu menu = menuRepository.findByRestaurant(restaurant);
+
+        // then
+        Assertions.assertThat(menuId).isEqualTo(menu.getMenuId());
+
     }
 }

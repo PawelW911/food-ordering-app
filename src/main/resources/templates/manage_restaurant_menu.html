@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+    <title>Food Ordering Application</title>
+</head>
+<div class="container">
+    <h2>Appetizers</h2>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>composition</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="appetizer : ${appetizerDTOs}">
+                <td th:text="${appetizer.name}"></td>
+                <td th:text="${appetizer.composition}"></td>
+                <td th:text="${appetizer.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <form action="#" th:action="@{/add_appetizer}" method="POST" th:object="${appetizerDTO}">
+                <div class="col-md-4">
+                    <div class="row mt-3">
+                        <br>
+                        <p>Add new:</p>
+                        <div class="row mt-1">
+                            <div class="col-md-3">
+                                <label for="name">Name:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="name" th:field="*{name}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="composition">Description:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="composition" th:field="*{composition}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="price">Price:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="price" th:field="*{price}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <input type="submit" value="Add" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-5">
+            <form action="#" th:action="@{/delete_appetizer}" method="POST" th:object="${appetizerDTO}">
+                <input type="hidden" name="_method" value="delete">
+                <div class="col-md-4">
+                    <label for="appetizerId">Select name:</label>
+                    <select id="appetizerId" th:field="*{appetizerId}">
+                        <option th:each="appetizer : ${appetizerDTOs}" th:value="${appetizer.appetizerId}" th:text="${appetizer.name}"></option>
+                    </select>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Delete" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

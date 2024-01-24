@@ -1,24 +1,60 @@
 package org.app.api.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.app.api.dto.MenuDTO;
-import org.app.api.dto.RestaurantDTO;
+import org.app.api.dto.AppetizerDTO;
+import org.app.api.dto.mapper.AppetizerMapperDTO;
+import org.app.bussiness.AppetizerService;
+import org.app.bussiness.MenuService;
+import org.app.bussiness.RestaurantService;
+import org.app.domain.Appetizer;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @AllArgsConstructor
 public class MenuController {
 
-    public static final String MENU = "/menu";
-    public static final String ADD_MENU = "/add_menu";
+    public static final String ADD_APPETIZER = "/add_appetizer";
+    public static final String DELETE_APPETIZER = "/delete_appetizer";
 
-    @GetMapping(value = MENU + ADD_MENU)
-    public String ownerPage(ModelMap model) {
-        model.addAttribute("menuDTO", new MenuDTO());
-        return "add_new_menu_restaurant";
+    AppetizerService appetizerService;
+    AppetizerMapperDTO appetizerMapperDTO;
+    MenuService menuService;
+    RestaurantService restaurantService;
+
+    @GetMapping(value = ADD_APPETIZER)
+    public void initializeAppetizerDTO(Model model) {
+        model.addAttribute("appetizerDTO", new AppetizerDTO());
     }
+
+    @PostMapping(value = ADD_APPETIZER)
+    public String addAppetizer(
+            @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
+    ) {
+        Appetizer appetizer = appetizerService.saveNewAppetizer(appetizerMapperDTO
+        .mapFromDTO(
+                appetizerDTO,
+                0,
+                menuService.findByRestaurant(restaurantService
+                        .findByUniqueCode(OwnerController.uniqueCodeNow))
+        ));
+        return "redirect:/restaurant/manage/menu";
+    }
+
+    @DeleteMapping(value = DELETE_APPETIZER)
+    public String deleteAppetizer(
+            @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
+    ) {
+        Integer appetizerId = appetizerDTO.getAppetizerId();
+        appetizerService.deleteAppetizer(appetizerDTO.getAppetizerId());
+        return "redirect:/restaurant/manage/menu";
+    }
+
 
 
 }

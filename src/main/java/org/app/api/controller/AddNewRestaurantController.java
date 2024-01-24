@@ -2,6 +2,7 @@ package org.app.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.app.api.dto.MenuDTO;
 import org.app.api.dto.RestaurantDTO;
 import org.app.api.dto.mapper.MenuMapperDTO;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 @Controller
 @AllArgsConstructor
+@NoArgsConstructor
 public class AddNewRestaurantController {
 
     public static final String RESTAURANT = "/restaurant";

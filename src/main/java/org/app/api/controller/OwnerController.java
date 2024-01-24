@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.app.api.dto.OwnerDTO;
 import org.app.api.dto.RestaurantDTO;
+import org.app.api.dto.VariableDTO;
 import org.app.api.dto.mapper.OwnerDTOMapper;
 import org.app.api.dto.mapper.RestaurantDTOMapper;
 import org.app.bussiness.RestaurantService;
@@ -46,16 +47,16 @@ public class OwnerController {
                 .toList();
 
         model.addAttribute("availableRestaurantDTOs", availableRestaurant);
-        model.addAttribute("uniqueCode", uniqueCodeNow);
+        model.addAttribute("variableDTO", new VariableDTO());
 
         return "owner_portal";
     }
 
     @PostMapping(value = OWNER + CHOOSE_RESTAURANT)
     public String chooseRestaurantToManage(
-            @Valid @ModelAttribute("uniqueCode") String uniqueCode
+            @Valid @ModelAttribute("variableDTO") VariableDTO variableDTO
     ) {
-        uniqueCodeNow = uniqueCode;
+        uniqueCodeNow = variableDTO.getUniqueCode();
         return "redirect:/restaurant/manage";
     }
 
