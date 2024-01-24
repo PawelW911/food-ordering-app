@@ -6,23 +6,26 @@ import org.app.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-
 @Service
 @AllArgsConstructor
 public class MenuService {
 
     private final MenuDAO menuDAO;
-    private final AppetizerService appetizerService;
-    private final MainMealService mainMealService;
-    private final DesertService desertService;
-    private final DrinkService drinkService;
-    private final SoupService soupService;
+//    private final AppetizerService appetizerService;
+//    private final MainMealService mainMealService;
+//    private final DesertService desertService;
+//    private final DrinkService drinkService;
+//    private final SoupService soupService;
 
     @Transactional
     public Menu saveNewMenu(Menu menu) {
 
         return menuDAO.saveMenu(menu);
+
+    }
+
+    public Menu findByRestaurant(Restaurant restaurant) {
+        return menuDAO.findByRestaurant(restaurant);
 
     }
 

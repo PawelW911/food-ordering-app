@@ -5,6 +5,7 @@ import org.app.domain.Restaurant;
 import org.app.infrastructure.database.entity.MenuEntity;
 import org.app.infrastructure.database.entity.RestaurantEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -27,4 +28,9 @@ public interface MenuMapper {
                 .restaurant(restaurant)
                 .build();
     }
+
+    @Mapping(target = "restaurant", ignore = true)
+    Menu mapFromEntity(MenuEntity byRestaurantId);
+
+    MenuEntity mapToEntity(Menu menu);
 }

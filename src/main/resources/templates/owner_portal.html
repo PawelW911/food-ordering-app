@@ -33,24 +33,22 @@
 
 <div class="container">
     <h2>What do you want? Add new restaurant or manage the existing one?</h2>
-    <form action="#" th:action="@{/owner/choose_restaurant}" method="POST" th:string="${uniqueCode}">
+    <form action="#" th:action="@{/owner/choose_restaurant}" method="POST" th:object="${variableDTO}">
         <div class="row mt-5">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
             <div class="col-md-4">
                 <label for="uniqueCode">Select restaurant:</label>
                 <select id="uniqueCode" th:field="*{uniqueCode}">
-                    <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${restaurant.uniqueCode}" th:text="${restaurant.uniqueCode}"></option>
+                    <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${restaurant.uniqueCode}" th:text="${restaurant.restaurantName}"></option>
                 </select>
             </div>
         </div>
     <div class="row mt-5">
         <div class="col-md-4">
-            <a th:href="@{/restaurant/add_new_restaurant}" class="btn btn-info" role="button">Add new restaurant</a>
+            <input type="submit" value="Manage restaurant" class="btn btn-info">
         </div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <input type="submit" value="Manage restaurant" class="btn btn-info">
+            <a th:href="@{/restaurant/add_new_restaurant}" class="btn btn-info" role="button">Add new restaurant</a>
         </div>
     </div>
     </form>

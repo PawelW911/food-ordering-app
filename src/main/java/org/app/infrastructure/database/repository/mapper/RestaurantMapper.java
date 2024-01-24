@@ -39,4 +39,7 @@ public interface RestaurantMapper {
                 .owner(ownerMapper.mapFromEntity(restaurantEntity.getOwner()))
                 .build();
     }
+
+    @Mapping(target = "menu", ignore = true)
+    RestaurantEntity mapToEntity(Restaurant restaurant);
 }

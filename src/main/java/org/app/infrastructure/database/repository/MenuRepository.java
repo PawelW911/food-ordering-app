@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.app.bussiness.dao.MenuDAO;
 import org.app.domain.*;
 import org.app.infrastructure.database.entity.MenuEntity;
+import org.app.infrastructure.database.entity.RestaurantEntity;
 import org.app.infrastructure.database.repository.jpa.MenuJpaRepository;
 import org.app.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import org.app.infrastructure.database.repository.mapper.*;
@@ -33,5 +34,12 @@ public class MenuRepository implements MenuDAO {
                         saved.getRestaurant(),
                         addressMapper,
                         ownerMapper));
+    }
+
+    @Override
+    public Menu findByRestaurant(Restaurant restaurant) {
+        RestaurantEntity toFind = restaurantMapper.mapToEntity(restaurant);
+        return menuMapper.mapFromEntity(menuJpaRepository.findByRestaurant(toFind));
+
     }
 }
