@@ -30,7 +30,12 @@ public interface MenuMapper {
     }
 
     @Mapping(target = "restaurant", ignore = true)
-    Menu mapFromEntity(MenuEntity byRestaurantId);
+    @Mapping(target = "appetizers", ignore = true)
+    @Mapping(target = "soups", ignore = true)
+    @Mapping(target = "mainMeals", ignore = true)
+    @Mapping(target = "deserts", ignore = true)
+    @Mapping(target = "drinks", ignore = true)
+    Menu mapFromEntity(MenuEntity menuEntity);
 
     MenuEntity mapToEntity(Menu menu);
 }

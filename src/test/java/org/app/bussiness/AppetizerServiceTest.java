@@ -34,6 +34,20 @@ public class AppetizerServiceTest {
     private AppetizerService appetizerService;
 
     @Test
+    void checkSaveNewAppetizers() {
+        // given
+        List<Appetizer> appetizersExample = AppetizerFixtures.someAppetizersForPolishFood().stream().toList();
+
+        Mockito.when(appetizerDAO.saveAppetizers(Mockito.anyList())).thenReturn(appetizersExample);
+
+        // when
+        List<Appetizer> appetizers = appetizerService.saveNewAppetizers(appetizersExample);
+
+        // then
+        Assertions.assertEquals(appetizersExample.size(), appetizers.size());
+    }
+
+    @Test
     void checkSaveNewAppetizer() {
         // given
         Appetizer appetizerExample = AppetizerFixtures.someAppetizersForPolishFood().stream().toList().get(0);
@@ -46,20 +60,6 @@ public class AppetizerServiceTest {
 
         // then
         Assertions.assertNotNull(appetizer);
-    }
-
-    @Test
-    void checkSaveNewAppetizers() {
-        // given
-        List<Appetizer> appetizersExample = AppetizerFixtures.someAppetizersForPolishFood().stream().toList();
-
-        Mockito.when(appetizerDAO.saveAppetizers(Mockito.anyList())).thenReturn(appetizersExample);
-
-        // when
-        List<Appetizer> appetizers = appetizerService.saveNewAppetizers(appetizersExample);
-
-        // then
-        Assertions.assertEquals(appetizersExample.size(), appetizers.size());
     }
 
     @Test

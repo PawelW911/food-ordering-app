@@ -9,15 +9,13 @@ import org.app.bussiness.MenuService;
 import org.app.bussiness.RestaurantService;
 import org.app.domain.Appetizer;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @AllArgsConstructor
-public class MenuController {
+public class AppetizerController {
 
     public static final String ADD_APPETIZER = "/add_appetizer";
     public static final String DELETE_APPETIZER = "/delete_appetizer";
@@ -26,11 +24,6 @@ public class MenuController {
     AppetizerMapperDTO appetizerMapperDTO;
     MenuService menuService;
     RestaurantService restaurantService;
-
-    @GetMapping(value = ADD_APPETIZER)
-    public void initializeAppetizerDTO(Model model) {
-        model.addAttribute("appetizerDTO", new AppetizerDTO());
-    }
 
     @PostMapping(value = ADD_APPETIZER)
     public String addAppetizer(

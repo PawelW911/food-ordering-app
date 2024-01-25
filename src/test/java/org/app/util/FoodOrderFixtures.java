@@ -1,7 +1,6 @@
 package org.app.util;
 
 import lombok.experimental.UtilityClass;
-import org.app.domain.Appetizer;
 import org.app.domain.FoodOrder;
 
 import java.math.BigDecimal;
@@ -9,7 +8,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @UtilityClass
 public class FoodOrderFixtures {
@@ -34,8 +32,8 @@ public class FoodOrderFixtures {
                 .appetizers(new HashSet<>(List.of(
                         AppetizerFixtures.someAppetizersForPolishFood().stream().toList().get(0).withQuantity(2))))
                 .mainMeals(new HashSet<>(List.of(
-                        MainMealFixtures.someMainMealForPolishFood().stream().toList().get(0).withQuantity(1),
-                        MainMealFixtures.someMainMealForPolishFood().stream().toList().get(1).withQuantity(1))))
+                        MainMealFixtures.someMainMealsForPolishFood().stream().toList().get(0).withQuantity(1),
+                        MainMealFixtures.someMainMealsForPolishFood().stream().toList().get(1).withQuantity(1))))
                 .deserts(new HashSet<>(List.of(
                         DesertFixtures.someDesertsForPolishFood().stream().toList().get(0).withQuantity(3))))
                 .drinks(new HashSet<>(List.of(
