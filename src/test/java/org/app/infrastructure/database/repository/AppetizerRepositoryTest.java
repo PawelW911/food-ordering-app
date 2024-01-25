@@ -57,22 +57,6 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
     }
 
     @Test
-    void correctlyAppetizerSave() {
-        // given
-        Appetizer appetizer = AppetizerFixtures.someAppetizersForPolishFood().stream()
-                .map(appetizerr -> appetizerr.withQuantity(0))
-                .toList().get(0);
-
-        // when
-        List<AppetizerEntity> allAppetizersBeforeSave = appetizerJpaRepository.findAll();
-        appetizerRepository.saveAppetizer(appetizer);
-        List<AppetizerEntity> allAppetizerAfterSave = appetizerJpaRepository.findAll();
-
-        // then
-        Assertions.assertThat(allAppetizersBeforeSave).hasSize(allAppetizerAfterSave.size() - 1);
-    }
-
-    @Test
     void correctlyAppetizersSave() {
         // given
         List<Appetizer> appetizers = AppetizerFixtures.someAppetizersForPolishFood().stream()
@@ -86,6 +70,22 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
 
         // then
         Assertions.assertThat(allAppetizersBeforeSave).hasSize(allAppetizerAfterSave.size() - appetizers.size());
+    }
+
+    @Test
+    void correctlyAppetizerSave() {
+        // given
+        Appetizer appetizer = AppetizerFixtures.someAppetizersForPolishFood().stream()
+                .map(appetizerr -> appetizerr.withQuantity(0))
+                .toList().get(0);
+
+        // when
+        List<AppetizerEntity> allAppetizersBeforeSave = appetizerJpaRepository.findAll();
+        appetizerRepository.saveAppetizer(appetizer);
+        List<AppetizerEntity> allAppetizerAfterSave = appetizerJpaRepository.findAll();
+
+        // then
+        Assertions.assertThat(allAppetizersBeforeSave).hasSize(allAppetizerAfterSave.size() - 1);
     }
 
     @Test

@@ -33,11 +33,11 @@ public class DesertEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "menu_id")
     MenuEntity menu;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "food_order_id")
     FoodOrderEntity foodOrder;
 

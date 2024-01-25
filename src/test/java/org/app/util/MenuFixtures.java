@@ -15,7 +15,7 @@ public class MenuFixtures {
                 .restaurant(RestaurantFixtures.someRestaurant1())
                 .appetizers(AppetizerFixtures.someAppetizersForPolishFood())
                 .soups(SoupFixtures.someSoupsForPolishFood())
-                .mainMeals(MainMealFixtures.someMainMealForPolishFood())
+                .mainMeals(MainMealFixtures.someMainMealsForPolishFood())
                 .deserts(DesertFixtures.someDesertsForPolishFood())
                 .drinks(DrinkFixtures.someDrinksForPolishFood())
                 .build();

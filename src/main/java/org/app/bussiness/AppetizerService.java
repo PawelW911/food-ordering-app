@@ -35,6 +35,7 @@ public class AppetizerService {
         return appetizerDAO.findAvailableByMenu(menu);
     }
 
+    @Transactional
     public void deleteAppetizer(Integer appetizerId) {
         appetizerDAO.deleteAppetizer(appetizerId);
     }

@@ -2,7 +2,6 @@ package org.app.util;
 
 import lombok.experimental.UtilityClass;
 import org.app.domain.MainMeal;
-import org.app.infrastructure.database.entity.MainMealEntity;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -10,7 +9,7 @@ import java.util.Set;
 
 @UtilityClass
 public class MainMealFixtures {
-    public static Set<MainMeal> someMainMealForPolishFood() {
+    public static Set<MainMeal> someMainMealsForPolishFood() {
         Set<MainMeal> mainMeals = new HashSet<>();
         mainMeals.add(MainMeal.builder()
                         .name("Pork chop with potatoes")

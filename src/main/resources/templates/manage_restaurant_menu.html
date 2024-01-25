@@ -36,26 +36,26 @@
                         <p>Add new:</p>
                         <div class="row mt-1">
                             <div class="col-md-3">
-                                <label for="name">Name:</label>
+                                <label for="nameAppetizer">Name:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="name" th:field="*{name}">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-3">
-                                <label for="composition">Description:</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="text" id="composition" th:field="*{composition}">
+                                <input type="text" id="nameAppetizer" th:field="*{name}">
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-3">
-                                <label for="price">Price:</label>
+                                <label for="compositionAppetizer">Description:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="price" th:field="*{price}">
+                                <input type="text" id="compositionAppetizer" th:field="*{composition}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="priceAppetizer">Price:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="priceAppetizer" th:field="*{price}">
                             </div>
                         </div>
                     </div>
@@ -85,4 +85,326 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row mt-5">
+        <h2>Soups</h2>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>composition</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="soup : ${soupDTOs}">
+                <td th:text="${soup.name}"></td>
+                <td th:text="${soup.composition}"></td>
+                <td th:text="${soup.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <form action="#" th:action="@{/add_soup}" method="POST" th:object="${soupDTO}">
+                <div class="col-md-4">
+                    <div class="row mt-3">
+                        <br>
+                        <p>Add new:</p>
+                        <div class="row mt-1">
+                            <div class="col-md-3">
+                                <label for="nameAppetizer">Name:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="nameSoup" th:field="*{name}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="compositionSoup">Description:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="compositionSoup" th:field="*{composition}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="priceSoup">Price:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="priceSoup" th:field="*{price}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <input type="submit" value="Add" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-5">
+            <form action="#" th:action="@{/delete_soup}" method="POST" th:object="${soupDTO}">
+                <input type="hidden" name="_method" value="delete">
+                <div class="col-md-4">
+                    <label for="soupId">Select name:</label>
+                    <select id="soupId" th:field="*{soupId}">
+                        <option th:each="soup : ${soupDTOs}" th:value="${soup.soupId}" th:text="${soup.name}"></option>
+                    </select>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Delete" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-5">
+        <h2>MainMeals</h2>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>composition</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mainMeal : ${mainMealDTOs}">
+                <td th:text="${mainMeal.name}"></td>
+                <td th:text="${mainMeal.composition}"></td>
+                <td th:text="${mainMeal.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <form action="#" th:action="@{/add_mainMeal}" method="POST" th:object="${mainMealDTO}">
+                <div class="col-md-4">
+                    <div class="row mt-3">
+                        <br>
+                        <p>Add new:</p>
+                        <div class="row mt-1">
+                            <div class="col-md-3">
+                                <label for="nameAppetizer">Name:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="nameMainMeal" th:field="*{name}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="compositionMainMeal">Description:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="compositionMainMeal" th:field="*{composition}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="priceMainMeal">Price:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="priceMainMeal" th:field="*{price}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <input type="submit" value="Add" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-5">
+            <form action="#" th:action="@{/delete_mainMeal}" method="POST" th:object="${mainMealDTO}">
+                <input type="hidden" name="_method" value="delete">
+                <div class="col-md-4">
+                    <label for="mainMealId">Select name:</label>
+                    <select id="mainMealId" th:field="*{mainMealId}">
+                        <option th:each="mainMeal : ${mainMealDTOs}" th:value="${mainMeal.mainMealId}" th:text="${mainMeal.name}"></option>
+                    </select>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Delete" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-5">
+        <h2>Deserts</h2>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>composition</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="desert : ${desertDTOs}">
+                <td th:text="${desert.name}"></td>
+                <td th:text="${desert.composition}"></td>
+                <td th:text="${desert.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <form action="#" th:action="@{/add_desert}" method="POST" th:object="${desertDTO}">
+                <div class="col-md-4">
+                    <div class="row mt-3">
+                        <br>
+                        <p>Add new:</p>
+                        <div class="row mt-1">
+                            <div class="col-md-3">
+                                <label for="nameAppetizer">Name:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="nameDesert" th:field="*{name}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="compositionDesert">Description:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="compositionDesert" th:field="*{composition}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="priceDesert">Price:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="priceDesert" th:field="*{price}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <input type="submit" value="Add" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-5">
+            <form action="#" th:action="@{/delete_desert}" method="POST" th:object="${desertDTO}">
+                <input type="hidden" name="_method" value="delete">
+                <div class="col-md-4">
+                    <label for="desertId">Select name:</label>
+                    <select id="desertId" th:field="*{desertId}">
+                        <option th:each="desert : ${desertDTOs}" th:value="${desert.desertId}" th:text="${desert.name}"></option>
+                    </select>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Delete" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-5">
+        <h2>Drinks</h2>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>composition</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="drink : ${drinkDTOs}">
+                <td th:text="${drink.name}"></td>
+                <td th:text="${drink.composition}"></td>
+                <td th:text="${drink.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <form action="#" th:action="@{/add_drink}" method="POST" th:object="${drinkDTO}">
+                <div class="col-md-4">
+                    <div class="row mt-3">
+                        <br>
+                        <p>Add new:</p>
+                        <div class="row mt-1">
+                            <div class="col-md-3">
+                                <label for="nameAppetizer">Name:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="nameDrink" th:field="*{name}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="compositionDrink">Description:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="compositionDrink" th:field="*{composition}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <label for="alcoholFreeDrink">Alcohol free:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="checkbox" id="alcoholFreeDrink" th:field="*{alcoholFree}">
+                                <input type="hidden" th:field="*{alcoholFree}" th:value="${alcoholFree == null ? false : alcoholFree}">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label for="priceDrink">Price:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" id="priceDrink" th:field="*{price}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <input type="submit" value="Add" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-5">
+            <form action="#" th:action="@{/delete_drink}" method="POST" th:object="${drinkDTO}">
+                <input type="hidden" name="_method" value="delete">
+                <div class="col-md-4">
+                    <label for="drinkId">Select name:</label>
+                    <select id="drinkId" th:field="*{drinkId}">
+                        <option th:each="drink : ${drinkDTOs}" th:value="${drink.drinkId}" th:text="${drink.name}"></option>
+                    </select>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Delete" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 </html>
