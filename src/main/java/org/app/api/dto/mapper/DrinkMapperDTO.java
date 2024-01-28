@@ -9,7 +9,11 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DrinkMapperDTO {
+
     default Drink mapFromDTO(DrinkDTO drinkDTO, int quantity, Menu menu) {
+        if(drinkDTO.getAlcoholFree()==null) {
+            drinkDTO.setAlcoholFree(false);
+        }
         return Drink.builder()
                 .name(drinkDTO.getName())
                 .composition(drinkDTO.getComposition())

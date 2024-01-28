@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "menuId")
-@ToString(of = {"menuId", "appetizers", "soups", "mainMeals", "deserts", "drinks"})
+@ToString(of = {"menuId", "name", "description", "appetizers", "soups", "mainMeals", "deserts", "drinks"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,19 +27,19 @@ public class MenuEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     Set<MainMealEntity> mainMeals;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     Set<AppetizerEntity> appetizers;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     Set<SoupEntity> soups;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     Set<DesertEntity> deserts;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     Set<DrinkEntity> drinks;
 
     @OneToOne(fetch = FetchType.LAZY)

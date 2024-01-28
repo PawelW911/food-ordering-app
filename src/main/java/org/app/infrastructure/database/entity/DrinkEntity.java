@@ -36,7 +36,7 @@ public class DrinkEntity {
     @Column(name = "alcohol_free")
     private Boolean alcoholFree;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     MenuEntity menu;
 

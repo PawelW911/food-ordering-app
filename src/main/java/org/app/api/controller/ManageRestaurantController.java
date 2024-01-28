@@ -3,6 +3,8 @@ package org.app.api.controller;
 import lombok.AllArgsConstructor;
 import org.app.api.dto.*;
 import org.app.bussiness.*;
+import org.app.domain.Menu;
+import org.app.domain.Restaurant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -11,7 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -26,6 +32,8 @@ public class ManageRestaurantController {
     MainMealService mainMealService;
     DesertService desertService;
     DrinkService drinkService;
+    MenuService menuService;
+    RestaurantService restaurantService;
 
     @GetMapping(value = RESTAURANT + MANAGE)
     public String manageRestaurantPage() {
@@ -39,11 +47,13 @@ public class ManageRestaurantController {
         model.addAttribute("mainMealDTO", new MainMealDTO());
         model.addAttribute("desertDTO", new DesertDTO());
         model.addAttribute("drinkDTO", new DrinkDTO());
+        model.addAttribute("menuDTO", new MenuDTO());
         Map<String, ?> modelMenu = prepareMenuPositions();
         return new ModelAndView("manage_restaurant_menu", modelMenu);
     }
 
     private Map<String, ?> prepareMenuPositions() {
+        System.out.println(OwnerController.uniqueCodeNow);
         var availableAppetizers = appetizerService.findAvailable(OwnerController.uniqueCodeNow);
         var availableSoups = soupService.findAvailable(OwnerController.uniqueCodeNow);
         var availableMainMeals = mainMealService.findAvailable(OwnerController.uniqueCodeNow);
@@ -54,14 +64,10 @@ public class ManageRestaurantController {
                 "soupDTOs", availableSoups,
                 "mainMealDTOs", availableMainMeals,
                 "desertDTOs", availableDeserts,
-                "drinkDTOs", availableDrinks
+                "drinkDTOs", availableDrinks,
+                "menuDTOs", Set.of(menuService.findByRestaurant(restaurantService.findByUniqueCode(OwnerController.uniqueCodeNow)))
         );
     }
 
-//    @PostMapping(value = RESTAURANT + MANAGE)
-//    public String manageRestaurant(@RequestParam("selectedRestaurant") String selectedRestaurant, Model model) {
-//        model.addAttribute("uniqueCode", selectedRestaurant);
-//        return "redirect:/restaurant/manage";
-//    }
 
 }

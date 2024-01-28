@@ -39,10 +39,11 @@ public class RestaurantEntity {
     @Column(name = "opening_hours")
     private String openingHours;
 
+    @Transient
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private MenuEntity menu;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "restaurant_street_delivery",
             joinColumns = @JoinColumn(name = "street_delivery_id"),

@@ -29,6 +29,11 @@ public class MenuService {
 
     }
 
+    @Transactional
+    public Menu updateMenu(Menu menuToUpdate) {
+        return menuDAO.updateMenu(menuToUpdate);
+    }
+
 //    private Menu assignDishesToTheMenu(Menu menu, Menu menuSaved) {
 //        return menuSaved
 //                .withAppetizers(new HashSet<>(appetizerService.saveNewAppetizers(

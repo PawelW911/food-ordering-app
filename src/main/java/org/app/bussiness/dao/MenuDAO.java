@@ -7,4 +7,6 @@ public interface MenuDAO {
     Menu saveMenu(Menu menu);
 
     Menu findByRestaurant(Restaurant restaurant);
+
+    Menu updateMenu(Menu menuToUpdate);
 }

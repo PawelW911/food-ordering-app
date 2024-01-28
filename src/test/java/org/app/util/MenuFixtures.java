@@ -20,4 +20,13 @@ public class MenuFixtures {
                 .drinks(DrinkFixtures.someDrinksForPolishFood())
                 .build();
     }
+
+    public static Menu someMenuPolishFoodUpdate() {
+        return Menu.builder()
+                .name("The best polish food")
+                .description("Traditional polish dishes and drinks")
+                .restaurant(RestaurantFixtures.someRestaurant1())
+                .build();
+    }
+
 }
