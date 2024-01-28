@@ -56,7 +56,7 @@ public class DrinkRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCon
     }
 
     @Test
-    void correctlySaveDrink() {
+    void correctlySaveDrinks() {
         // given
         List<Drink> drinks = DrinkFixtures.someDrinksForPolishFood().stream()
                 .map(drink -> drink.withQuantity(0))
@@ -71,46 +71,46 @@ public class DrinkRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCon
         Assertions.assertThat(allDrinkBeforeSave).hasSize(allDrinkAfterSave.size() - drinks.size());
     }
 
-//    @Test
-//    void correctlyDrinkSave() {
-//        // given
-//        Drink drink = DrinkFixtures.someDrinksForPolishFood().stream()
-//                .map(drinkr -> drinkr.withQuantity(0))
-//                .toList().get(0);
-//
-//        // when
-//        List<DrinkEntity> allDrinksBeforeSave = drinkJpaRepository.findAll();
-//        drinkRepository.saveDrink(drink);
-//        List<DrinkEntity> allDrinkAfterSave = drinkJpaRepository.findAll();
-//
-//        // then
-//        Assertions.assertThat(allDrinksBeforeSave).hasSize(allDrinkAfterSave.size() - 1);
-//    }
-//
-//    @Test
-//    void correctlyFindAvailable() {
-//        Menu menu = saveRestaurantAndOwnerAndMenu();
-//        // given, when
-//        List<DrinkEntity> allBefore = drinkJpaRepository.findAll();
-//        Set<Drink> drinks = drinkRepository.findAvailableByMenu(menu);
-//
-//        // then
-//        Assertions.assertThat(drinks).hasSize(allBefore.size());
-//    }
-//
-//    @Test
-//    void correctlyDrinkDelete() {
-//        saveDrinks();
-//        // given
-//        Integer drinkId = drinkJpaRepository.findAll().get(0).getDrinkId();
-//
-//        // when
-//        List<DrinkEntity> allDrinksBeforeDelete = drinkJpaRepository.findAll();
-//        drinkRepository.deleteDrink(drinkId);
-//        List<DrinkEntity> allDrinksAfterDelete = drinkJpaRepository.findAll();
-//
-//        //
-//        Assertions.assertThat(allDrinksBeforeDelete).hasSize(allDrinksAfterDelete.size() + 1);
-//
-//    }
+    @Test
+    void correctlyDrinkSave() {
+        // given
+        Drink drink = DrinkFixtures.someDrinksForPolishFood().stream()
+                .map(drinkr -> drinkr.withQuantity(0))
+                .toList().get(0);
+
+        // when
+        List<DrinkEntity> allDrinksBeforeSave = drinkJpaRepository.findAll();
+        drinkRepository.saveDrink(drink);
+        List<DrinkEntity> allDrinkAfterSave = drinkJpaRepository.findAll();
+
+        // then
+        Assertions.assertThat(allDrinksBeforeSave).hasSize(allDrinkAfterSave.size() - 1);
+    }
+
+    @Test
+    void correctlyFindAvailable() {
+        Menu menu = saveRestaurantAndOwnerAndMenu();
+        // given, when
+        List<DrinkEntity> allBefore = drinkJpaRepository.findAll();
+        Set<Drink> drinks = drinkRepository.findAvailableByMenu(menu);
+
+        // then
+        Assertions.assertThat(drinks).hasSize(allBefore.size());
+    }
+
+    @Test
+    void correctlyDrinkDelete() {
+        saveDrinks();
+        // given
+        Integer drinkId = drinkJpaRepository.findAll().get(0).getDrinkId();
+
+        // when
+        List<DrinkEntity> allDrinksBeforeDelete = drinkJpaRepository.findAll();
+        drinkRepository.deleteDrink(drinkId);
+        List<DrinkEntity> allDrinksAfterDelete = drinkJpaRepository.findAll();
+
+        //
+        Assertions.assertThat(allDrinksBeforeDelete).hasSize(allDrinksAfterDelete.size() + 1);
+
+    }
 }

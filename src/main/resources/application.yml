@@ -3,6 +3,10 @@ server:
   servlet:
     context-path: /food-ordering-app
 
+api:
+  poczta:
+    url: http://kodpocztowy.intami.pl
+
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource

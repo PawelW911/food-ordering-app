@@ -58,6 +58,7 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
 
     @Test
     void correctlyAppetizersSave() {
+        saveRestaurantAndOwnerAndMenu();
         // given
         List<Appetizer> appetizers = AppetizerFixtures.someAppetizersForPolishFood().stream()
                 .map(appetizer -> appetizer.withQuantity(0))

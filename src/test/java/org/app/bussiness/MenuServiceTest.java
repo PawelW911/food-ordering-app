@@ -64,5 +64,18 @@ public class MenuServiceTest {
 //        Assertions.assertTrue(menu.getSoups().containsAll(menuExample.getSoups()));
     }
 
+    @Test
+    void checkCorrectlyUpdateMenu() {
+        // given
+        Menu menuExample = MenuFixtures.someMenuPolishFoodUpdate();
+
+        Mockito.when(menuDAO.updateMenu(Mockito.any(Menu.class))).thenReturn(menuExample);
+        // when
+        Menu menuAfterUpdate = menuService.updateMenu(menuExample);
+
+        // then
+        Assertions.assertInstanceOf(Menu.class, menuAfterUpdate);
+    }
+
 
 }

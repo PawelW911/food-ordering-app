@@ -10,10 +10,12 @@ import org.app.infrastructure.database.entity.RestaurantEntity;
 import org.app.infrastructure.database.repository.jpa.*;
 import org.app.infrastructure.database.repository.mapper.CustomerMapper;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
+import org.app.infrastructure.database.repository.mapper.RestaurantMapper;
 import org.app.util.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class MenuRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndConf
     private final RestaurantRepository restaurantRepository;
     private final OwnerJpaRepository ownerJpaRepository;
     private final OwnerMapper ownerMapper;
+    private final RestaurantMapper restaurantMapper;
 
     private void saveRestaurantAndOwner() {
         OwnerEntity ownerEntity = ownerMapper.mapToEntity(OwnerFixtures.someOwner1());
@@ -65,5 +68,28 @@ public class MenuRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndConf
         // then
         Assertions.assertThat(menuId).isEqualTo(menu.getMenuId());
 
+    }
+
+    @Transactional
+    @Test
+    void correctlyUpdateMenu() {
+        saveRestaurantAndOwner();
+        saveMenu();
+        // given
+        MenuEntity menuBeforeUpdate = menuJpaRepository
+                .findByRestaurant(restaurantMapper.mapToEntity((restaurantRepository
+                        .findByUniqueCode(RestaurantFixtures.someRestaurant1().getUniqueCode()))));
+        Menu menuToUpdate = MenuFixtures
+                .someMenuPolishFoodUpdate()
+                .withRestaurant(restaurantRepository
+                        .findByUniqueCode(RestaurantFixtures.someRestaurant1().getUniqueCode()));
+
+        // when
+        Menu menuAfterUpdate = menuRepository.updateMenu(menuToUpdate);
+
+        // then
+        Assertions.assertThat(menuBeforeUpdate.getMenuId()).isEqualTo(menuAfterUpdate.getMenuId());
+        Assertions.assertThat(menuToUpdate.getName()).isEqualTo(menuAfterUpdate.getName());
+        Assertions.assertThat(menuToUpdate.getDescription()).isEqualTo(menuAfterUpdate.getDescription());
     }
 }

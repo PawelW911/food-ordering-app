@@ -25,35 +25,35 @@ public class MainMealRepositoryTest extends CleanDatabaseBeforeRepositoryTestAnd
 
     private final MainMealRepository mainMealRepository;
     private final MainMealJpaRepository mainMealJpaRepository;
-//    private final OwnerMapper ownerMapper;
-//    private final OwnerJpaRepository ownerJpaRepository;
-//    private final RestaurantRepository restaurantRepository;
-//    private final MenuRepository menuRepository;
-//
-//    private void saveMainMeals() {
-//        mainMealRepository.saveMainMeal(MainMealFixtures.someMainMealsForPolishFood().stream()
-//                .map(mainMealr -> mainMealr.withQuantity(0))
-//                .toList().get(0));
-//        mainMealRepository.saveMainMeal(MainMealFixtures.someMainMealsForPolishFood().stream()
-//                .map(mainMealr -> mainMealr.withQuantity(0))
-//                .toList().get(1));
-//
-//    }
-//
-//    private Menu saveRestaurantAndOwnerAndMenu() {
-//        OwnerEntity ownerEntity = ownerMapper.mapToEntity(OwnerFixtures.someOwner1());
-//        ownerJpaRepository.saveAndFlush(ownerEntity);
-//        restaurantRepository.saveRestaurant(RestaurantFixtures.someRestaurant1());
-//        Menu menu = menuRepository.saveMenu(MenuFixtures.someMenuPolishFood());
-//        mainMealRepository.saveMainMeal(MainMealFixtures.someMainMealsForPolishFood().stream()
-//                .map(mainMealr -> mainMealr.withQuantity(0).withMenu(menu))
-//                .toList().get(0));
-//        mainMealRepository.saveMainMeal(MainMealFixtures.someMainMealsForPolishFood().stream()
-//                .map(mainMealr -> mainMealr.withQuantity(0).withMenu(menu))
-//                .toList().get(1));
-//
-//        return menu;
-//    }
+    private final OwnerMapper ownerMapper;
+    private final OwnerJpaRepository ownerJpaRepository;
+    private final RestaurantRepository restaurantRepository;
+    private final MenuRepository menuRepository;
+
+    private void saveMainMeals() {
+        mainMealRepository.saveMainMeal(MainMealFixtures.someMainMealsForPolishFood().stream()
+                .map(mainMealr -> mainMealr.withQuantity(0))
+                .toList().get(0));
+        mainMealRepository.saveMainMeal(MainMealFixtures.someMainMealsForPolishFood().stream()
+                .map(mainMealr -> mainMealr.withQuantity(0))
+                .toList().get(1));
+
+    }
+
+    private Menu saveRestaurantAndOwnerAndMenu() {
+        OwnerEntity ownerEntity = ownerMapper.mapToEntity(OwnerFixtures.someOwner1());
+        ownerJpaRepository.saveAndFlush(ownerEntity);
+        restaurantRepository.saveRestaurant(RestaurantFixtures.someRestaurant1());
+        Menu menu = menuRepository.saveMenu(MenuFixtures.someMenuPolishFood());
+        mainMealRepository.saveMainMeal(MainMealFixtures.someMainMealsForPolishFood().stream()
+                .map(mainMealr -> mainMealr.withQuantity(0).withMenu(menu))
+                .toList().get(0));
+        mainMealRepository.saveMainMeal(MainMealFixtures.someMainMealsForPolishFood().stream()
+                .map(mainMealr -> mainMealr.withQuantity(0).withMenu(menu))
+                .toList().get(1));
+
+        return menu;
+    }
 
     @Test
     void correctlySaveMainMeals() {

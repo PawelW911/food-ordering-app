@@ -10,6 +10,8 @@ import org.app.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import org.app.infrastructure.database.repository.mapper.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @AllArgsConstructor
 public class MenuRepository implements MenuDAO {
@@ -41,5 +43,13 @@ public class MenuRepository implements MenuDAO {
         RestaurantEntity toFind = restaurantMapper.mapToEntity(restaurant);
         return menuMapper.mapFromEntity(menuJpaRepository.findByRestaurant(toFind));
 
+    }
+
+    @Override
+    public Menu updateMenu(Menu menuToUpdate) {
+        Menu menu = findByRestaurant(menuToUpdate.getRestaurant());
+        menuJpaRepository.updateMenu(menu.getMenuId(), menuToUpdate.getName(), menuToUpdate.getDescription());
+        MenuEntity afterUpdate = menuJpaRepository.findById(menu.getMenuId()).orElseThrow();
+        return menuMapper.mapFromEntity(afterUpdate);
     }
 }
