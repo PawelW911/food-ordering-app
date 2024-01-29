@@ -2,6 +2,8 @@ package org.app.infrastructure.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openapitools.client.ApiClient;
+import org.openapitools.client.api.DefaultApi;
+import org.openapitools.client.model.ZipCodeEntry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,4 +44,10 @@ public class WebClientConfiguration {
         apiClient.setBasePath(pocztaUrl);
         return apiClient;
     }
+
+    @Bean
+    public DefaultApi zipCodeApi(final ApiClient apiClient) {
+        return new DefaultApi(apiClient);
+    }
+
 }

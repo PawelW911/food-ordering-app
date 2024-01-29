@@ -16,22 +16,27 @@ public class StreetDeliveryFixtures {
         streetsDelivery.add(StreetDelivery.builder()
                         .street("Poczdamska")
                         .city("Warszawa")
+                        .postalCode("00-212")
                 .build());
         streetsDelivery.add(StreetDelivery.builder()
                         .street("Ulanska")
                         .city("Warszawa")
+                        .postalCode("00-212")
                 .build());
         streetsDelivery.add(StreetDelivery.builder()
                         .street("Kwiatowa")
                         .city("Warszawa")
+                        .postalCode("00-212")
                 .build());
         streetsDelivery.add(StreetDelivery.builder()
                         .street("Wielka")
                         .city("Warszawa")
+                        .postalCode("00-265")
                 .build());
         streetsDelivery.add(StreetDelivery.builder()
                         .street("Morska")
                         .city("Warszawa")
+                        .postalCode("00-764")
                 .build());
 
         return streetsDelivery;

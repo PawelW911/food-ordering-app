@@ -14,5 +14,6 @@ public class StreetDelivery {
     Integer streetDeliveryId;
     String street;
     String city;
+    String postalCode;
     Set<Restaurant> restaurant;
 }
