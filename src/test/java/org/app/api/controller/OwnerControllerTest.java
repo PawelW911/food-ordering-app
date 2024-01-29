@@ -6,6 +6,7 @@ import org.app.api.dto.mapper.RestaurantDTOMapper;
 import org.app.bussiness.RestaurantService;
 import org.app.domain.Owner;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
+import org.app.infrastructure.zipCode.ZipCodeImpl;
 import org.app.util.OwnerFixtures;
 import org.app.util.RestaurantFixtures;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,7 @@ public class OwnerControllerTest {
 
     @Mock
     RestaurantService restaurantService;
+
 
     @InjectMocks
     OwnerController ownerController;

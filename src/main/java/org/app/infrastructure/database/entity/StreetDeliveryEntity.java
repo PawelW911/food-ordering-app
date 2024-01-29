@@ -27,6 +27,9 @@ public class StreetDeliveryEntity {
     @Column(name = "city")
     private String city;
 
+    @Column(name = "postal_code")
+    private String postalCode;
+
 
     @ManyToMany(mappedBy = "streetsDelivery")
     private Set<RestaurantEntity> restaurant;
