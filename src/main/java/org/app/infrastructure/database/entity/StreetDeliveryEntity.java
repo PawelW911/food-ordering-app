@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "streetDeliveryId")
-@ToString(of = {"streetDeliveryId", "street", "city"})
+@ToString(of = {"streetDeliveryId", "street", "city", "restaurants"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,9 +30,15 @@ public class StreetDeliveryEntity {
     @Column(name = "postal_code")
     private String postalCode;
 
-
-    @ManyToMany(mappedBy = "streetsDelivery")
-    private Set<RestaurantEntity> restaurant;
-
+//
+//    @ManyToMany(targetEntity = RestaurantEntity.class, mappedBy = "streetsDelivery", cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+//    private Set<RestaurantEntity> restaurant;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "restaurant_street_delivery",
+            joinColumns = @JoinColumn(name = "street_delivery_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id")
+    )
+    private Set<RestaurantEntity> restaurants;
 
 }

@@ -8,7 +8,7 @@ import java.util.Set;
 @Value
 @Builder
 @EqualsAndHashCode
-@ToString(of = {"streetDeliveryId", "street", "city", "restaurant"})
+@ToString(of = {"streetDeliveryId", "street", "city", "postalCode", "restaurant"})
 public class StreetDelivery {
 
     Integer streetDeliveryId;

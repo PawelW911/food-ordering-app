@@ -50,6 +50,8 @@ public class RestaurantRepository implements RestaurantDAO {
 
     @Override
     public Restaurant findByUniqueCode(String uniqueCode) {
-        return restaurantMapper.mapFromEntity(restaurantJpaRepository.findByUniqueCode(uniqueCode));
+        RestaurantEntity byUniqueCode = restaurantJpaRepository.findByUniqueCode(uniqueCode);
+        System.out.println(byUniqueCode.getStreetsDelivery());
+        return restaurantMapper.mapFromEntity(byUniqueCode);
     }
 }

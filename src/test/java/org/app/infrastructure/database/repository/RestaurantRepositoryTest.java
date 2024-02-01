@@ -55,6 +55,7 @@ public class RestaurantRepositoryTest extends CleanDatabaseBeforeRepositoryTestA
 
         // when
         List<Restaurant> restaurants = restaurantRepository.findRestaurantByStreetDelivery(streetDeliveryExample);
+        System.out.println(restaurants.get(0).getStreetDelivery());
 
         // then
         Assertions.assertThat(restaurants).hasSize(1);
