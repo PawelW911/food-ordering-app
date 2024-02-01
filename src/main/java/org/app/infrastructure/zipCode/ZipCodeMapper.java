@@ -11,6 +11,7 @@ public class ZipCodeMapper {
         return StreetDelivery.builder()
                 .street(zipCodeEntry.getUlica())
                 .city(zipCodeEntry.getMiejscowosc())
+                .postalCode(zipCodeEntry.getKod())
                 .build();
     }
 }

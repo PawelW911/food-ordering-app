@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+    <title>Food Ordering Application</title>
+</head>
+<div class="container">
+    <h1>Postal code where you delivery</h1>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>postal code</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="postalCode : ${deliveryPostalCodeDTOs}">
+                <td th:text="${postalCode}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <h2>Add new street delivery by postal code</h2>
+    <form action="#" th:action="@{/add_street_delivery}" method="POST" th:object="${postalCodeDTO}">
+        <div class="row mt-5">
+            <div class="col-md-1">
+                <label for="postalCode">Postal code:</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="postalCode" th:field="*{postalCode}">
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <input type="submit" value="Add" class="btn btn-info">
+            </div>
+        </div>
+    </form>
+</div>
+</html>

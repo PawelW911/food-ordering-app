@@ -15,14 +15,15 @@ import java.util.List;
 public class RestaurantService {
 
     private final RestaurantDAO restaurantDAO;
+    private final StreetDeliveryService streetDeliveryService;
 
     @Transactional
     public Restaurant saveNewRestaurant(Restaurant restaurant) {
         return restaurantDAO.saveRestaurant(restaurant);
     }
 
-    public List<Restaurant> findAvailableRestaurantByStreetDelivery(StreetDelivery streetDelivery) {
-        return restaurantDAO.findRestaurantByStreetDelivery(streetDelivery);
+    public List<Restaurant> findAvailableRestaurantByStreetDelivery(String street, String city) {
+        return restaurantDAO.findRestaurantByStreetDelivery(streetDeliveryService.findByStreetAndCity(street, city));
     }
 
     public List<Restaurant> findAvailableRestaurantByOwner(Owner owner) {
