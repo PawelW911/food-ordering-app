@@ -66,4 +66,9 @@ public class StreetDeliveryRepository implements StreetDeliveryDAO {
                 .map(streetDeliveryMapper::mapFromEntity)
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public StreetDelivery findByStreetAndCity(String street, String city) {
+        return streetDeliveryMapper.mapFromEntity(streetDeliveryJpaRepository.findByStreetAndCity(street, city));
+    }
 }

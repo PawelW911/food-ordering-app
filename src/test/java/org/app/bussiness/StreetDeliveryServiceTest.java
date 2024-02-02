@@ -15,7 +15,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Set;
+
+import static org.app.util.StreetDeliveryFixtures.someStreetDelivery1;
 
 @ExtendWith(MockitoExtension.class)
 public class StreetDeliveryServiceTest {
@@ -67,5 +70,20 @@ public class StreetDeliveryServiceTest {
 
         // then
         Assertions.assertEquals(streetDeliveriesExample.size(), streetDeliveries.size());
+    }
+
+    @Test
+    void checkCorrectlyFindStreetDeliveryByStreetAndCity() {
+        // given
+        List<StreetDelivery> streetDeliveryList = someStreetDelivery1().stream().toList();
+        String street = streetDeliveryList.get(0).getStreet();
+        String city = streetDeliveryList.get(0).getCity();
+
+        Mockito.when(streetDeliveryDAO.findByStreetAndCity(street, city)).thenReturn(streetDeliveryList.get(0));
+        // when
+        StreetDelivery streetDelivery = streetDeliveryService.findByStreetAndCity(street, city);
+
+        // then
+        Assertions.assertEquals(StreetDelivery.class, streetDelivery.getClass());
     }
 }
