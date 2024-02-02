@@ -57,8 +57,8 @@ public class CleanDatabaseBeforeRepositoryTestAndConfiguration {
         appetizerJpaRepository.deleteAll();
         menuJpaRepository.deleteAll();
         opinionJpaRepository.deleteAll();
-        restaurantJpaRepository.deleteAll();
         streetDeliveryJpaRepository.deleteAll();
+        restaurantJpaRepository.deleteAll();
         ownerJpaRepository.deleteAll();
         customerJpaRepository.deleteAll();
         addressJpaRepository.deleteAll();

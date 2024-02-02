@@ -12,4 +12,6 @@ public interface StreetDeliveryDAO {
     StreetDeliveryEntity streetDeliveryIsAvailable(StreetDelivery streetDelivery);
 
     Set<StreetDelivery> findPostalCodeByRestaurant(Restaurant restaurant);
+
+    StreetDelivery findByStreetAndCity(String street, String city);
 }

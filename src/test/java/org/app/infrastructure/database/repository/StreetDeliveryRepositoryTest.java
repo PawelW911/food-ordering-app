@@ -124,4 +124,22 @@ public class StreetDeliveryRepositoryTest extends CleanDatabaseBeforeRepositoryT
 
         deleteAll();
     }
+
+    @Test
+    void correctlyFindStreetDeliveryByStreetAndCity() {
+        saveTwoRestaurantAndOwnerAndStreetDelivery();
+        // given
+        List<StreetDelivery> streetDeliveryList = someStreetDelivery1().stream().toList();
+        String street = streetDeliveryList.get(0).getStreet();
+        String city = streetDeliveryList.get(0).getCity();
+        String postalCode = streetDeliveryList.get(0).getPostalCode();
+
+        // when
+        StreetDelivery streetDelivery = streetDeliveryRepository.findByStreetAndCity(street, city);
+
+        // then
+        Assertions.assertThat(streetDelivery.getStreet()).isEqualTo(street);
+        Assertions.assertThat(streetDelivery.getCity()).isEqualTo(city);
+        Assertions.assertThat(streetDelivery.getPostalCode()).isEqualTo(postalCode);
+    }
 }

@@ -36,4 +36,46 @@
     </form>
     </div>
 </div>
+<div class="container">
+<br>
+<br>
+    <h1>Available restaurants</h1>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>type food</th>
+                <th>description menu</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="restaurant : ${availableRestaurantDTOs}">
+                <td th:text="${restaurant.name}"></td>
+                <td th:text="${restaurant.typeFood}"></td>
+                <td th:text="${restaurant.menu.description}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Choose restaurant</h2>
+    <form action="#" th:action="@{/choose_restaurant_to_order_food}" method="POST" th:object="${variableDTO}">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <label for="uniqueCode">Select restaurant:</label>
+                <select id="uniqueCode" th:field="*{uniqueCode}">
+                    <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${restaurant.uniqueCode}" th:text="${restaurant.restaurantName}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <input type="submit" value="Go to order" class="btn btn-info">
+            </div>
+        </div>
+    </form>
+</div>
 </html>

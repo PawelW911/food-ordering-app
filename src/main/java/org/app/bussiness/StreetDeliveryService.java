@@ -34,6 +34,6 @@ public class StreetDeliveryService {
     }
 
     public StreetDelivery findByStreetAndCity(String street, String city) {
-        return null;
+        return streetDeliveryDAO.findByStreetAndCity(street, city);
     }
 }
