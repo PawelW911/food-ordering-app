@@ -6,6 +6,7 @@ import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAnd
 import org.app.infrastructure.database.entity.CustomerEntity;
 import org.app.infrastructure.database.entity.FoodOrderEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
+import org.app.infrastructure.database.repository.jpa.AppetizerJpaRepository;
 import org.app.infrastructure.database.repository.jpa.CustomerJpaRepository;
 import org.app.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
@@ -31,6 +32,7 @@ public class FoodOrderRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
     private final OwnerJpaRepository ownerJpaRepository;
     private final CustomerMapper customerMapper;
     private final OwnerMapper ownerMapper;
+    private final AppetizerJpaRepository appetizerJpaRepository;
 
 
     private void saveRestaurantAndCustomer() {
@@ -46,14 +48,21 @@ public class FoodOrderRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
     void correctlySaveFoodOrder() {
         saveRestaurantAndCustomer();
         // given
-        FoodOrder foodOrder = FoodOrderFixtures.someFoodOrder1();
+        FoodOrder foodOrder = FoodOrderFixtures.someFoodOrder2();
 
         // when
         List<FoodOrderEntity> allFoodOrdersBeforeSave = foodOrderJpaRepository.findAll();
-        foodOrderRepository.saveFoodOrder(foodOrder);
+        FoodOrder foodOrder1 = foodOrderRepository.saveFoodOrder(foodOrder);
         List<FoodOrderEntity> allFoodOrdersAfterSave = foodOrderJpaRepository.findAll();
 
         // then
+        System.out.println("byJPA: " + appetizerJpaRepository.findAll());
+        System.out.println(foodOrder1.getAppetizers());
+        System.out.println(foodOrder1.getSoups());
+        System.out.println(foodOrder1.getMainMeals());
+        System.out.println(foodOrder1.getDeserts());
+        System.out.println(foodOrder1.getDrinks());
+
         Assertions.assertThat(allFoodOrdersBeforeSave).hasSize(allFoodOrdersAfterSave.size() - 1);
     }
 }

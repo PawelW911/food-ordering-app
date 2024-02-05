@@ -33,4 +33,20 @@ public class CustomerServiceTest {
         // then
         Assertions.assertNotNull(customer);
     }
+
+    @Test
+    void checkFindCustomerByEmail() {
+        // given
+        Customer customerExample = CustomerFixtures.someCustomer1();
+        String email = customerExample.getEmail();
+
+        Mockito.when(customerDAO.findByEmail(email)).thenReturn(customerExample);
+
+        // when
+        Customer customer = customerService.findCustomerByEmail(email);
+
+        // then
+        Assertions.assertNotNull(customer);
+
+    }
 }

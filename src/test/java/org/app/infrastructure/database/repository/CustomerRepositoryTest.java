@@ -20,6 +20,10 @@ public class CustomerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAnd
     private final CustomerJpaRepository customerJpaRepository;
     
 
+    private void saveCustomer() {
+        customerRepository.saveCustomer(CustomerFixtures.someCustomer1());
+    }
+
     @Test
     void correctlySaveCustomer() {
         
@@ -33,6 +37,20 @@ public class CustomerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAnd
 
         // then
         Assertions.assertThat(allCustomerBeforeSave).hasSize(allCustomerAfterSave.size()-1);
+    }
+
+    @Test
+    void correctlyFindCustomerByEmail() {
+        saveCustomer();
+        // given
+        String email = CustomerFixtures.someCustomer1().getEmail();
+
+        // when
+        Customer customer = customerRepository.findByEmail(email);
+
+        // then
+        Assertions.assertThat(customer.getEmail()).isEqualTo(email);
+
     }
 
 }

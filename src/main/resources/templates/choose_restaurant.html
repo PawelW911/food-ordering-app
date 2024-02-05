@@ -32,6 +32,12 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <input type="submit" value="Choose" class="btn btn-success">
+                </div>
+            </div>
+            </div>
         </div>
     </form>
     </div>
@@ -46,14 +52,12 @@
             <tr>
                 <th>name</th>
                 <th>type food</th>
-                <th>description menu</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="restaurant : ${availableRestaurantDTOs}">
                 <td th:text="${restaurant.name}"></td>
                 <td th:text="${restaurant.typeFood}"></td>
-                <td th:text="${restaurant.menu.description}"></td>
             </tr>
             </tbody>
         </table>
@@ -67,7 +71,7 @@
             <div class="col-md-4">
                 <label for="uniqueCode">Select restaurant:</label>
                 <select id="uniqueCode" th:field="*{uniqueCode}">
-                    <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${restaurant.uniqueCode}" th:text="${restaurant.restaurantName}"></option>
+                    <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${restaurant.uniqueCode}" th:text="${restaurant.name}"></option>
                 </select>
             </div>
         </div>

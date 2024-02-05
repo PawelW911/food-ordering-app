@@ -23,4 +23,6 @@ public interface DrinkMapperDTO {
                 .menu(menu)
                 .build();
     }
+
+    Drink mapFromDTO(DrinkDTO drinkDTO);
 }

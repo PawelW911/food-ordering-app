@@ -19,4 +19,6 @@ public interface DesertMapperDTO {
                 .build();
 
     }
+
+    Desert mapFromDTO(DesertDTO desertDTO);
 }

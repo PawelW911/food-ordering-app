@@ -43,19 +43,19 @@ public class FoodOrderEntity {
     @JoinColumn(name = "customer_id")
     CustomerEntity customer;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder", cascade = CascadeType.ALL)
     Set<AppetizerEntity> appetizers;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder", cascade = CascadeType.ALL)
     Set<SoupEntity> soups;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder", cascade = CascadeType.ALL)
     Set<MainMealEntity> mainMeals;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder", cascade = CascadeType.ALL)
     Set<DesertEntity> deserts;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder", cascade = CascadeType.ALL)
     Set<DrinkEntity> drinks;
 
 }

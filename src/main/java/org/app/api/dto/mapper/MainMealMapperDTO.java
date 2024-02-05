@@ -18,4 +18,7 @@ public interface MainMealMapperDTO {
                 .menu(menu)
                 .build();
     }
+
+    MainMeal mapFromDTO(MainMealDTO mainMealDTO);
+
 }
