@@ -27,13 +27,7 @@ public class ManageRestaurantController {
     public static final String MANAGE = "/manage";
     public static final String MENU = "/menu";
 
-    AppetizerService appetizerService;
-    SoupService soupService;
-    MainMealService mainMealService;
-    DesertService desertService;
-    DrinkService drinkService;
-    MenuService menuService;
-    RestaurantService restaurantService;
+    private MenuPosition menuPosition;
 
     @GetMapping(value = RESTAURANT + MANAGE)
     public String manageRestaurantPage() {
@@ -48,26 +42,11 @@ public class ManageRestaurantController {
         model.addAttribute("desertDTO", new DesertDTO());
         model.addAttribute("drinkDTO", new DrinkDTO());
         model.addAttribute("menuDTO", new MenuDTO());
-        Map<String, ?> modelMenu = prepareMenuPositions();
+        Map<String, ?> modelMenu = menuPosition.prepareMenuPositions(OwnerController.uniqueCodeNow);
         return new ModelAndView("manage_restaurant_menu", modelMenu);
     }
 
-    private Map<String, ?> prepareMenuPositions() {
-        System.out.println(OwnerController.uniqueCodeNow);
-        var availableAppetizers = appetizerService.findAvailable(OwnerController.uniqueCodeNow);
-        var availableSoups = soupService.findAvailable(OwnerController.uniqueCodeNow);
-        var availableMainMeals = mainMealService.findAvailable(OwnerController.uniqueCodeNow);
-        var availableDeserts = desertService.findAvailable(OwnerController.uniqueCodeNow);
-        var availableDrinks = drinkService.findAvailable(OwnerController.uniqueCodeNow);
-        return Map.of(
-                "appetizerDTOs", availableAppetizers,
-                "soupDTOs", availableSoups,
-                "mainMealDTOs", availableMainMeals,
-                "desertDTOs", availableDeserts,
-                "drinkDTOs", availableDrinks,
-                "menuDTOs", Set.of(menuService.findByRestaurant(restaurantService.findByUniqueCode(OwnerController.uniqueCodeNow)))
-        );
-    }
+
 
 
 }

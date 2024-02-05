@@ -26,7 +26,7 @@ public class AppetizerController {
     RestaurantService restaurantService;
 
     @PostMapping(value = ADD_APPETIZER)
-    public String addAppetizer(
+    public String addAppetizerToMenu(
             @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
     ) {
         Appetizer appetizer = appetizerService.saveNewAppetizer(appetizerMapperDTO

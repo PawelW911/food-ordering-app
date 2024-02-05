@@ -10,6 +10,59 @@
     <title>Food Ordering Application</title>
 </head>
 <div class="container">
-    <h1>Please choose dishes</h1>
+    <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a th:href="@{/choose_street_delivery}" class="btn btn-info" role="button">Back</a>
+        </div>
+    </div>
+    <br>
+    <h1>Your order</h1>
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>name</th>
+            <th>quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appetizerAdded : ${appetizerDTOsAdded}">
+            <td th:text="${appetizerAdded.name}"></td>
+            <td th:text="${appetizerAdded.quantity}"></td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr th:each="soupAdded : ${soupDTOsAdded}">
+            <td th:text="${soupAdded.name}"></td>
+            <td th:text="${soupAdded.quantity}"></td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr th:each="mainMealAdded : ${mainMealDTOsAdded}">
+            <td th:text="${mainMealAdded.name}"></td>
+            <td th:text="${mainMealAdded.quantity}"></td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr th:each="desertAdded : ${desertDTOsAdded}">
+            <td th:text="${desertAdded.name}"></td>
+            <td th:text="${desertAdded.quantity}"></td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr th:each="drinkAdded : ${drinkDTOsAdded}">
+            <td th:text="${drinkAdded.name}"></td>
+            <td th:text="${drinkAdded.quantity}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        <b>
+            <span th:if="${sumCost}" th:text="${sumCost}">Sum cost:</span>
+        </b>
+    </p>
+    <br>
+    <h2>Please choose dishes</h2>
 </div>
 </html>

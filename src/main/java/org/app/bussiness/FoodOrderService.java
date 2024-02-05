@@ -29,7 +29,7 @@ public class FoodOrderService {
         return assignDishesToTheFoodOrder(foodOrder, foodOrderSaved);
     }
 
-    private BigDecimal calculateCost(FoodOrder foodOrder) {
+    public BigDecimal calculateCost(FoodOrder foodOrder) {
         BigDecimal costAppetizers = BigDecimal.ZERO;
         for (Appetizer appetizer : foodOrder.getAppetizers()) {
             costAppetizers = costAppetizers.add(appetizer.getPrice().multiply(new BigDecimal(appetizer.getQuantity())));

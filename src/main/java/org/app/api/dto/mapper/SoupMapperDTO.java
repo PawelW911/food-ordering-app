@@ -19,4 +19,5 @@ public interface SoupMapperDTO {
                 .build();
     }
 
+    Soup mapFromDTO(SoupDTO soupDTO);
 }

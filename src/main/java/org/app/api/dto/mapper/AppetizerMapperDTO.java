@@ -20,4 +20,6 @@ public interface AppetizerMapperDTO {
                 .menu(menu)
                 .build();
     }
+
+    Appetizer mapFromDTO(AppetizerDTO appetizerDTO);
 }
