@@ -1,6 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.app.domain.Appetizer;
 import org.app.domain.MainMeal;
 import org.app.domain.Menu;
 import org.app.domain.Soup;
@@ -72,47 +73,60 @@ public class MainMealRepositoryTest extends CleanDatabaseBeforeRepositoryTestAnd
         Assertions.assertThat(allMainMealBeforeSave).hasSize(allMainMealAfterSave.size() - mainMeals.size());
     }
 
-//    @Test
-//    void correctlyMainMealSave() {
-//        // given
-//        MainMeal mainMeal = MainMealFixtures.someMainMealsForPolishFood().stream()
-//                .map(mainMealr -> mainMealr.withQuantity(0))
-//                .toList().get(0);
-//
-//        // when
-//        List<MainMealEntity> allMainMealsBeforeSave = mainMealJpaRepository.findAll();
-//        mainMealRepository.saveMainMeal(mainMeal);
-//        List<MainMealEntity> allMainMealAfterSave = mainMealJpaRepository.findAll();
-//
-//        // then
-//        Assertions.assertThat(allMainMealsBeforeSave).hasSize(allMainMealAfterSave.size() - 1);
-//    }
-//
-//    @Test
-//    void correctlyFindAvailable() {
-//        Menu menu = saveRestaurantAndOwnerAndMenu();
-//        // given, when
-//        List<MainMealEntity> allBefore = mainMealJpaRepository.findAll();
-//        Set<MainMeal> mainMeals = mainMealRepository.findAvailableByMenu(menu);
-//
-//        // then
-//        Assertions.assertThat(mainMeals).hasSize(allBefore.size());
-//    }
-//
-//    @Test
-//    void correctlyMainMealDelete() {
-//        saveMainMeals();
-//        // given
-//        Integer mainMealId = mainMealJpaRepository.findAll().get(0).getMainMealId();
-//
-//        // when
-//        List<MainMealEntity> allMainMealsBeforeDelete = mainMealJpaRepository.findAll();
-//        mainMealRepository.deleteMainMeal(mainMealId);
-//        List<MainMealEntity> allMainMealsAfterDelete = mainMealJpaRepository.findAll();
-//
-//        //
-//        Assertions.assertThat(allMainMealsBeforeDelete).hasSize(allMainMealsAfterDelete.size() + 1);
-//
-//    }
+    @Test
+    void correctlyMainMealSave() {
+        // given
+        MainMeal mainMeal = MainMealFixtures.someMainMealsForPolishFood().stream()
+                .map(mainMealr -> mainMealr.withQuantity(0))
+                .toList().get(0);
+
+        // when
+        List<MainMealEntity> allMainMealsBeforeSave = mainMealJpaRepository.findAll();
+        mainMealRepository.saveMainMeal(mainMeal);
+        List<MainMealEntity> allMainMealAfterSave = mainMealJpaRepository.findAll();
+
+        // then
+        Assertions.assertThat(allMainMealsBeforeSave).hasSize(allMainMealAfterSave.size() - 1);
+    }
+
+    @Test
+    void correctlyFindAvailable() {
+        Menu menu = saveRestaurantAndOwnerAndMenu();
+        // given, when
+        List<MainMealEntity> allBefore = mainMealJpaRepository.findAll();
+        Set<MainMeal> mainMeals = mainMealRepository.findAvailableByMenu(menu);
+
+        // then
+        Assertions.assertThat(mainMeals).hasSize(allBefore.size());
+    }
+
+    @Test
+    void correctlyMainMealDelete() {
+        saveMainMeals();
+        // given
+        Integer mainMealId = mainMealJpaRepository.findAll().get(0).getMainMealId();
+
+        // when
+        List<MainMealEntity> allMainMealsBeforeDelete = mainMealJpaRepository.findAll();
+        mainMealRepository.deleteMainMeal(mainMealId);
+        List<MainMealEntity> allMainMealsAfterDelete = mainMealJpaRepository.findAll();
+
+        //
+        Assertions.assertThat(allMainMealsBeforeDelete).hasSize(allMainMealsAfterDelete.size() + 1);
+
+    }
+
+    @Test
+    void correctlyFindByIdMainMeal() {
+        saveMainMeals();
+        // given
+        Integer mainMealId = mainMealJpaRepository.findAll().get(0).getMainMealId();
+
+        // when
+        MainMeal mainMeal = mainMealRepository.findById(mainMealId);
+
+        // then
+        Assertions.assertThat(mainMeal.getMainMealId()).isEqualTo(mainMealId);
+    }
 
 }

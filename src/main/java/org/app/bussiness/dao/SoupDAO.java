@@ -15,4 +15,6 @@ public interface SoupDAO {
     Set<Soup> findAvailableByMenu(Menu menu);
 
     void deleteSoup(Integer soupId);
+
+    Soup findById(Integer soupId);
 }

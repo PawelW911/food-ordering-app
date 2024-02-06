@@ -52,4 +52,9 @@ public class AppetizerRepository implements AppetizerDAO {
     public void deleteAppetizer(Integer appetizerId) {
         appetizerJpaRepository.deleteById(appetizerId);
     }
+
+    @Override
+    public Appetizer findById(Integer appetizerId) {
+        return appetizerMapper.mapFromEntity(appetizerJpaRepository.findById(appetizerId).orElseThrow());
+    }
 }

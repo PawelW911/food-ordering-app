@@ -54,5 +54,9 @@ public class DesertRepository implements DesertDAO {
         desertJpaRepository.deleteById(desertId);
     }
 
+    @Override
+    public Desert findById(Integer desertId) {
+        return desertMapper.mapFromEntity(desertJpaRepository.findById(desertId).orElseThrow());
+    }
 
 }

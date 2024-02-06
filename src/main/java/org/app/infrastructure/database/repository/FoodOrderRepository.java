@@ -32,12 +32,12 @@ public class FoodOrderRepository implements FoodOrderDAO {
         FoodOrderEntity toSave = foodOrderMapper.mapToEntity(
                 foodOrder,
                 restaurantJpaRepository.findByUniqueCode(foodOrder.getRestaurant().getUniqueCode()),
-                customerJpaRepository.findByEmail(foodOrder.getCustomer().getEmail()),
-                foodOrder.getAppetizers().stream().map(appetizerMapper::mapToEntity).collect(Collectors.toSet()),
-                foodOrder.getSoups().stream().map(soupMapper::mapToEntity).collect(Collectors.toSet()),
-                foodOrder.getMainMeals().stream().map(mainMealMapper::mapToEntity).collect(Collectors.toSet()),
-                foodOrder.getDeserts().stream().map(desertMapper::mapToEntity).collect(Collectors.toSet()),
-                foodOrder.getDrinks().stream().map(drinkMapper::mapToEntity).collect(Collectors.toSet())
+                customerJpaRepository.findByEmail(foodOrder.getCustomer().getEmail())
+//                foodOrder.getAppetizers().stream().map(appetizerMapper::mapToEntity).collect(Collectors.toSet()),
+//                foodOrder.getSoups().stream().map(soupMapper::mapToEntity).collect(Collectors.toSet()),
+//                foodOrder.getMainMeals().stream().map(mainMealMapper::mapToEntity).collect(Collectors.toSet()),
+//                foodOrder.getDeserts().stream().map(desertMapper::mapToEntity).collect(Collectors.toSet()),
+//                foodOrder.getDrinks().stream().map(drinkMapper::mapToEntity).collect(Collectors.toSet())
                 );
 
         FoodOrderEntity saved = foodOrderJpaRepository.saveAndFlush(toSave);

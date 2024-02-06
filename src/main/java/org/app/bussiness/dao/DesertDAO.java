@@ -15,4 +15,6 @@ public interface DesertDAO {
     Set<Desert> findAvailableByMenu(Menu menu);
 
     void deleteDesert(Integer desertId);
+
+    Desert findById(Integer desertId);
 }

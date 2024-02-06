@@ -1,6 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.app.domain.Appetizer;
 import org.app.domain.Drink;
 import org.app.domain.Menu;
 import org.app.domain.Soup;
@@ -112,5 +113,18 @@ public class DrinkRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCon
         //
         Assertions.assertThat(allDrinksBeforeDelete).hasSize(allDrinksAfterDelete.size() + 1);
 
+    }
+
+    @Test
+    void correctlyFindByIdDrink() {
+        saveDrinks();
+        // given
+        Integer drinkId = drinkJpaRepository.findAll().get(0).getDrinkId();
+
+        // when
+        Drink drink = drinkRepository.findById(drinkId);
+
+        // then
+        Assertions.assertThat(drink.getDrinkId()).isEqualTo(drinkId);
     }
 }

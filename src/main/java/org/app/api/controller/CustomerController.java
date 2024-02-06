@@ -20,18 +20,18 @@ public class CustomerController {
 
     @GetMapping(value = CUSTOMER)
     public String customerPage(Model model) {
-        customerService.saveNewCustomer(Customer.builder()
-                .name("Adam")
-                .surname("Mazowiecki")
-                .email("adam@gmail.com")
-                .phone("+48 564 332 543")
-                .address(Address.builder()
-                        .street("Komornicka")
-                        .localNumber("5")
-                        .postalCode("00-532")
-                        .city("Warszawa")
-                        .build())
-                .build());
+//        customerService.saveNewCustomer(Customer.builder()
+//                .name("Adam")
+//                .surname("Mazowiecki")
+//                .email("adam@gmail.com")
+//                .phone("+48 564 332 543")
+//                .address(Address.builder()
+//                        .street("Komornicka")
+//                        .localNumber("5")
+//                        .postalCode("00-532")
+//                        .city("Warszawa")
+//                        .build())
+//                .build());
 
         emailCustomer = "adam@gmail.com";
 

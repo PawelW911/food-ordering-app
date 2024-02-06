@@ -81,4 +81,19 @@ public class SoupServiceTest {
         Assertions.assertEquals(soupsExample.size(), soups.size());
 
     }
+
+    @Test
+    void checkCorrectlyFindById() {
+        // given
+        Soup soupExample = SoupFixtures.someSoupsForPolishFood().stream().toList().get(0)
+                .withSoupId(1);
+
+        Mockito.when(soupDAO.findById(soupExample.getSoupId())).thenReturn(soupExample);
+        // when
+        Soup soup = soupService.findById(soupExample.getSoupId());
+
+        // then
+        Assertions.assertNotNull(soup);
+
+    }
 }

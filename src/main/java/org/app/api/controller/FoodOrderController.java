@@ -3,12 +3,13 @@ package org.app.api.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.app.api.controller.dataForController.MenuPosition;
 import org.app.api.dto.*;
 import org.app.api.dto.mapper.*;
-import org.app.bussiness.CustomerService;
-import org.app.bussiness.FoodOrderService;
-import org.app.bussiness.RestaurantService;
+import org.app.bussiness.*;
 import org.app.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,16 +24,17 @@ import java.util.*;
 
 @Data
 @Controller
-@AllArgsConstructor
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class FoodOrderController {
 
     public static final String CREATE_FOOD_ORDER = "/create_food_order";
     public static final String SUBMIT_ORDER = "/submit_order";
-    public static final String ADD_APPETIZER = "/add_appetizer";
-    public static final String ADD_SOUP = "/add_soup";
-    public static final String ADD_MAIN_MEAL = "/add_main_meal";
-    public static final String ADD_DESERT = "/add_desert";
-    public static final String ADD_DRINK = "/add_drink";
+    public static final String ADD_APPETIZER_TO_ORDER = "/add_appetizer_to_order";
+    public static final String ADD_SOUP_TO_ORDER = "/add_soup_to_order";
+    public static final String ADD_MAIN_MEAL_TO_ORDER = "/add_main_meal_to_order";
+    public static final String ADD_DESERT_TO_ORDER = "/add_desert_to_order";
+    public static final String ADD_DRINK_TO_ORDER = "/add_drink_to_order";
 
     private FoodOrderService foodOrderService;
     private RestaurantService restaurantService;
@@ -43,12 +45,17 @@ public class FoodOrderController {
     private DesertMapperDTO desertMapperDTO;
     private DrinkMapperDTO drinkMapperDTO;
     private MenuPosition menuPosition;
+    private AppetizerService appetizerService;
+    private SoupService soupService;
+    private MainMealService mainMealService;
+    private DesertService desertService;
+    private DrinkService drinkService;
 
-    private static Set<Appetizer> appetizerSet;
-    private static Set<Soup> soupSet;
-    private static Set<MainMeal> mainMealSet;
-    private static Set<Desert> desertSet;
-    private static Set<Drink> drinkSet;
+    private static Set<Appetizer> appetizerSet = new HashSet<>();
+    private static Set<Soup> soupSet = new HashSet<>();
+    private static Set<MainMeal> mainMealSet = new HashSet<>();
+    private static Set<Desert> desertSet = new HashSet<>();
+    private static Set<Drink> drinkSet = new HashSet<>();
 
 
     @GetMapping(value = CREATE_FOOD_ORDER)
@@ -58,12 +65,17 @@ public class FoodOrderController {
         model.addAttribute("mainMealDTO", new MainMealDTO());
         model.addAttribute("desertDTO", new DesertDTO());
         model.addAttribute("drinkDTO", new DrinkDTO());
-        Map<String, ?> addedDishes = prepareAddedDishesAndSumCost();
-        Map<String, ?> availableMenuPosition = menuPosition
-                .prepareMenuPositions(ChooseRestaurantToFoodOrderController.uniqueCodeRestaurantToOrderFood);
+        Map<String, ?> addedDishesAndAvailablePositionMenu = prepareAddedDishesAndSumCost();
 
+        model.addAttribute("sumCost", foodOrderService.calculateCost(FoodOrder.builder()
+                .appetizers(appetizerSet)
+                .soups(soupSet)
+                .mainMeals(mainMealSet)
+                .deserts(desertSet)
+                .drinks(drinkSet)
+                .build()));
 
-        return new ModelAndView("create_food_order", addedDishes);
+        return new ModelAndView("create_food_order", addedDishesAndAvailablePositionMenu);
     }
 
     @PostMapping(value = SUBMIT_ORDER)
@@ -85,66 +97,89 @@ public class FoodOrderController {
         return "submit_order_success";
     }
 
-    @PostMapping(value = ADD_APPETIZER)
+    @PostMapping(value = ADD_APPETIZER_TO_ORDER)
     public String addAppetizer(
             @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
     ) {
-        appetizerSet.add(appetizerMapperDTO.mapFromDTO(appetizerDTO));
+        Appetizer appetizerFound = appetizerService.findById(appetizerDTO.getAppetizerId());
 
+        if(appetizerDTO.getQuantity()>0) {
+            appetizerSet.add(appetizerFound.withAppetizerId(null).withQuantity(appetizerDTO.getQuantity()));
+        }
         return "redirect:/create_food_order";
     }
 
-    @PostMapping(value = ADD_SOUP)
+    @PostMapping(value = ADD_SOUP_TO_ORDER)
     public String addSoup(
             @Valid @ModelAttribute("soupDTO") SoupDTO soupDTO
     ) {
-        soupSet.add(soupMapperDTO.mapFromDTO(soupDTO));
+        Soup soupFound = soupService.findById(soupDTO.getSoupId());
 
+        if(soupDTO.getQuantity()>0) {
+            soupSet.add(soupFound.withSoupId(null).withQuantity(soupDTO.getQuantity()));
+        }
         return "redirect:/create_food_order";
     }
 
-    @PostMapping(value = ADD_MAIN_MEAL)
+    @PostMapping(value = ADD_MAIN_MEAL_TO_ORDER)
     public String addMainMeal(
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
     ) {
-        mainMealSet.add(mainMealMapperDTO.mapFromDTO(mainMealDTO));
+        MainMeal mainMealFound = mainMealService.findById(mainMealDTO.getMainMealId());
 
+        if(mainMealDTO.getQuantity()>0) {
+            mainMealSet.add(mainMealFound.withMainMealId(null).withQuantity(mainMealDTO.getQuantity()));
+        }
         return "redirect:/create_food_order";
     }
 
-    @PostMapping(value = ADD_DESERT)
+    @PostMapping(value = ADD_DESERT_TO_ORDER)
     public String addDesert(
             @Valid @ModelAttribute("desertDTO") DesertDTO desertDTO
     ) {
-        desertSet.add(desertMapperDTO.mapFromDTO(desertDTO));
+        Desert desertFound = desertService.findById(desertDTO.getDesertId());
 
+        if(desertDTO.getQuantity()>0) {
+            desertSet.add(desertFound.withDesertId(null).withQuantity(desertDTO.getQuantity()));
+        }
         return "redirect:/create_food_order";
     }
 
-    @PostMapping(value = ADD_DRINK)
+    @PostMapping(value = ADD_DRINK_TO_ORDER)
     public String addDrink(
             @Valid @ModelAttribute("drinkDTO") DrinkDTO drinkDTO
     ) {
-        drinkSet.add(drinkMapperDTO.mapFromDTO(drinkDTO));
+        Drink drinkFound = drinkService.findById(drinkDTO.getDrinkId());
 
+        if(drinkDTO.getQuantity()>0) {
+            drinkSet.add(drinkFound.withDrinkId(null).withQuantity(drinkDTO.getQuantity()));
+        }
         return "redirect:/create_food_order";
     }
 
 
     private Map<String, ?> prepareAddedDishesAndSumCost() {
+        var availableAppetizers = appetizerService.findAvailable(
+                ChooseRestaurantToFoodOrderController.uniqueCodeRestaurantToOrderFood);
+        var availableSoups = soupService.findAvailable(
+                ChooseRestaurantToFoodOrderController.uniqueCodeRestaurantToOrderFood);
+        var availableMainMeals = mainMealService.findAvailable(
+                ChooseRestaurantToFoodOrderController.uniqueCodeRestaurantToOrderFood);
+        var availableDeserts = desertService.findAvailable(
+                ChooseRestaurantToFoodOrderController.uniqueCodeRestaurantToOrderFood);
+        var availableDrinks = drinkService.findAvailable(
+                ChooseRestaurantToFoodOrderController.uniqueCodeRestaurantToOrderFood);
         return Map.of(
                 "appetizerDTOsAdded", appetizerSet,
                 "soupDTOsAdded", soupSet,
                 "mainMealDTOsAdded", mainMealSet,
                 "desertDTOsAdded", desertSet,
                 "drinkDTOsAdded", drinkSet,
-                "sumCost", foodOrderService.calculateCost(FoodOrder.builder()
-                        .appetizers(appetizerSet)
-                        .soups(soupSet)
-                        .mainMeals(mainMealSet)
-                        .deserts(desertSet)
-                        .drinks(drinkSet)
-                        .build())
+                "appetizerDTOs", availableAppetizers,
+                "soupDTOs", availableSoups,
+                "mainMealDTOs", availableMainMeals,
+                "desertDTOs", availableDeserts,
+                "drinkDTOs", availableDrinks
         );
     }
 

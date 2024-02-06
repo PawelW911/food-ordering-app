@@ -2,8 +2,8 @@ package org.app.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.app.api.dto.ChooseStreetDeliveryDTO;
-import org.app.api.dto.VariableDTO;
+import org.app.api.controller.dataForController.MenuPosition;
+import org.app.api.dto.*;
 import org.app.bussiness.CustomerService;
 import org.app.bussiness.FoodOrderService;
 import org.app.bussiness.RestaurantService;
@@ -34,6 +34,7 @@ public class ChooseRestaurantToFoodOrderController {
 
     private StreetDeliveryService streetDeliveryService;
     private RestaurantService restaurantService;
+    private MenuPosition menuPosition;
     private FoodOrderService foodOrderService;
     private CustomerService customerService;
 
@@ -61,13 +62,22 @@ public class ChooseRestaurantToFoodOrderController {
     }
 
     @PostMapping(value = CHOOSE_RESTAURANT_TO_ORDER_FOOD)
-    public String chooseRestaurant(
+    public ModelAndView chooseRestaurant(
+            Model model,
             @Valid @ModelAttribute("variableDTO")VariableDTO variableDTO
             ) {
 
         uniqueCodeRestaurantToOrderFood = variableDTO.getUniqueCode();
 
-        return "redirect:/choose_street_delivery";
+        model.addAttribute("appetizerDTO", new AppetizerDTO());
+        model.addAttribute("soupDTO", new SoupDTO());
+        model.addAttribute("mainMealDTO", new MainMealDTO());
+        model.addAttribute("desertDTO", new DesertDTO());
+        model.addAttribute("drinkDTO", new DrinkDTO());
+
+        Map<String, ?> menuPositions = menuPosition.prepareMenuPositions(uniqueCodeRestaurantToOrderFood);
+
+        return new ModelAndView("create_food_order", menuPositions);
     }
 
     private Map<String, ?> prepareAvailableRestaurant(StreetDelivery streetDelivery) {

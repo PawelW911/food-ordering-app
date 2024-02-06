@@ -1,11 +1,13 @@
-package org.app.api.controller;
+package org.app.api.controller.dataForController;
 
 import lombok.AllArgsConstructor;
 import org.app.bussiness.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Set;
 
+@Component
 @AllArgsConstructor
 public class MenuPosition {
 

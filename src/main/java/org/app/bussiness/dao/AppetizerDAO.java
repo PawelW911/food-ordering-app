@@ -13,4 +13,6 @@ public interface AppetizerDAO {
     Set<Appetizer> findAvailableByMenu(Menu menu);
 
     void deleteAppetizer(Integer appetizerId);
+
+    Appetizer findById(Integer appetizerId);
 }

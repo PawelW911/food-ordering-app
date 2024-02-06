@@ -15,4 +15,6 @@ public interface MainMealDAO {
     Set<MainMeal> findAvailableByMenu(Menu menu);
 
     void deleteMainMeal(Integer mainMealId);
+
+    MainMeal findById(Integer mainMealId);
 }

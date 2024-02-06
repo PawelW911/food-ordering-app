@@ -41,4 +41,8 @@ public class SoupService {
     public void deleteSoup(Integer soupId) {
         soupDAO.deleteSoup(soupId);
     }
+
+    public Soup findById(Integer soupId) {
+        return soupDAO.findById(soupId);
+    }
 }

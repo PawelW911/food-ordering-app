@@ -54,4 +54,9 @@ public class MainMealRepository implements MainMealDAO {
         mainMealJpaRepository.deleteById(mainMealId);
     }
 
+    @Override
+    public MainMeal findById(Integer mainMealId) {
+        return mainMealMapper.mapFromEntity(mainMealJpaRepository.findById(mainMealId).orElseThrow());
+    }
+
 }
