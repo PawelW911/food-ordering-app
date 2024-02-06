@@ -113,4 +113,17 @@ public class SoupRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndConf
         Assertions.assertThat(allSoupsBeforeDelete).hasSize(allSoupsAfterDelete.size() + 1);
 
     }
+
+    @Test
+    void correctlyFindByIdSoup() {
+        saveSoups();
+        // given
+        Integer soupId = soupJpaRepository.findAll().get(0).getSoupId();
+
+        // when
+        Soup soup = soupRepository.findById(soupId);
+
+        // then
+        Assertions.assertThat(soup.getSoupId()).isEqualTo(soupId);
+    }
 }

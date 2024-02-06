@@ -12,6 +12,7 @@ import org.app.bussiness.OwnerService;
 import org.app.bussiness.RestaurantService;
 import org.app.domain.Menu;
 import org.app.domain.Restaurant;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +28,18 @@ public class AddNewRestaurantController {
 
     public static final String RESTAURANT = "/restaurant";
     public static final String ADD_NEW_RESTAURANT = "/add_new_restaurant";
+    public static final String ADD_NEW_RESTAURANT_SUBMIT = "/add_new_restaurant_submit";
     public static final String ADD_MENU = "/add_menu";
 
+    @Autowired
     private RestaurantService restaurantService;
+    @Autowired
     private RestaurantDTOMapper restaurantDTOMapper;
+    @Autowired
     private OwnerService ownerService;
+    @Autowired
     private MenuService menuService;
+    @Autowired
     private MenuMapperDTO menuMapperDTO;
 
     private static String uniqueCode;
@@ -40,10 +47,11 @@ public class AddNewRestaurantController {
     @GetMapping(value = RESTAURANT + ADD_NEW_RESTAURANT)
     public String restaurantAddNewPage(ModelMap model) {
         model.addAttribute("restaurantDTO", new RestaurantDTO());
+
         return "add_new_restaurant";
     }
 
-    @PostMapping(value = RESTAURANT + ADD_NEW_RESTAURANT)
+    @PostMapping(value = RESTAURANT + ADD_NEW_RESTAURANT_SUBMIT)
     public String addRestaurant(
             @Valid @ModelAttribute("restaurantDTO") RestaurantDTO restaurantDTO,
             ModelMap model

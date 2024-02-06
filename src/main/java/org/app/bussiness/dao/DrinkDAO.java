@@ -16,4 +16,6 @@ public interface DrinkDAO {
     Set<Drink> findAvailableByMenu(Menu menu);
 
     void deleteDrink(Integer drinkId);
+
+    Drink findById(Integer drinkId);
 }

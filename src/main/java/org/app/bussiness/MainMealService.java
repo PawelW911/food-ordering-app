@@ -41,4 +41,8 @@ public class MainMealService {
     public void deleteMainMeal(Integer mainMealId) {
         mainMealDAO.deleteMainMeal(mainMealId);
     }
+
+    public MainMeal findById(Integer mainMealId) {
+        return mainMealDAO.findById(mainMealId);
+    }
 }

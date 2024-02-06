@@ -115,4 +115,17 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
         Assertions.assertThat(allAppetizersBeforeDelete).hasSize(allAppetizersAfterDelete.size() + 1);
 
     }
+
+    @Test
+    void correctlyFindByIdAppetizer() {
+        saveAppetizers();
+        // given
+        Integer appetizerId = appetizerJpaRepository.findAll().get(0).getAppetizerId();
+
+        // when
+        Appetizer appetizer = appetizerRepository.findById(appetizerId);
+
+        // then
+        Assertions.assertThat(appetizer.getAppetizerId()).isEqualTo(appetizerId);
+    }
 }

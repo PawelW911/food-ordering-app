@@ -1,14 +1,8 @@
 package org.app.bussiness;
 
 import org.app.bussiness.dao.DesertDAO;
-import org.app.domain.Desert;
-import org.app.domain.Menu;
-import org.app.domain.Restaurant;
-import org.app.domain.Soup;
-import org.app.util.DesertFixtures;
-import org.app.util.MenuFixtures;
-import org.app.util.RestaurantFixtures;
-import org.app.util.SoupFixtures;
+import org.app.domain.*;
+import org.app.util.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -80,6 +74,21 @@ public class DesertServiceTest {
 
         // then
         Assertions.assertEquals(desertsExample.size(), deserts.size());
+
+    }
+
+    @Test
+    void checkCorrectlyFindById() {
+        // given
+        Desert desertExample = DesertFixtures.someDesertsForPolishFood().stream().toList().get(0)
+                .withDesertId(1);
+
+        Mockito.when(desertDAO.findById(desertExample.getDesertId())).thenReturn(desertExample);
+        // when
+        Desert desert = desertService.findById(desertExample.getDesertId());
+
+        // then
+        Assertions.assertNotNull(desert);
 
     }
 }

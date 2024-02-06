@@ -54,4 +54,8 @@ public class SoupRepository implements SoupDAO {
         soupJpaRepository.deleteById(soupId);
     }
 
+    @Override
+    public Soup findById(Integer soupId) {
+        return soupMapper.mapFromEntity(soupJpaRepository.findById(soupId).orElseThrow());
+    }
 }

@@ -80,5 +80,20 @@ public class AppetizerServiceTest {
 
     }
 
+    @Test
+    void checkCorrectlyFindById() {
+        // given
+        Appetizer appetizerExample = AppetizerFixtures.someAppetizersForPolishFood().stream().toList().get(0)
+                .withAppetizerId(1);
+
+        Mockito.when(appetizerDAO.findById(appetizerExample.getAppetizerId())).thenReturn(appetizerExample);
+        // when
+        Appetizer appetizer = appetizerService.findById(appetizerExample.getAppetizerId());
+
+        // then
+        Assertions.assertNotNull(appetizer);
+
+    }
+
 
 }

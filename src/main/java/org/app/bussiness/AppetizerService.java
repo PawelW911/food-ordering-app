@@ -39,4 +39,8 @@ public class AppetizerService {
     public void deleteAppetizer(Integer appetizerId) {
         appetizerDAO.deleteAppetizer(appetizerId);
     }
+
+    public Appetizer findById(Integer appetizerId) {
+        return appetizerDAO.findById(appetizerId);
+    }
 }

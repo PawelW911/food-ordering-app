@@ -21,12 +21,19 @@ public class FoodOrderService {
     private final DrinkService drinkService;
     private final SoupService soupService;
 
-    @Transactional
     public FoodOrder saveNewFoodOrder(FoodOrder foodOrder) {
         foodOrder.setSumCost(calculateCost(foodOrder));
-        FoodOrder foodOrderSaved = foodOrderDAO.saveFoodOrder(foodOrder);
-
+        FoodOrder foodOrderSaved = saveOrder(foodOrder);
+        System.out.println(foodOrderSaved.getOrderId());
+        if(foodOrderSaved == null) {
+            throw new RuntimeException("Food order doesn't save");
+        }
         return assignDishesToTheFoodOrder(foodOrder, foodOrderSaved);
+    }
+
+    @Transactional
+    private FoodOrder saveOrder(FoodOrder foodOrder) {
+        return foodOrderDAO.saveFoodOrder(foodOrder);
     }
 
     public BigDecimal calculateCost(FoodOrder foodOrder) {

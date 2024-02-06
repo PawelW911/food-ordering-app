@@ -13,12 +13,12 @@ public interface FoodOrderMapper {
     default FoodOrderEntity mapToEntity(
             FoodOrder foodOrder,
             RestaurantEntity restaurantEntity,
-            CustomerEntity customerEntity,
-            Set<AppetizerEntity> appetizerEntities,
-            Set<SoupEntity> soupEntities,
-            Set<MainMealEntity> mainMealEntities,
-            Set<DesertEntity> desertEntities,
-            Set<DrinkEntity> drinkEntities
+            CustomerEntity customerEntity
+//            Set<AppetizerEntity> appetizerEntities,
+//            Set<SoupEntity> soupEntities,
+//            Set<MainMealEntity> mainMealEntities,
+//            Set<DesertEntity> desertEntities,
+//            Set<DrinkEntity> drinkEntities
     ) {
         return FoodOrderEntity.builder()
                 .foodOrderNumber(foodOrder.getOrderNumber())
@@ -26,11 +26,11 @@ public interface FoodOrderMapper {
                 .sumCost(foodOrder.getSumCost())
                 .restaurant(restaurantEntity)
                 .customer(customerEntity)
-                .appetizers(appetizerEntities)
-                .soups(soupEntities)
-                .mainMeals(mainMealEntities)
-                .deserts(desertEntities)
-                .drinks(drinkEntities)
+//                .appetizers(appetizerEntities)
+//                .soups(soupEntities)
+//                .mainMeals(mainMealEntities)
+//                .deserts(desertEntities)
+//                .drinks(drinkEntities)
                 .build();
     }
 

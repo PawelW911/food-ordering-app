@@ -1,6 +1,7 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.app.domain.Appetizer;
 import org.app.domain.Desert;
 import org.app.domain.Menu;
 import org.app.domain.Soup;
@@ -114,5 +115,18 @@ public class DesertRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCo
         //
         Assertions.assertThat(allDesertsBeforeDelete).hasSize(allDesertsAfterDelete.size() + 1);
 
+    }
+
+    @Test
+    void correctlyFindByIdDesert() {
+        saveDeserts();
+        // given
+        Integer desertId = desertJpaRepository.findAll().get(0).getDesertId();
+
+        // when
+        Desert desert = desertRepository.findById(desertId);
+
+        // then
+        Assertions.assertThat(desert.getDesertId()).isEqualTo(desertId);
     }
 }

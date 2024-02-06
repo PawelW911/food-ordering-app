@@ -54,5 +54,10 @@ public class DrinkRepository implements DrinkDAO {
         drinkJpaRepository.deleteById(drinkId);
     }
 
+    @Override
+    public Drink findById(Integer drinkId) {
+        return drinkMapper.mapFromEntity(drinkJpaRepository.findById(drinkId).orElseThrow());
+    }
+
 
 }

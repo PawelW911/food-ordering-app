@@ -1,23 +1,14 @@
 package org.app.api.controller;
 
 import lombok.AllArgsConstructor;
+import org.app.api.controller.dataForController.MenuPosition;
 import org.app.api.dto.*;
-import org.app.bussiness.*;
-import org.app.domain.Menu;
-import org.app.domain.Restaurant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor

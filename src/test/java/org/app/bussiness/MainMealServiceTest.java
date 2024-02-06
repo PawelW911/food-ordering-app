@@ -1,9 +1,11 @@
 package org.app.bussiness;
 
 import org.app.bussiness.dao.MainMealDAO;
+import org.app.domain.Appetizer;
 import org.app.domain.MainMeal;
 import org.app.domain.Menu;
 import org.app.domain.Restaurant;
+import org.app.util.AppetizerFixtures;
 import org.app.util.MainMealFixtures;
 import org.app.util.MenuFixtures;
 import org.app.util.RestaurantFixtures;
@@ -77,6 +79,21 @@ public class MainMealServiceTest {
 
         // then
         Assertions.assertEquals(mainMealsExample.size(), mainMeals.size());
+
+    }
+
+    @Test
+    void checkCorrectlyFindById() {
+        // given
+        MainMeal mainMealExample = MainMealFixtures.someMainMealsForPolishFood().stream().toList().get(0)
+                .withMainMealId(1);
+
+        Mockito.when(mainMealDAO.findById(mainMealExample.getMainMealId())).thenReturn(mainMealExample);
+        // when
+        MainMeal mainMeal = mainMealService.findById(mainMealExample.getMainMealId());
+
+        // then
+        Assertions.assertNotNull(mainMeal);
 
     }
 }

@@ -41,4 +41,8 @@ public class DrinkService {
     public void deleteDrink(Integer drinkId) {
         drinkDAO.deleteDrink(drinkId);
     }
+
+    public Drink findById(Integer drinkId) {
+        return drinkDAO.findById(drinkId);
+    }
 }

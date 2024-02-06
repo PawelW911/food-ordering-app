@@ -41,4 +41,8 @@ public class DesertService {
     public void deleteDesert(Integer desertId) {
         desertDAO.deleteDesert(desertId);
     }
+
+    public Desert findById(Integer desertId) {
+        return desertDAO.findById(desertId);
+    }
 }
