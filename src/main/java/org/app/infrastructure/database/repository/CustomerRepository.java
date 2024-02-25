@@ -6,18 +6,21 @@ import org.app.domain.Customer;
 import org.app.infrastructure.database.entity.CustomerEntity;
 import org.app.infrastructure.database.repository.jpa.CustomerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.CustomerMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @AllArgsConstructor
 public class CustomerRepository implements CustomerDAO {
 
-    CustomerJpaRepository customerJpaRepository;
-    CustomerMapper customerMapper;
+    private CustomerJpaRepository customerJpaRepository;
+    private CustomerMapper customerMapper;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Customer saveCustomer(Customer customer) {
         CustomerEntity toSave = customerMapper.mapToEntity(customer);
+        toSave.getUser().setPassword(passwordEncoder.encode(toSave.getUser().getPassword()));
         CustomerEntity saved = customerJpaRepository.saveAndFlush(toSave);
         return customerMapper.mapFromEntity(saved);
     }

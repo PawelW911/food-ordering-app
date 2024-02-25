@@ -3,6 +3,9 @@ package org.app.infrastructure.configuration;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.app.infrastructure.database.repository.jpa.*;
+import org.app.security.RoleEntity;
+import org.app.security.RoleRepository;
+import org.app.security.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -46,6 +49,10 @@ public class CleanDatabaseBeforeRepositoryTestAndConfiguration {
     private CustomerJpaRepository customerJpaRepository;
     @Autowired
     private AddressJpaRepository addressJpaRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @BeforeEach
     public void cleanDatabase() {
@@ -62,5 +69,15 @@ public class CleanDatabaseBeforeRepositoryTestAndConfiguration {
         ownerJpaRepository.deleteAll();
         customerJpaRepository.deleteAll();
         addressJpaRepository.deleteAll();
+        userRepository.deleteAll();
+        roleRepository.deleteAll();
+        roleRepository.save(RoleEntity.builder()
+                .id(1)
+                .role("OWNER")
+                .build());
+        roleRepository.save(RoleEntity.builder()
+                .id(2)
+                .role("CUSTOMER")
+                .build());
     }
 }

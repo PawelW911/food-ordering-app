@@ -9,6 +9,7 @@ public class CustomerFixtures {
                 .surname("Kowalski")
                 .email("stefan@gmail.com")
                 .phone("+48 542 482 841")
+                .user(UserFixtures.someUserForCustomer())
                 .address(AddressFixtures.someAddress1())
                 .build();
     }

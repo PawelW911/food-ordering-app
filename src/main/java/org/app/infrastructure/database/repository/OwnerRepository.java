@@ -6,6 +6,7 @@ import org.app.domain.Owner;
 import org.app.infrastructure.database.entity.OwnerEntity;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -14,10 +15,12 @@ public class OwnerRepository implements OwnerDAO {
 
     private final OwnerJpaRepository ownerJpaRepository;
     private final OwnerMapper ownerMapper;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Owner saveOwner(Owner owner) {
         OwnerEntity toSave = ownerMapper.mapToEntity(owner);
+        toSave.getUser().setPassword(passwordEncoder.encode(toSave.getUser().getPassword()));
         OwnerEntity saved = ownerJpaRepository.saveAndFlush(toSave);
         return ownerMapper.mapFromEntity(saved);
     }

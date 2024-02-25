@@ -9,11 +9,14 @@ import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAnd
 import org.app.infrastructure.database.entity.CustomerEntity;
 import org.app.infrastructure.database.entity.FoodOrderEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
+import org.app.infrastructure.database.repository.jpa.AppetizerJpaRepository;
 import org.app.infrastructure.database.repository.jpa.CustomerJpaRepository;
 import org.app.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.CustomerMapper;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
+import org.app.security.RoleEntity;
+import org.app.security.RoleRepository;
 import org.app.util.CustomerFixtures;
 import org.app.util.FoodOrderFixtures;
 import org.app.util.OwnerFixtures;
@@ -40,6 +43,8 @@ public class FoodOrderRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
     private final OwnerJpaRepository ownerJpaRepository;
     private final CustomerMapper customerMapper;
     private final OwnerMapper ownerMapper;
+    private final AppetizerJpaRepository appetizerJpaRepository;
+    private final RoleRepository roleRepository;
 
 
     private void saveRestaurantAndCustomer() {

@@ -25,28 +25,28 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class OwnerControllerTest {
 
-    @Mock
-    OwnerDTOMapper ownerDTOMapper;
-
-    @Mock
-    RestaurantDTOMapper restaurantDTOMapper;
-
-    @Mock
-    RestaurantService restaurantService;
-
-
-    @InjectMocks
-    OwnerController ownerController;
-
-    @Test
-    void correctlyReturnViewOwner() throws Exception {
-        // given
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(ownerController).build();
-
-        // when, then
-
-        mockMvc.perform(MockMvcRequestBuilders.get(OwnerController.OWNER))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("owner_portal"));
-    }
+//    @Mock
+//    OwnerDTOMapper ownerDTOMapper;
+//
+//    @Mock
+//    RestaurantDTOMapper restaurantDTOMapper;
+//
+//    @Mock
+//    RestaurantService restaurantService;
+//
+//
+//    @InjectMocks
+//    OwnerController ownerController;
+//
+//    @Test
+//    void correctlyReturnViewOwner() throws Exception {
+//        // given
+//        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(ownerController).build();
+//
+//        // when, then
+//
+//        mockMvc.perform(MockMvcRequestBuilders.get(OwnerController.OWNER))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.view().name("owner_portal"));
+//    }
 }

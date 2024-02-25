@@ -16,5 +16,6 @@ public class Owner {
     String surname;
     String email;
     String phone;
+    User user;
     Set<Restaurant> restaurant;
 }
