@@ -16,6 +16,7 @@ import org.app.util.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -126,5 +127,22 @@ public class DrinkRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCon
 
         // then
         Assertions.assertThat(drink.getDrinkId()).isEqualTo(drinkId);
+    }
+
+    @Transactional
+    @Test
+    void correctlyUpdateQuantityDrink() {
+        saveDrinks();
+        // given
+        Integer drinkId = drinkJpaRepository.findAll().get(0).getDrinkId();
+        Integer quantity = 5;
+
+        // when
+        Drink drink = drinkRepository.updateQuantityDrink(drinkId, quantity);
+
+        // then
+        Integer quantityUpdate = drinkJpaRepository.findById(drinkId).orElseThrow().getQuantity();
+        Assertions.assertThat(quantityUpdate)
+                .isEqualTo(quantity);
     }
 }

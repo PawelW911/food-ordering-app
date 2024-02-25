@@ -17,4 +17,6 @@ public interface DesertDAO {
     void deleteDesert(Integer desertId);
 
     Desert findById(Integer desertId);
+
+    Desert updateQuantityDesert(Integer desertId, Integer quantity);
 }

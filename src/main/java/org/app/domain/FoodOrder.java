@@ -12,14 +12,14 @@ import java.util.Set;
 @Builder
 @EqualsAndHashCode
 @ToString(of = {
-        "orderId", "orderNumber", "receivedDateTime", "completedDateTime",
+        "foodOrderId", "foodOrderNumber", "receivedDateTime", "completedDateTime",
         "restaurant", "customer", "appetizers", "sumCost",
         "soups", "mainMeals", "deserts", "drinks"
 })
 public class FoodOrder {
 
-    Integer orderId;
-    String orderNumber;
+    Integer foodOrderId;
+    String foodOrderNumber;
     OffsetDateTime receivedDateTime;
     OffsetDateTime completedDateTime;
     BigDecimal sumCost;

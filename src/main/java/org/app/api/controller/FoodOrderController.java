@@ -81,7 +81,7 @@ public class FoodOrderController {
     @PostMapping(value = SUBMIT_ORDER)
     public String submitOrder() {
         foodOrderService.saveNewFoodOrder(FoodOrder.builder()
-                .orderNumber(UUID.randomUUID().toString())
+                .foodOrderNumber(UUID.randomUUID().toString())
                 .receivedDateTime(OffsetDateTime.now(ZoneOffset.UTC))
                 .sumCost(BigDecimal.ZERO)
                 .restaurant(restaurantService.findByUniqueCode(

@@ -9,7 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "appetizerId")
-@ToString(of = {"appetizerId", "name", "composition", "price", "quantity"})
+@ToString(of = {"appetizerId", "name", "composition", "price", "quantity", "foodOrder"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,11 +34,11 @@ public class AppetizerEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     MenuEntity menu;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_order_id")
     FoodOrderEntity foodOrder;
 

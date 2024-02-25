@@ -17,4 +17,6 @@ public interface MainMealDAO {
     void deleteMainMeal(Integer mainMealId);
 
     MainMeal findById(Integer mainMealId);
+
+    MainMeal updateQuantityMainMeal(Integer mainMealId, Integer quantity);
 }

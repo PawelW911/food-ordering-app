@@ -11,5 +11,6 @@ public interface DrinkMapper {
     DrinkEntity mapToEntity(Drink drink);
 
     @Mapping(target = "menu", ignore = true)
+    @Mapping(target = "foodOrder", ignore = true)
     Drink mapFromEntity(DrinkEntity drinkEntity);
 }

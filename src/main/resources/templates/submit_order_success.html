@@ -9,4 +9,17 @@
           crossorigin="anonymous">
     <title>Food Ordering Application</title>
 </head>
+<div class="container">
+    <br>
+    <h1>Food order success!</h1>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <a th:href="@{/update_order}" class="btn btn-info" role="button">Update order</a>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a th:href="@{/customer}" class="btn btn-info" role="button">Back</a>
+        </div>
+    </div>
+</div>
 </html>

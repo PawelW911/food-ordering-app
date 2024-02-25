@@ -59,4 +59,11 @@ public class DesertRepository implements DesertDAO {
         return desertMapper.mapFromEntity(desertJpaRepository.findById(desertId).orElseThrow());
     }
 
+    @Override
+    public Desert updateQuantityDesert(Integer desertId, Integer quantity) {
+        desertJpaRepository.updateQuantityDesert(desertId, quantity);
+        DesertEntity desertEntity = desertJpaRepository.findById(desertId).orElseThrow();
+        return desertMapper.mapFromEntity(desertEntity);
+    }
+
 }

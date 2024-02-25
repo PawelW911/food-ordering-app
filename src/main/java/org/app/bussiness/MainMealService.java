@@ -2,10 +2,7 @@ package org.app.bussiness;
 
 import lombok.AllArgsConstructor;
 import org.app.bussiness.dao.MainMealDAO;
-import org.app.domain.MainMeal;
-import org.app.domain.Menu;
-import org.app.domain.Restaurant;
-import org.app.domain.Soup;
+import org.app.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,5 +41,10 @@ public class MainMealService {
 
     public MainMeal findById(Integer mainMealId) {
         return mainMealDAO.findById(mainMealId);
+    }
+
+    @Transactional
+    public MainMeal updateQuantityMainMeal(Integer mainMealId, Integer quantity) {
+        return mainMealDAO.updateQuantityMainMeal(mainMealId, quantity);
     }
 }

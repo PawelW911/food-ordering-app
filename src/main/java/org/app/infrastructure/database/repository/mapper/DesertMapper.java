@@ -11,5 +11,6 @@ public interface DesertMapper {
     DesertEntity mapToEntity(Desert desert);
 
     @Mapping(target = "menu", ignore = true)
+    @Mapping(target = "foodOrder", ignore = true)
     Desert mapFromEntity(DesertEntity desertEntity);
 }

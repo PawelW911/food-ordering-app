@@ -5,17 +5,18 @@ import org.app.domain.Appetizer;
 import org.app.domain.Menu;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.AppetizerEntity;
+import org.app.infrastructure.database.entity.FoodOrderEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
 import org.app.infrastructure.database.repository.jpa.AppetizerJpaRepository;
+import org.app.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
+import org.app.infrastructure.database.repository.mapper.FoodOrderMapper;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
-import org.app.util.AppetizerFixtures;
-import org.app.util.MenuFixtures;
-import org.app.util.OwnerFixtures;
-import org.app.util.RestaurantFixtures;
+import org.app.util.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,10 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
     private final OwnerJpaRepository ownerJpaRepository;
     private final RestaurantRepository restaurantRepository;
     private final MenuRepository menuRepository;
+    private final FoodOrderRepository foodOrderRepository;
+    private final CustomerRepository customerRepository;
+    private final FoodOrderJpaRepository foodOrderJpaRepository;
+    private final FoodOrderMapper foodOrderMapper;
 
     private void saveAppetizers() {
         appetizerRepository.saveAppetizer(AppetizerFixtures.someAppetizersForPolishFood().stream()
@@ -56,12 +61,23 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
         return menu;
     }
 
+    private void saveFoodOrderAndCustomer() {
+        customerRepository.saveCustomer(CustomerFixtures.someCustomer1());
+        foodOrderRepository.saveFoodOrder(FoodOrderFixtures.someFoodOrder1());
+    }
+
     @Test
     void correctlyAppetizersSave() {
         saveRestaurantAndOwnerAndMenu();
+        saveFoodOrderAndCustomer();
         // given
         List<Appetizer> appetizers = AppetizerFixtures.someAppetizersForPolishFood().stream()
-                .map(appetizer -> appetizer.withQuantity(0))
+                .map(appetizer -> appetizer
+                        .withQuantity(0)
+                        .withFoodOrder(foodOrderMapper.mapFromEntity(
+                                foodOrderJpaRepository
+                                        .findByFoodOrderNumber(
+                                                FoodOrderFixtures.someFoodOrder1().getFoodOrderNumber()))))
                 .toList();
 
         // when
@@ -127,5 +143,22 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
 
         // then
         Assertions.assertThat(appetizer.getAppetizerId()).isEqualTo(appetizerId);
+    }
+
+    @Transactional
+    @Test
+    void correctlyUpdateQuantityAppetizer() {
+        saveAppetizers();
+        // given
+        Integer appetizerId = appetizerJpaRepository.findAll().get(0).getAppetizerId();
+        Integer quantity = 5;
+
+        // when
+        Appetizer appetizer = appetizerRepository.updateQuantityAppetizer(appetizerId, quantity);
+
+        // then
+        Integer quantityUpdate = appetizerJpaRepository.findById(appetizerId).orElseThrow().getQuantity();
+        Assertions.assertThat(quantityUpdate)
+                .isEqualTo(quantity);
     }
 }

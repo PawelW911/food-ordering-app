@@ -96,4 +96,20 @@ public class MainMealServiceTest {
         Assertions.assertNotNull(mainMeal);
 
     }
+
+    @Test
+    void checkUpdateQuantityMainMeal() {
+        // given
+        MainMeal mainMealExample = MainMealFixtures.someMainMealsForPolishFood().stream().toList().get(0)
+                .withMainMealId(1);
+        Integer quantity = 5;
+
+        Mockito.when(mainMealDAO.updateQuantityMainMeal(mainMealExample.getMainMealId(), quantity))
+                .thenReturn(mainMealExample.withQuantity(quantity));
+        // when
+        MainMeal mainMeal = mainMealService.updateQuantityMainMeal(mainMealExample.getMainMealId(), quantity);
+
+        // then
+        Assertions.assertNotNull(mainMeal);
+    }
 }

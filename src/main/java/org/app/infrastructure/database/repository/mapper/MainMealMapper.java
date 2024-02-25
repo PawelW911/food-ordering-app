@@ -11,5 +11,6 @@ public interface MainMealMapper {
     MainMealEntity mapToEntity(MainMeal mainMeal);
 
     @Mapping(target = "menu", ignore = true)
+    @Mapping(target = "foodOrder", ignore = true)
     MainMeal mapFromEntity(MainMealEntity mainMealEntity);
 }

@@ -3,12 +3,19 @@ package org.app.bussiness;
 import lombok.AllArgsConstructor;
 import org.app.bussiness.dao.FoodOrderDAO;
 import org.app.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
+
+import static org.app.api.controller.dataForController.ForFoodOrderChoose.*;
 
 @Service
 @AllArgsConstructor
@@ -20,20 +27,41 @@ public class FoodOrderService {
     private final DesertService desertService;
     private final DrinkService drinkService;
     private final SoupService soupService;
+    private final RestaurantService restaurantService;
 
     public FoodOrder saveNewFoodOrder(FoodOrder foodOrder) {
         foodOrder.setSumCost(calculateCost(foodOrder));
         FoodOrder foodOrderSaved = saveOrder(foodOrder);
-        System.out.println(foodOrderSaved.getOrderId());
-        if(foodOrderSaved == null) {
-            throw new RuntimeException("Food order doesn't save");
-        }
         return assignDishesToTheFoodOrder(foodOrder, foodOrderSaved);
     }
 
     @Transactional
     private FoodOrder saveOrder(FoodOrder foodOrder) {
         return foodOrderDAO.saveFoodOrder(foodOrder);
+    }
+
+    public Set<FoodOrder> findFoodOrdersByCustomer(Customer customer) {
+        return foodOrderDAO.findByCustomer(customer);
+    }
+
+    public FoodOrder findByFoodOrderNumber(String foodOrderNumber, String chooseMapper) {
+        return foodOrderDAO.findByFoodOrderNumber(
+                foodOrderNumber,
+                chooseMapper
+        );
+    }
+
+    @Transactional
+    public void updateSumCost(String foodOrderNumber) {
+        BigDecimal newSumCost = calculateCost(findByFoodOrderNumber(
+                foodOrderNumber,
+                MAP_ONLY_SET_DISHES.toString()
+        ));
+        foodOrderDAO.updateSumCost(newSumCost, foodOrderNumber);
+    }
+
+    public Set<FoodOrder> findAvailableByRestaurantUniqueCode(String uniqueCodeRestaurant) {
+        return foodOrderDAO.findAvailableByRestaurant(restaurantService.findByUniqueCode(uniqueCodeRestaurant));
     }
 
     public BigDecimal calculateCost(FoodOrder foodOrder) {
@@ -84,5 +112,10 @@ public class FoodOrderService {
                         foodOrder.getSoups().stream()
                                 .map(soup -> soup.withFoodOrder(foodOrderSaved))
                                 .toList())));
+    }
+
+    @Transactional
+    public void updateCompletedDateTime(String orderNumber) {
+        foodOrderDAO.updateCompletedDateTime(orderNumber, OffsetDateTime.now(ZoneOffset.UTC));
     }
 }

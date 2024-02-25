@@ -43,4 +43,9 @@ public class AppetizerService {
     public Appetizer findById(Integer appetizerId) {
         return appetizerDAO.findById(appetizerId);
     }
+
+    @Transactional
+    public Appetizer updateQuantityAppetizer(Integer appetizerId, Integer quantity) {
+        return appetizerDAO.updateQuantityAppetizer(appetizerId, quantity);
+    }
 }

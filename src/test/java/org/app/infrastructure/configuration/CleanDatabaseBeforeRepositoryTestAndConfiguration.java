@@ -49,12 +49,12 @@ public class CleanDatabaseBeforeRepositoryTestAndConfiguration {
 
     @BeforeEach
     public void cleanDatabase() {
-        foodOrderJpaRepository.deleteAll();
         drinkJpaRepository.deleteAll();
         desertJpaRepository.deleteAll();
         soupJpaRepository.deleteAll();
         mainMealJpaRepository.deleteAll();
         appetizerJpaRepository.deleteAll();
+        foodOrderJpaRepository.deleteAll();
         menuJpaRepository.deleteAll();
         opinionJpaRepository.deleteAll();
         streetDeliveryJpaRepository.deleteAll();

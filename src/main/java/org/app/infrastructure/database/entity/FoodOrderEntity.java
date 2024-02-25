@@ -43,16 +43,16 @@ public class FoodOrderEntity {
     @JoinColumn(name = "customer_id")
     CustomerEntity customer;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<AppetizerEntity> appetizers;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<SoupEntity> soups;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<MainMealEntity> mainMeals;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")
     Set<DesertEntity> deserts;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "foodOrder")

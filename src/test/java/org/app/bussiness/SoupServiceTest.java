@@ -96,4 +96,20 @@ public class SoupServiceTest {
         Assertions.assertNotNull(soup);
 
     }
+
+    @Test
+    void checkUpdateQuantitySoup() {
+        // given
+        Soup soupExample = SoupFixtures.someSoupsForPolishFood().stream().toList().get(0)
+                .withSoupId(1);
+        Integer quantity = 5;
+
+        Mockito.when(soupDAO.updateQuantitySoup(soupExample.getSoupId(), quantity))
+                .thenReturn(soupExample.withQuantity(quantity));
+        // when
+        Soup soup = soupService.updateQuantitySoup(soupExample.getSoupId(), quantity);
+
+        // then
+        Assertions.assertNotNull(soup);
+    }
 }

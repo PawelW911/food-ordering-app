@@ -12,5 +12,6 @@ public interface SoupMapper {
     SoupEntity mapToEntity(Soup soup);
 
     @Mapping(target = "menu", ignore = true)
+    @Mapping(target = "foodOrder", ignore = true)
     Soup mapFromEntity(SoupEntity soupEntity);
 }

@@ -10,6 +10,13 @@
     <title>Food Ordering Application</title>
 </head>
 <div class="container">
+    <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a th:href="@{/customer}" class="btn btn-info" role="button">Back</a>
+        </div>
+    </div>
     <h2>Please enter the street and city where you want food delivered</h2>
     <div class="row mt-3">
     <form action="#" th:action="@{/enter_street_and_city}" method="POST" th:object="${chooseStreetDeliveryDTO}">

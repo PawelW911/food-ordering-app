@@ -16,6 +16,7 @@ import org.app.util.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -128,5 +129,22 @@ public class DesertRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCo
 
         // then
         Assertions.assertThat(desert.getDesertId()).isEqualTo(desertId);
+    }
+
+    @Transactional
+    @Test
+    void correctlyUpdateQuantityDesert() {
+        saveDeserts();
+        // given
+        Integer desertId = desertJpaRepository.findAll().get(0).getDesertId();
+        Integer quantity = 5;
+
+        // when
+        Desert desert = desertRepository.updateQuantityDesert(desertId, quantity);
+
+        // then
+        Integer quantityUpdate = desertJpaRepository.findById(desertId).orElseThrow().getQuantity();
+        Assertions.assertThat(quantityUpdate)
+                .isEqualTo(quantity);
     }
 }
