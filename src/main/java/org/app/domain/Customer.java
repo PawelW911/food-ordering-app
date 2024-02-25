@@ -14,6 +14,7 @@ public class Customer {
     String surname;
     String email;
     String phone;
+    User user;
     Address address;
     Opinion opinion;
     FoodOrder order;

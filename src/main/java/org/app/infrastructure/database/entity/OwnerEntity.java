@@ -2,6 +2,7 @@ package org.app.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.app.security.UserEntity;
 
 import java.util.Set;
 
@@ -24,6 +25,7 @@ public class OwnerEntity {
     @Column(name = "name")
     private String name;
 
+
     @Column(name = "surname")
     private String surname;
 
@@ -33,9 +35,13 @@ public class OwnerEntity {
     @Column(name = "phone")
     private String phone;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
     @Transient
     @OneToMany(fetch = FetchType.LAZY)
-    Set<RestaurantEntity> restaurants;
+    private Set<RestaurantEntity> restaurants;
 
 
 

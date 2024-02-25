@@ -2,6 +2,7 @@ package org.app.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.app.security.UserEntity;
 
 import java.util.Set;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "email")
-@ToString(of = {"customerId", "name", "surname", "email", "phone"})
+@ToString(of = {"customerId", "name", "surname", "email", "phone", "userEntity"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,6 +34,10 @@ public class CustomerEntity {
 
     @Column(name = "phone")
     private String phone;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")

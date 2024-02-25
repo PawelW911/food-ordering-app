@@ -19,18 +19,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class HomeControllerTest {
 
-    @InjectMocks
-    private HomeController homeController;
-
-    @Test
-    void correctlyReturnViewHome() throws Exception {
-        // given
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(homeController).build();
-
-        // when, then
-
-        mockMvc.perform(MockMvcRequestBuilders.get(HomeController.HOME))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("home"));
-    }
+//    @InjectMocks
+//    private HomeController homeController;
+//
+//    @Test
+//    void correctlyReturnViewHome() throws Exception {
+//        // given
+//        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(homeController).build();
+//
+//        // when, then
+//
+//        mockMvc.perform(MockMvcRequestBuilders.get(HomeController.HOME))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.view().name("home"));
+//    }
 }

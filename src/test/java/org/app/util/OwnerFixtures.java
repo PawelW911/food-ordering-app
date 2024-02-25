@@ -12,6 +12,7 @@ public class OwnerFixtures {
                 .surname("Kowalski")
                 .email("tomek1@gmail.com")
                 .phone("+48 565 642 543")
+                .user(UserFixtures.someUserForOwner())
                 .build();
     }
 
@@ -21,6 +22,7 @@ public class OwnerFixtures {
                 .surname("Kowalski")
                 .email("jan5@gmail.com")
                 .phone("+48 432 765 322")
+                .user(UserFixtures.someUserForOwner())
                 .build();
     }
 
