@@ -16,6 +16,7 @@ import org.app.util.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -127,6 +128,23 @@ public class MainMealRepositoryTest extends CleanDatabaseBeforeRepositoryTestAnd
 
         // then
         Assertions.assertThat(mainMeal.getMainMealId()).isEqualTo(mainMealId);
+    }
+
+    @Transactional
+    @Test
+    void correctlyUpdateQuantityMainMeal() {
+        saveMainMeals();
+        // given
+        Integer mainMealId = mainMealJpaRepository.findAll().get(0).getMainMealId();
+        Integer quantity = 5;
+
+        // when
+        MainMeal mainMeal = mainMealRepository.updateQuantityMainMeal(mainMealId, quantity);
+
+        // then
+        Integer quantityUpdate = mainMealJpaRepository.findById(mainMealId).orElseThrow().getQuantity();
+        Assertions.assertThat(quantityUpdate)
+                .isEqualTo(quantity);
     }
 
 }

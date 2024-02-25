@@ -95,5 +95,21 @@ public class AppetizerServiceTest {
 
     }
 
+    @Test
+    void checkUpdateQuantityAppetizer() {
+        // given
+        Appetizer appetizerExample = AppetizerFixtures.someAppetizersForPolishFood().stream().toList().get(0)
+                .withAppetizerId(1);
+        Integer quantity = 5;
+
+        Mockito.when(appetizerDAO.updateQuantityAppetizer(appetizerExample.getAppetizerId(), quantity))
+                .thenReturn(appetizerExample.withQuantity(quantity));
+        // when
+        Appetizer appetizer = appetizerService.updateQuantityAppetizer(appetizerExample.getAppetizerId(), quantity);
+
+        // then
+        Assertions.assertNotNull(appetizer);
+    }
+
 
 }

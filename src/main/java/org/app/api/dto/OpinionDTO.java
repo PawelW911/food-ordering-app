@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VariableDTO {
+public class OpinionDTO {
 
-    String uniqueCode;
-    String foodOrderNumber;
+    String opinionText;
+    Integer opinionStars;
 }

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Value
 @Builder
 @EqualsAndHashCode
-@ToString(of = {"appetizerId", "name", "composition", "price", "quantity"})
+@ToString(of = {"appetizerId", "name", "composition", "price", "quantity", "foodOrder"})
 public class Appetizer {
 
     Integer appetizerId;

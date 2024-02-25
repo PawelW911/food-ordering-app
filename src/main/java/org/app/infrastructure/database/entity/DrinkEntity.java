@@ -40,7 +40,7 @@ public class DrinkEntity {
     @JoinColumn(name = "menu_id")
     MenuEntity menu;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_order_id")
     FoodOrderEntity foodOrder;
 

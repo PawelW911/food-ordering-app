@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+    <title>Food Ordering Application</title>
+</head>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a th:href="@{/customer}" class="btn btn-info" role="button">Back</a>
+        </div>
+    </div>
+    <h1>Your order</h1>
+    <div>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>food order number</th>
+                <th>received date time</th>
+                <th>completed date time</th>
+                <th>sum cost</th>
+                <th>restaurant</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="foodOrder : ${foodOrderDTOs}">
+                <td th:text="${foodOrder.foodOrderNumber}"></td>
+                <td th:text="${foodOrder.receivedDateTime}"></td>
+                <td th:text="${foodOrder.completedDateTime}"></td>
+                <td th:text="${foodOrder.sumCost}"></td>
+                <td th:text="${foodOrder.restaurant.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <h2>Choose order</h2>
+    <form action="#" th:action="@{/update_order}" method="GET" th:object="${variableDTO}">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <label for="foodOrderNumber">Select order:</label>
+                <select id="foodOrderNumber" th:field="*{foodOrderNumber}">
+                    <option th:each="foodOrder : ${foodOrderDTOs}" th:value="${foodOrder.foodOrderNumber}" th:text="${foodOrder.foodOrderNumber}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <input type="submit" value="Update order" class="btn btn-info">
+            </div>
+        </div>
+    </form>
+    <br>
+    <br>
+    <br>
+    <h2>Choose order to opinion restaurant</h2>
+    <form action="#" th:action="@{/add_opinion}" method="GET" th:object="${variableDTO}">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <label for="foodOrderNumberToOpinion">Select order:</label>
+                <select id="foodOrderNumberToOpinion" th:field="*{foodOrderNumber}">
+                    <option th:each="foodOrder : ${completedOrderToOpinion}" th:value="${foodOrder.foodOrderNumber}" th:text="${foodOrder.foodOrderNumber}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <input type="submit" value="Add opinion" class="btn btn-info">
+            </div>
+        </div>
+    </form>
+</div>
+</html>

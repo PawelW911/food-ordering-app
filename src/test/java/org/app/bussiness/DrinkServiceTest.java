@@ -90,4 +90,20 @@ public class DrinkServiceTest {
         Assertions.assertNotNull(drink);
 
     }
+
+    @Test
+    void checkUpdateQuantityDrink() {
+        // given
+        Drink drinkExample = DrinkFixtures.someDrinksForPolishFood().stream().toList().get(0)
+                .withDrinkId(1);
+        Integer quantity = 5;
+
+        Mockito.when(drinkDAO.updateQuantityDrink(drinkExample.getDrinkId(), quantity))
+                .thenReturn(drinkExample.withQuantity(quantity));
+        // when
+        Drink drink = drinkService.updateQuantityDrink(drinkExample.getDrinkId(), quantity);
+
+        // then
+        Assertions.assertNotNull(drink);
+    }
 }

@@ -7,6 +7,7 @@ import org.app.domain.Menu;
 import org.app.infrastructure.database.entity.AppetizerEntity;
 import org.app.infrastructure.database.repository.jpa.AppetizerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.AppetizerMapper;
+import org.app.infrastructure.database.repository.mapper.FoodOrderMapper;
 import org.app.infrastructure.database.repository.mapper.MenuMapper;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +22,7 @@ public class AppetizerRepository implements AppetizerDAO {
     private final AppetizerJpaRepository appetizerJpaRepository;
     private final AppetizerMapper appetizerMapper;
     private final MenuMapper menuMapper;
+    private final FoodOrderMapper foodOrderMapper;
 
     @Override
     public Appetizer saveAppetizer(Appetizer appetizer) {
@@ -32,7 +34,10 @@ public class AppetizerRepository implements AppetizerDAO {
     @Override
     public List<Appetizer> saveAppetizers(List<Appetizer> appetizer) {
         List<AppetizerEntity> toSave = appetizer.stream()
-                .map(appetizerMapper::mapToEntity)
+                .map(appetizer1 -> appetizerMapper.mapToEntity(
+                        appetizer1,
+                        foodOrderMapper.mapToEntity(appetizer1.getFoodOrder())
+                ))
                 .toList();
         List<AppetizerEntity> saved = appetizerJpaRepository.saveAllAndFlush(toSave);
         return saved.stream()
@@ -56,5 +61,12 @@ public class AppetizerRepository implements AppetizerDAO {
     @Override
     public Appetizer findById(Integer appetizerId) {
         return appetizerMapper.mapFromEntity(appetizerJpaRepository.findById(appetizerId).orElseThrow());
+    }
+
+    @Override
+    public Appetizer updateQuantityAppetizer(Integer appetizerId, Integer quantity) {
+        appetizerJpaRepository.updateQuantityAppetizer(appetizerId, quantity);
+        AppetizerEntity appetizerEntity = appetizerJpaRepository.findById(appetizerId).orElseThrow();
+        return appetizerMapper.mapFromEntity(appetizerEntity);
     }
 }

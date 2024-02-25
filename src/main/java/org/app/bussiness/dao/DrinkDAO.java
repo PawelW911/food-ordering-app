@@ -18,4 +18,6 @@ public interface DrinkDAO {
     void deleteDrink(Integer drinkId);
 
     Drink findById(Integer drinkId);
+
+    Drink updateQuantityDrink(Integer drinkId, Integer quantity);
 }

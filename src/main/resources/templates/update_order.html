@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+    <title>Food Ordering Application</title>
+</head>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a th:href="@{/customer_orders}" class="btn btn-info" role="button">Back</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>Order details</h1>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <p>
+                <b>
+                    <span th:if="${sumCost}" th:text="${sumCost}">Sum cost:</span>
+                </b>
+            </p>
+        </div>
+    </div>
+    <h2>Appetizers</h2>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>quantity</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="appetizer : ${orderAppetizersDTOs}">
+                <td th:text="${appetizer.name}"></td>
+                <td th:text="${appetizer.quantity}"></td>
+                <td th:text="${appetizer.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <h3>Add new appetizer to order:</h3>
+            <form action="#" th:action="@{/update_appetizer_order}" method="POST" th:object="${appetizerDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="appetizerId">Select name:</label>
+                    <select id="appetizerId" th:field="*{appetizerId}">
+                        <option th:each="appetizer : ${appetizerDTOs}" th:value="${appetizer.appetizerId}" th:text="${appetizer.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantityAppetizer">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityAppetizer" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Add" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-3">
+                <h3>Update quantity appetizer exist in order:</h3>
+            <form action="#" th:action="@{/update_quantity_appetizer_order}" method="POST" th:object="${appetizerDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="appetizerIdExist">Select name:</label>
+                    <select id="appetizerIdExist" th:field="*{appetizerId}">
+                        <option th:each="appetizer : ${orderAppetizersDTOs}" th:value="${appetizer.appetizerId}" th:text="${appetizer.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantityAppetizerOrder">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityAppetizerOrder" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Update" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <h2>Soups</h2>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>quantity</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="soup : ${orderSoupsDTOs}">
+                <td th:text="${soup.name}"></td>
+                <td th:text="${soup.quantity}"></td>
+                <td th:text="${soup.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <h3>Add new soup to order:</h3>
+            <form action="#" th:action="@{/update_soup_order}" method="POST" th:object="${soupDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="soupId">Select name:</label>
+                    <select id="soupId" th:field="*{soupId}">
+                        <option th:each="soup : ${soupDTOs}" th:value="${soup.soupId}" th:text="${soup.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantitySoup">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantitySoup" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Add" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-3">
+                <h3>Update quantity soup exist in order:</h3>
+            <form action="#" th:action="@{/update_quantity_soup_order}" method="POST" th:object="${soupDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="soupIdExist">Select name:</label>
+                    <select id="soupIdExist" th:field="*{soupId}">
+                        <option th:each="soup : ${orderSoupsDTOs}" th:value="${soup.soupId}" th:text="${soup.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantitySoupOrder">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantitySoupOrder" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Update" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <h2>MainMeals</h2>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>quantity</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mainMeal : ${orderMainMealsDTOs}">
+                <td th:text="${mainMeal.name}"></td>
+                <td th:text="${mainMeal.quantity}"></td>
+                <td th:text="${mainMeal.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <h3>Add new main meal to order:</h3>
+            <form action="#" th:action="@{/update_main_meal_order}" method="POST" th:object="${mainMealDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="mainMealId">Select name:</label>
+                    <select id="mainMealId" th:field="*{mainMealId}">
+                        <option th:each="mainMeal : ${mainMealDTOs}" th:value="${mainMeal.mainMealId}" th:text="${mainMeal.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantityMainMeal">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityMainMeal" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Add" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-3">
+                <h3>Update quantity main meal exist in order:</h3>
+            <form action="#" th:action="@{/update_quantity_main_meal_order}" method="POST" th:object="${mainMealDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="mainMealIdExist">Select name:</label>
+                    <select id="mainMealIdExist" th:field="*{mainMealId}">
+                        <option th:each="mainMeal : ${orderMainMealsDTOs}" th:value="${mainMeal.mainMealId}" th:text="${mainMeal.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantityMainMealOrder">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityMainMealOrder" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Update" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <h2>Deserts</h2>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>quantity</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="desert : ${orderDesertsDTOs}">
+                <td th:text="${desert.name}"></td>
+                <td th:text="${desert.quantity}"></td>
+                <td th:text="${desert.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <h3>Add new desert to order:</h3>
+            <form action="#" th:action="@{/update_desert_order}" method="POST" th:object="${desertDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="desertId">Select name:</label>
+                    <select id="desertId" th:field="*{desertId}">
+                        <option th:each="desert : ${desertDTOs}" th:value="${desert.desertId}" th:text="${desert.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantityDesert">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityDesert" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Add" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-3">
+                <h3>Update quantity desert exist in order:</h3>
+            <form action="#" th:action="@{/update_quantity_desert_order}" method="POST" th:object="${desertDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="desertIdExist">Select name:</label>
+                    <select id="desertIdExist" th:field="*{desertId}">
+                        <option th:each="desert : ${orderDesertsDTOs}" th:value="${desert.desertId}" th:text="${desert.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantityDesertOrder">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityDesertOrder" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Update" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <h2>Drinks</h2>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>name</th>
+                <th>quantity</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="drink : ${orderDrinksDTOs}">
+                <td th:text="${drink.name}"></td>
+                <td th:text="${drink.quantity}"></td>
+                <td th:text="${drink.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <h3>Add new drink to order:</h3>
+            <form action="#" th:action="@{/update_drink_order}" method="POST" th:object="${drinkDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="drinkId">Select name:</label>
+                    <select id="drinkId" th:field="*{drinkId}">
+                        <option th:each="drink : ${drinkDTOs}" th:value="${drink.drinkId}" th:text="${drink.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantityDrink">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityDrink" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Add" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+            <div class="row mt-3">
+                <h3>Update quantity drink exist in order:</h3>
+            <form action="#" th:action="@{/update_quantity_drink_order}" method="POST" th:object="${drinkDTO}">
+                <input type="hidden" name="_method" value="put">
+                <div class="col-md-4">
+                    <label for="drinkIdExist">Select name:</label>
+                    <select id="drinkIdExist" th:field="*{drinkId}">
+                        <option th:each="drink : ${orderDrinksDTOs}" th:value="${drink.drinkId}" th:text="${drink.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantityDrinkOrder">You have to enter quantity:</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityDrinkOrder" th:field="*{quantity}">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <input type="submit" value="Update" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</html>

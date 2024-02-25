@@ -91,4 +91,21 @@ public class DesertServiceTest {
         Assertions.assertNotNull(desert);
 
     }
+
+
+    @Test
+    void checkUpdateQuantityDesert() {
+        // given
+        Desert desertExample = DesertFixtures.someDesertsForPolishFood().stream().toList().get(0)
+                .withDesertId(1);
+        Integer quantity = 5;
+
+        Mockito.when(desertDAO.updateQuantityDesert(desertExample.getDesertId(), quantity))
+                .thenReturn(desertExample.withQuantity(quantity));
+        // when
+        Desert desert = desertService.updateQuantityDesert(desertExample.getDesertId(), quantity);
+
+        // then
+        Assertions.assertNotNull(desert);
+    }
 }

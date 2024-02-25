@@ -2,10 +2,7 @@ package org.app.bussiness;
 
 import lombok.AllArgsConstructor;
 import org.app.bussiness.dao.DesertDAO;
-import org.app.domain.Desert;
-import org.app.domain.Menu;
-import org.app.domain.Restaurant;
-import org.app.domain.Soup;
+import org.app.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,5 +41,10 @@ public class DesertService {
 
     public Desert findById(Integer desertId) {
         return desertDAO.findById(desertId);
+    }
+
+    @Transactional
+    public Desert updateQuantityDesert(Integer desertId, Integer quantity) {
+        return desertDAO.updateQuantityDesert(desertId, quantity);
     }
 }

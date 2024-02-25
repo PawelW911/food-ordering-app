@@ -2,10 +2,7 @@ package org.app.bussiness;
 
 import lombok.AllArgsConstructor;
 import org.app.bussiness.dao.DrinkDAO;
-import org.app.domain.Drink;
-import org.app.domain.Menu;
-import org.app.domain.Restaurant;
-import org.app.domain.Soup;
+import org.app.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,5 +41,10 @@ public class DrinkService {
 
     public Drink findById(Integer drinkId) {
         return drinkDAO.findById(drinkId);
+    }
+
+    @Transactional
+    public Drink updateQuantityDrink(Integer drinkId, Integer quantity) {
+        return drinkDAO.updateQuantityDrink(drinkId, quantity);
     }
 }

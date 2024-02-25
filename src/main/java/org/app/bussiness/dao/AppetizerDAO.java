@@ -15,4 +15,6 @@ public interface AppetizerDAO {
     void deleteAppetizer(Integer appetizerId);
 
     Appetizer findById(Integer appetizerId);
+
+    Appetizer updateQuantityAppetizer(Integer appetizerId, Integer quantity);
 }

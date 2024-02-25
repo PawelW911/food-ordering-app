@@ -59,4 +59,11 @@ public class MainMealRepository implements MainMealDAO {
         return mainMealMapper.mapFromEntity(mainMealJpaRepository.findById(mainMealId).orElseThrow());
     }
 
+    @Override
+    public MainMeal updateQuantityMainMeal(Integer mainMealId, Integer quantity) {
+        mainMealJpaRepository.updateQuantityMainMeal(mainMealId, quantity);
+        MainMealEntity mainMealEntity = mainMealJpaRepository.findById(mainMealId).orElseThrow();
+        return mainMealMapper.mapFromEntity(mainMealEntity);
+    }
+
 }

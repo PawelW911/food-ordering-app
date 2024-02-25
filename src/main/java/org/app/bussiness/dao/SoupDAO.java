@@ -17,4 +17,6 @@ public interface SoupDAO {
     void deleteSoup(Integer soupId);
 
     Soup findById(Integer soupId);
+
+    Soup updateQuantitySoup(Integer soupId, Integer quantity);
 }

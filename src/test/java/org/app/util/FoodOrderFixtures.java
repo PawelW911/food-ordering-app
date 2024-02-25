@@ -14,7 +14,7 @@ public class FoodOrderFixtures {
 
     public static FoodOrder someFoodOrder1() {
         return FoodOrder.builder()
-                .orderNumber("436465amz")
+                .foodOrderNumber("436465amz")
                 .receivedDateTime(OffsetDateTime.of(2023, 5, 10, 18, 20, 32, 15, ZoneOffset.UTC))
                 .sumCost(new BigDecimal("52.11"))
                 .restaurant(RestaurantFixtures.someRestaurant1())
@@ -24,7 +24,7 @@ public class FoodOrderFixtures {
 
     public static FoodOrder someFoodOrder2() {
         return FoodOrder.builder()
-                .orderNumber("643265gdf")
+                .foodOrderNumber("643265gdf")
                 .receivedDateTime(OffsetDateTime.of(2023, 5, 10, 18, 20, 32, 15, ZoneOffset.UTC))
                 .sumCost(BigDecimal.ZERO)
                 .restaurant(RestaurantFixtures.someRestaurant1())

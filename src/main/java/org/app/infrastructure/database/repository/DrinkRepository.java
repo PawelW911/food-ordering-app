@@ -59,5 +59,11 @@ public class DrinkRepository implements DrinkDAO {
         return drinkMapper.mapFromEntity(drinkJpaRepository.findById(drinkId).orElseThrow());
     }
 
+    @Override
+    public Drink updateQuantityDrink(Integer drinkId, Integer quantity) {
+        drinkJpaRepository.updateQuantityDrink(drinkId, quantity);
+        DrinkEntity drinkEntity = drinkJpaRepository.findById(drinkId).orElseThrow();
+        return drinkMapper.mapFromEntity(drinkEntity);
+    }
 
 }

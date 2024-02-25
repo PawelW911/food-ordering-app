@@ -45,4 +45,9 @@ public class SoupService {
     public Soup findById(Integer soupId) {
         return soupDAO.findById(soupId);
     }
+
+    @Transactional
+    public Soup updateQuantitySoup(Integer soupId, Integer quantity) {
+        return soupDAO.updateQuantitySoup(soupId, quantity);
+    }
 }

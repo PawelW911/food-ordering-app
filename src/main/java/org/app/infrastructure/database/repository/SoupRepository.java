@@ -58,4 +58,11 @@ public class SoupRepository implements SoupDAO {
     public Soup findById(Integer soupId) {
         return soupMapper.mapFromEntity(soupJpaRepository.findById(soupId).orElseThrow());
     }
+
+    @Override
+    public Soup updateQuantitySoup(Integer soupId, Integer quantity) {
+        soupJpaRepository.updateQuantitySoup(soupId, quantity);
+        SoupEntity soupEntity = soupJpaRepository.findById(soupId).orElseThrow();
+        return soupMapper.mapFromEntity(soupEntity);
+    }
 }
