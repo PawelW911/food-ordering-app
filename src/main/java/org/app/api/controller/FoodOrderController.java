@@ -22,6 +22,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
 
+import static org.app.api.controller.CustomerController.*;
+
 @Data
 @Controller
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -58,7 +60,7 @@ public class FoodOrderController {
     private static Set<Drink> drinkSet = new HashSet<>();
 
 
-    @GetMapping(value = CREATE_FOOD_ORDER)
+    @GetMapping(value = CUSTOMER + CREATE_FOOD_ORDER)
     public ModelAndView createFoodOrderPage(Model model) {
         model.addAttribute("appetizerDTO", new AppetizerDTO());
         model.addAttribute("soupDTO", new SoupDTO());
@@ -78,7 +80,7 @@ public class FoodOrderController {
         return new ModelAndView("create_food_order", addedDishesAndAvailablePositionMenu);
     }
 
-    @PostMapping(value = SUBMIT_ORDER)
+    @PostMapping(value = CUSTOMER + SUBMIT_ORDER)
     public String submitOrder() {
         foodOrderService.saveNewFoodOrder(FoodOrder.builder()
                 .foodOrderNumber(UUID.randomUUID().toString())
@@ -87,7 +89,7 @@ public class FoodOrderController {
                 .restaurant(restaurantService.findByUniqueCode(
                         ChooseRestaurantToFoodOrderController.uniqueCodeRestaurantToOrderFood
                 ))
-                .customer(customerService.findCustomerByEmail(CustomerController.emailCustomer))
+                .customer(customerService.findCustomerByEmail(emailCustomer))
                 .appetizers(appetizerSet)
                 .soups(soupSet)
                 .mainMeals(mainMealSet)
@@ -97,7 +99,7 @@ public class FoodOrderController {
         return "submit_order_success";
     }
 
-    @PostMapping(value = ADD_APPETIZER_TO_ORDER)
+    @PostMapping(value = CUSTOMER + ADD_APPETIZER_TO_ORDER)
     public String addAppetizer(
             @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
     ) {
@@ -106,10 +108,10 @@ public class FoodOrderController {
         if(appetizerDTO.getQuantity()>0) {
             appetizerSet.add(appetizerFound.withAppetizerId(null).withQuantity(appetizerDTO.getQuantity()));
         }
-        return "redirect:/create_food_order";
+        return "redirect:/customer/create_food_order";
     }
 
-    @PostMapping(value = ADD_SOUP_TO_ORDER)
+    @PostMapping(value = CUSTOMER + ADD_SOUP_TO_ORDER)
     public String addSoup(
             @Valid @ModelAttribute("soupDTO") SoupDTO soupDTO
     ) {
@@ -118,10 +120,10 @@ public class FoodOrderController {
         if(soupDTO.getQuantity()>0) {
             soupSet.add(soupFound.withSoupId(null).withQuantity(soupDTO.getQuantity()));
         }
-        return "redirect:/create_food_order";
+        return "redirect:/customer/create_food_order";
     }
 
-    @PostMapping(value = ADD_MAIN_MEAL_TO_ORDER)
+    @PostMapping(value = CUSTOMER + ADD_MAIN_MEAL_TO_ORDER)
     public String addMainMeal(
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
     ) {
@@ -130,10 +132,10 @@ public class FoodOrderController {
         if(mainMealDTO.getQuantity()>0) {
             mainMealSet.add(mainMealFound.withMainMealId(null).withQuantity(mainMealDTO.getQuantity()));
         }
-        return "redirect:/create_food_order";
+        return "redirect:/customer/create_food_order";
     }
 
-    @PostMapping(value = ADD_DESERT_TO_ORDER)
+    @PostMapping(value = CUSTOMER + ADD_DESERT_TO_ORDER)
     public String addDesert(
             @Valid @ModelAttribute("desertDTO") DesertDTO desertDTO
     ) {
@@ -142,10 +144,10 @@ public class FoodOrderController {
         if(desertDTO.getQuantity()>0) {
             desertSet.add(desertFound.withDesertId(null).withQuantity(desertDTO.getQuantity()));
         }
-        return "redirect:/create_food_order";
+        return "redirect:/customer/create_food_order";
     }
 
-    @PostMapping(value = ADD_DRINK_TO_ORDER)
+    @PostMapping(value = CUSTOMER + ADD_DRINK_TO_ORDER)
     public String addDrink(
             @Valid @ModelAttribute("drinkDTO") DrinkDTO drinkDTO
     ) {
@@ -154,7 +156,7 @@ public class FoodOrderController {
         if(drinkDTO.getQuantity()>0) {
             drinkSet.add(drinkFound.withDrinkId(null).withQuantity(drinkDTO.getQuantity()));
         }
-        return "redirect:/create_food_order";
+        return "redirect:/customer/create_food_order";
     }
 
 

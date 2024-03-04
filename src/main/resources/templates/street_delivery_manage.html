@@ -10,6 +10,15 @@
     <title>Food Ordering Application</title>
 </head>
 <div class="container">
+    <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a th:href="@{/owner/restaurant/manage}" class="btn btn-info" role="button">Back</a>
+        </div>
+    </div>
+</div>
+<div class="container">
     <h1>Postal code where you delivery</h1>
     <div>
         <table class="table">
@@ -30,7 +39,7 @@
     <br>
     <br>
     <h2>Add new street delivery by postal code</h2>
-    <form action="#" th:action="@{/add_street_delivery}" method="POST" th:object="${postalCodeDTO}">
+    <form action="#" th:action="@{/owner/add_street_delivery}" method="POST" th:object="${postalCodeDTO}">
         <div class="row mt-5">
             <div class="col-md-1">
                 <label for="postalCode">Postal code:</label>

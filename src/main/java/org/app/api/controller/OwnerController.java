@@ -2,15 +2,12 @@ package org.app.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.app.api.dto.OwnerDTO;
 import org.app.api.dto.RestaurantDTO;
 import org.app.api.dto.VariableDTO;
 import org.app.api.dto.mapper.OwnerDTOMapper;
 import org.app.api.dto.mapper.RestaurantDTOMapper;
 import org.app.bussiness.OwnerService;
 import org.app.bussiness.RestaurantService;
-import org.app.domain.Owner;
-import org.app.infrastructure.zipCode.ZipCodeImpl;
 import org.app.security.UserEntity;
 import org.app.security.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -38,6 +35,7 @@ public class OwnerController {
     private final UserRepository userRepository;
 
     protected static String uniqueCodeNow;
+    protected static String ownerEmail;
 
     @GetMapping(value = OWNER)
     public String ownerPage(Model model) {
@@ -46,9 +44,10 @@ public class OwnerController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         String username = userDetails.getUsername();
-        UserEntity userLogNow = userRepository.findByUserName(username);
+                UserEntity userLogNow = userRepository.findByUserName(username);
+                ownerEmail = userLogNow.getEmail();
         List<RestaurantDTO> availableRestaurant = restaurantService
-                .findAvailableRestaurantByOwner(ownerService.findByEmail(userLogNow.getEmail()))
+                .findAvailableRestaurantByOwner(ownerService.findByEmail(ownerEmail))
                 .stream()
                 .map(restaurantDTOMapper::mapToDTO)
                 .toList();
@@ -64,7 +63,7 @@ public class OwnerController {
             @Valid @ModelAttribute("variableDTO") VariableDTO variableDTO
     ) {
         uniqueCodeNow = variableDTO.getUniqueCode();
-        return "redirect:/restaurant/manage";
+        return "redirect:/owner/restaurant/manage";
     }
 
 }

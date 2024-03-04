@@ -14,7 +14,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <a th:href="@{/choose_order_to_manage}" class="btn btn-info" role="button">Back</a>
+            <a th:href="@{/owner/choose_order_to_manage}" class="btn btn-info" role="button">Back</a>
         </div>
     </div>
     <h1>Order details</h1>
@@ -28,11 +28,9 @@
             </tr>
             </thead>
             <tbody>
-            <!--            <tr th:each="foodOrder : ${detailsOrder}">-->
             <td th:text="${detailsOrder.foodOrderNumber}"></td>
             <td th:text="${detailsOrder.receivedDateTime}"></td>
             <td th:text="${detailsOrder.sumCost}"></td>
-            <!--            </tr>-->
             </tbody>
         </table>
     </div>
@@ -72,13 +70,11 @@
             </tr>
             </thead>
             <tbody>
-            <!--            <tr th:each="foodOrder : ${detailsOrder}">-->
             <td th:text="${detailsOrder.customer.phone}"></td>
             <td th:text="${detailsOrder.customer.address.street}"></td>
             <td th:text="${detailsOrder.customer.address.localNumber}"></td>
             <td th:text="${detailsOrder.customer.address.postalCode}"></td>
             <td th:text="${detailsOrder.customer.address.city}"></td>
-            <!--            </tr>-->
             </tbody>
         </table>
     </div>
@@ -88,7 +84,7 @@
 <br>
 <div class="container">
     <h3>Order delivered</h3>
-    <form action="#" th:action="@{/choose_order_to_complete}" method="POST">
+    <form action="#" th:action="@{/owner/choose_order_to_complete}" method="POST">
         <input type="hidden" name="_method" value="put">
         <div class="row mt-5">
             <div class="col-md-4">

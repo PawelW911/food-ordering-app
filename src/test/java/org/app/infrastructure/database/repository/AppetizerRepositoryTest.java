@@ -5,15 +5,17 @@ import org.app.domain.Appetizer;
 import org.app.domain.Menu;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.AppetizerEntity;
-import org.app.infrastructure.database.entity.FoodOrderEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
 import org.app.infrastructure.database.repository.jpa.AppetizerJpaRepository;
 import org.app.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.FoodOrderMapper;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
+import org.app.security.RoleEntity;
+import org.app.security.RoleRepository;
 import org.app.util.*;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +37,8 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
     private final CustomerRepository customerRepository;
     private final FoodOrderJpaRepository foodOrderJpaRepository;
     private final FoodOrderMapper foodOrderMapper;
+    private final RoleRepository roleRepository;
+
 
     private void saveAppetizers() {
         appetizerRepository.saveAppetizer(AppetizerFixtures.someAppetizersForPolishFood().stream()

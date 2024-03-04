@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.app.api.controller.CustomerController.*;
 import static org.app.api.controller.dataForController.ForFoodOrderChoose.*;
 
 @Controller
@@ -49,7 +50,7 @@ public class CustomerOrderFoodController {
 
     protected static String foodOrderNumber;
 
-    @GetMapping(value = CUSTOMER_ORDERS)
+    @GetMapping(value = CUSTOMER + CUSTOMER_ORDERS)
     public ModelAndView customerOrdersPage(Model model) {
         model.addAttribute("variableDTO", new VariableDTO());
 
@@ -61,7 +62,7 @@ public class CustomerOrderFoodController {
         return new ModelAndView("customer_order_food", customerOrders);
     }
 
-    @GetMapping(value = UPDATE_ORDER)
+    @GetMapping(value = CUSTOMER + UPDATE_ORDER)
     public ModelAndView updateOrder(
             Model model,
             @Valid @ModelAttribute("variableDTO") VariableDTO variableDTO
@@ -82,7 +83,7 @@ public class CustomerOrderFoodController {
         return new ModelAndView("update_order", orderDishes);
     }
 
-    @PutMapping(UPDATE_APPETIZER_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_APPETIZER_ORDER)
     public String addAppetizerToOrder(
             Model model,
             @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
@@ -100,11 +101,11 @@ public class CustomerOrderFoodController {
             );
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
 
-    @PutMapping(UPDATE_QUANTITY_APPETIZER_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_QUANTITY_APPETIZER_ORDER)
     public String updateQuantityAppetizerInOrder(
             Model model,
             @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
@@ -117,10 +118,10 @@ public class CustomerOrderFoodController {
             appetizerService.updateQuantityAppetizer(appetizerDTO.getAppetizerId(), appetizerDTO.getQuantity());
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
-    @PutMapping(UPDATE_SOUP_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_SOUP_ORDER)
     public String addSoupToOrder(
             Model model,
             @Valid @ModelAttribute("soupDTO") SoupDTO soupDTO
@@ -138,11 +139,11 @@ public class CustomerOrderFoodController {
             );
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
 
-    @PutMapping(UPDATE_QUANTITY_SOUP_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_QUANTITY_SOUP_ORDER)
     public String updateQuantitySoupInOrder(
             Model model,
             @Valid @ModelAttribute("soupDTO") SoupDTO soupDTO
@@ -155,10 +156,10 @@ public class CustomerOrderFoodController {
             soupService.updateQuantitySoup(soupDTO.getSoupId(), soupDTO.getQuantity());
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
-    @PutMapping(UPDATE_MAIN_MEAL_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_MAIN_MEAL_ORDER)
     public String addMainMealToOrder(
             Model model,
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
@@ -176,11 +177,11 @@ public class CustomerOrderFoodController {
             );
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
 
-    @PutMapping(UPDATE_QUANTITY_MAIN_MEAL_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_QUANTITY_MAIN_MEAL_ORDER)
     public String updateQuantityMainMealInOrder(
             Model model,
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
@@ -193,10 +194,10 @@ public class CustomerOrderFoodController {
             mainMealService.updateQuantityMainMeal(mainMealDTO.getMainMealId(), mainMealDTO.getQuantity());
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
-    @PutMapping(UPDATE_DESERT_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_DESERT_ORDER)
     public String addDesertToOrder(
             Model model,
             @Valid @ModelAttribute("desertDTO") DesertDTO desertDTO
@@ -214,11 +215,11 @@ public class CustomerOrderFoodController {
             );
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
 
-    @PutMapping(UPDATE_QUANTITY_DESERT_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_QUANTITY_DESERT_ORDER)
     public String updateQuantityDesertInOrder(
             Model model,
             @Valid @ModelAttribute("desertDTO") DesertDTO desertDTO
@@ -231,10 +232,10 @@ public class CustomerOrderFoodController {
             desertService.updateQuantityDesert(desertDTO.getDesertId(), desertDTO.getQuantity());
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
-    @PutMapping(UPDATE_DRINK_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_DRINK_ORDER)
     public String addDrinkToOrder(
             Model model,
             @Valid @ModelAttribute("drinkDTO") DrinkDTO drinkDTO
@@ -252,11 +253,11 @@ public class CustomerOrderFoodController {
             );
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
 
-    @PutMapping(UPDATE_QUANTITY_DRINK_ORDER)
+    @PutMapping(value = CUSTOMER + UPDATE_QUANTITY_DRINK_ORDER)
     public String updateQuantityDrinkInOrder(
             Model model,
             @Valid @ModelAttribute("drinkDTO") DrinkDTO drinkDTO
@@ -269,7 +270,7 @@ public class CustomerOrderFoodController {
             drinkService.updateQuantityDrink(drinkDTO.getDrinkId(), drinkDTO.getQuantity());
         }
         model.addAttribute("variableDTO", new VariableDTO());
-        return "redirect:/update_order";
+        return "redirect:/customer/update_order";
     }
 
 
@@ -306,7 +307,7 @@ public class CustomerOrderFoodController {
 
     private Map<String, Set<FoodOrder>> prepareCustomerOrders() {
         var availableOrders = foodOrderService
-                .findFoodOrdersByCustomer(customerService.findCustomerByEmail(CustomerController.emailCustomer));
+                .findFoodOrdersByCustomer(customerService.findCustomerByEmail(emailCustomer));
         return Map.of("foodOrderDTOs", availableOrders);
     }
 }

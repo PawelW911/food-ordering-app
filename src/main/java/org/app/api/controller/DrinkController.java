@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static org.app.api.controller.OwnerController.*;
+
 @Controller
 @AllArgsConstructor
 public class DrinkController {
@@ -29,7 +31,7 @@ public class DrinkController {
     MenuService menuService;
     RestaurantService restaurantService;
 
-    @PostMapping(value = ADD_DRINK)
+    @PostMapping(value = OWNER + ADD_DRINK)
     public String addDrink(
             @Valid @ModelAttribute("drinkDTO") DrinkDTO drinkDTO
     ) {
@@ -38,18 +40,18 @@ public class DrinkController {
                 drinkDTO,
                 0,
                 menuService.findByRestaurant(restaurantService
-                        .findByUniqueCode(OwnerController.uniqueCodeNow))
+                        .findByUniqueCode(uniqueCodeNow))
         ));
-        return "redirect:/restaurant/manage/menu";
+        return "redirect:/owner/restaurant/manage/menu";
     }
 
-    @DeleteMapping(value = DELETE_DRINK)
+    @DeleteMapping(value = OWNER + DELETE_DRINK)
     public String deleteDrink(
             @Valid @ModelAttribute("drinkDTO") DrinkDTO drinkDTO
     ) {
         Integer drinkId = drinkDTO.getDrinkId();
         drinkService.deleteDrink(drinkDTO.getDrinkId());
-        return "redirect:/restaurant/manage/menu";
+        return "redirect:/owner/restaurant/manage/menu";
     }
 
 

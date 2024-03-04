@@ -14,7 +14,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <a th:href="@{/owner/choose_restaurant}" class="btn btn-info" role="button">Back</a>
+            <a th:href="@{/owner/restaurant/manage}" class="btn btn-info" role="button">Back</a>
         </div>
     </div>
     <h1>Your orders</h1>
@@ -39,7 +39,7 @@
 </div>
 <div class="container">
     <h2>Choose order</h2>
-    <form action="#" th:action="@{/choose_order_to_manage}" method="POST" th:object="${variableDTO}">
+    <form action="#" th:action="@{/owner/choose_order_to_manage}" method="POST" th:object="${variableDTO}">
         <div class="row mt-5">
             <div class="col-md-4">
                 <label for="foodOrderNumber">Select order:</label>

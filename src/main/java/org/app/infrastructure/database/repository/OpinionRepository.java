@@ -10,6 +10,8 @@ import org.app.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import org.app.infrastructure.database.repository.mapper.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class OpinionRepository implements OpinionDAO {
@@ -33,5 +35,14 @@ public class OpinionRepository implements OpinionDAO {
                 );
         OpinionEntity saved = opinionJpaRepository.saveAndFlush(toSave);
         return opinionMapper.mapFromEntity(saved, customerMapper, restaurantMapper, addressMapper, ownerMapper);
+    }
+
+    @Override
+    public List<Opinion> findByRestaurant(String restaurantUniqueCode) {
+        List<OpinionEntity> opinionEntities =
+                opinionJpaRepository.findByRestaurant(restaurantJpaRepository.findByUniqueCode(restaurantUniqueCode));
+        return opinionEntities.stream()
+                .map(opinion -> opinionMapper.mapFromEntity(opinion))
+                .toList();
     }
 }

@@ -38,7 +38,13 @@ public class SecurityConfiguration {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/create_user_owner",
+                                "/submit_user_owner",
+                                "/create_user_customer",
+                                "/submit_user_customer"
+                        ).permitAll()
                         .requestMatchers("/customer/**").hasAnyAuthority("CUSTOMER")
                         .requestMatchers("/owner/**").hasAnyAuthority("OWNER")
                 )

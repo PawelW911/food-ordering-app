@@ -14,7 +14,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <a th:href="@{/customer_orders}" class="btn btn-info" role="button">Back</a>
+            <a th:href="@{/customer/customer_orders}" class="btn btn-info" role="button">Back</a>
         </div>
     </div>
 </div>
@@ -22,7 +22,7 @@
     <br>
     <br>
     <h3>Please enter opinion.</h3>
-    <form action="#" th:action="@{/submit_opinion}" method="POST" th:object="${opinionDTO}">
+    <form action="#" th:action="@{/customer/submit_opinion}" method="POST" th:object="${opinionDTO}">
         <div class="row mt-3">
             <div class="col-md-6">
                 <div class="row mt-3">

@@ -14,7 +14,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <a th:href="@{/customer_orders}" class="btn btn-info" role="button">Back</a>
+            <a th:href="@{/customer/customer_orders}" class="btn btn-info" role="button">Back</a>
         </div>
     </div>
 </div>
@@ -48,7 +48,7 @@
         </table>
         <div class="row mt-3">
             <h3>Add new appetizer to order:</h3>
-            <form action="#" th:action="@{/update_appetizer_order}" method="POST" th:object="${appetizerDTO}">
+            <form action="#" th:action="@{/customer/update_appetizer_order}" method="POST" th:object="${appetizerDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="appetizerId">Select name:</label>
@@ -70,7 +70,7 @@
             </form>
             <div class="row mt-3">
                 <h3>Update quantity appetizer exist in order:</h3>
-            <form action="#" th:action="@{/update_quantity_appetizer_order}" method="POST" th:object="${appetizerDTO}">
+            <form action="#" th:action="@{/customer/update_quantity_appetizer_order}" method="POST" th:object="${appetizerDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="appetizerIdExist">Select name:</label>
@@ -113,7 +113,7 @@
         </table>
         <div class="row mt-3">
             <h3>Add new soup to order:</h3>
-            <form action="#" th:action="@{/update_soup_order}" method="POST" th:object="${soupDTO}">
+            <form action="#" th:action="@{/customer/update_soup_order}" method="POST" th:object="${soupDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="soupId">Select name:</label>
@@ -135,7 +135,7 @@
             </form>
             <div class="row mt-3">
                 <h3>Update quantity soup exist in order:</h3>
-            <form action="#" th:action="@{/update_quantity_soup_order}" method="POST" th:object="${soupDTO}">
+            <form action="#" th:action="@{/customer/update_quantity_soup_order}" method="POST" th:object="${soupDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="soupIdExist">Select name:</label>
@@ -178,7 +178,7 @@
         </table>
         <div class="row mt-3">
             <h3>Add new main meal to order:</h3>
-            <form action="#" th:action="@{/update_main_meal_order}" method="POST" th:object="${mainMealDTO}">
+            <form action="#" th:action="@{/customer/update_main_meal_order}" method="POST" th:object="${mainMealDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="mainMealId">Select name:</label>
@@ -200,7 +200,7 @@
             </form>
             <div class="row mt-3">
                 <h3>Update quantity main meal exist in order:</h3>
-            <form action="#" th:action="@{/update_quantity_main_meal_order}" method="POST" th:object="${mainMealDTO}">
+            <form action="#" th:action="@{/customer/update_quantity_main_meal_order}" method="POST" th:object="${mainMealDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="mainMealIdExist">Select name:</label>
@@ -243,7 +243,7 @@
         </table>
         <div class="row mt-3">
             <h3>Add new desert to order:</h3>
-            <form action="#" th:action="@{/update_desert_order}" method="POST" th:object="${desertDTO}">
+            <form action="#" th:action="@{/customer/update_desert_order}" method="POST" th:object="${desertDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="desertId">Select name:</label>
@@ -265,7 +265,7 @@
             </form>
             <div class="row mt-3">
                 <h3>Update quantity desert exist in order:</h3>
-            <form action="#" th:action="@{/update_quantity_desert_order}" method="POST" th:object="${desertDTO}">
+            <form action="#" th:action="@{/customer/update_quantity_desert_order}" method="POST" th:object="${desertDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="desertIdExist">Select name:</label>
@@ -308,7 +308,7 @@
         </table>
         <div class="row mt-3">
             <h3>Add new drink to order:</h3>
-            <form action="#" th:action="@{/update_drink_order}" method="POST" th:object="${drinkDTO}">
+            <form action="#" th:action="@{/customer/update_drink_order}" method="POST" th:object="${drinkDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="drinkId">Select name:</label>
@@ -330,7 +330,7 @@
             </form>
             <div class="row mt-3">
                 <h3>Update quantity drink exist in order:</h3>
-            <form action="#" th:action="@{/update_quantity_drink_order}" method="POST" th:object="${drinkDTO}">
+            <form action="#" th:action="@{/customer/update_quantity_drink_order}" method="POST" th:object="${drinkDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <label for="drinkIdExist">Select name:</label>
@@ -353,5 +353,4 @@
         </div>
     </div>
 </div>
-
 </html>

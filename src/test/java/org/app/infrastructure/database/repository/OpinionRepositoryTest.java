@@ -2,6 +2,7 @@ package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.app.domain.Opinion;
+import org.app.domain.Restaurant;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.CustomerEntity;
 import org.app.infrastructure.database.entity.OpinionEntity;
@@ -43,6 +44,10 @@ public class OpinionRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndC
         restaurantRepository.saveRestaurant(RestaurantFixtures.someRestaurant1());
     }
 
+    private void saveOpinion() {
+        opinionRepository.saveOpinion(OpinionFixtures.someOpinion1());
+    }
+
     @Test
     void correctlySaveOpinion() {
         saveRestaurantAndCustomer();
@@ -56,5 +61,20 @@ public class OpinionRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndC
 
         // then
         Assertions.assertThat(allOpinionsBeforeSave).hasSize(allOpinionsAfterSave.size()-1);
+    }
+
+    @Test
+    void correctlyFindOpinionByRestaurant() {
+        saveRestaurantAndCustomer();
+        saveOpinion();
+        // given
+        String restaurantUniqueCode = RestaurantFixtures.someRestaurant1().getUniqueCode();
+
+        // when
+        List<Opinion> listOpinions = opinionRepository.findByRestaurant(restaurantUniqueCode);
+
+        // then
+        Assertions.assertThat(listOpinions).hasSize(1);
+
     }
 }

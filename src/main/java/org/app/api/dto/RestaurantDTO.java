@@ -24,7 +24,6 @@ public class RestaurantDTO {
     String restaurantAddressLocalNumber;
     String restaurantAddressPostalCode;
     String restaurantAddressCity;
-    String ownerEmail;
     Menu menu;
     Set<StreetDelivery> streetDelivery;
     Address address;

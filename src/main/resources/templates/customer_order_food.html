@@ -43,7 +43,7 @@
 </div>
 <div class="container">
     <h2>Choose order</h2>
-    <form action="#" th:action="@{/update_order}" method="GET" th:object="${variableDTO}">
+    <form action="#" th:action="@{/customer/update_order}" method="GET" th:object="${variableDTO}">
         <div class="row mt-5">
             <div class="col-md-4">
                 <label for="foodOrderNumber">Select order:</label>
@@ -62,7 +62,7 @@
     <br>
     <br>
     <h2>Choose order to opinion restaurant</h2>
-    <form action="#" th:action="@{/add_opinion}" method="GET" th:object="${variableDTO}">
+    <form action="#" th:action="@{/customer/add_opinion}" method="GET" th:object="${variableDTO}">
         <div class="row mt-5">
             <div class="col-md-4">
                 <label for="foodOrderNumberToOpinion">Select order:</label>

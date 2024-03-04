@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import static org.app.api.controller.OwnerController.*;
+
 @Controller
 @AllArgsConstructor
 public class MenuController {
@@ -21,13 +23,13 @@ public class MenuController {
     MenuMapperDTO menuMapperDTO;
     RestaurantService restaurantService;
 
-    @PutMapping(value = UPDATE_MENU)
+    @PutMapping(value = OWNER + UPDATE_MENU)
     public String updateMenu(
             @Valid @ModelAttribute("menuDTO") MenuDTO menuDTO
     ) {
         menuService.updateMenu(menuMapperDTO
-                .mapFromDTO(menuDTO, restaurantService.findByUniqueCode(OwnerController.uniqueCodeNow)));
+                .mapFromDTO(menuDTO, restaurantService.findByUniqueCode(uniqueCodeNow)));
 
-        return "redirect:/restaurant/manage/menu";
+        return "redirect:/owner/restaurant/manage/menu";
     }
 }

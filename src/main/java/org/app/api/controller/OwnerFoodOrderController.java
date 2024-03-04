@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.app.api.controller.OwnerController.*;
 import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_ONLY_SET_DISHES;
 import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_WITHOUT_SET_DISHES;
 
@@ -30,7 +31,7 @@ import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_WI
 @NoArgsConstructor
 public class OwnerFoodOrderController {
 
-    public static final String FOOD_ORDER_OWNER = "/restaurant/manage/food_order_owner";
+    public static final String FOOD_ORDER_OWNER = "/manage/food_order_owner";
     public static final String CHOOSE_ORDER_TO_MANAGE = "/choose_order_to_manage";
     public static final String CHOOSE_ORDER_TO_COMPLETE = "/choose_order_to_complete";
 
@@ -38,13 +39,13 @@ public class OwnerFoodOrderController {
 
     private static String orderNumber;
 
-    @GetMapping(value = FOOD_ORDER_OWNER)
+    @GetMapping(value = OWNER + FOOD_ORDER_OWNER)
     public ModelAndView listFoodOrderToManage(Model model) {
         model.addAttribute("variableDTO", new VariableDTO());
         return new ModelAndView("manage_food_orders_by_owner", prepareFoodOrdersByRestaurant());
     }
 
-    @PostMapping(CHOOSE_ORDER_TO_MANAGE)
+    @PostMapping(value = OWNER + CHOOSE_ORDER_TO_MANAGE)
     public ModelAndView chooseFoodOrderToManage(
             Model model,
             @Valid @ModelAttribute("variableDTO") VariableDTO variableDTO
@@ -74,17 +75,17 @@ public class OwnerFoodOrderController {
         );
     }
 
-    @PutMapping(value = CHOOSE_ORDER_TO_COMPLETE)
+    @PutMapping(value = OWNER + CHOOSE_ORDER_TO_COMPLETE)
     public String chooseToCompleteOrder() {
         foodOrderService.updateCompletedDateTime(orderNumber);
-        return "redirect:" + FOOD_ORDER_OWNER;
+        return "redirect:/owner/manage/food_order_owner" + FOOD_ORDER_OWNER;
     }
 
 
     private Map<String, ?> prepareFoodOrdersByRestaurant() {
         return Map.of(
                 "availableFoodOrderDTOs",
-                foodOrderService.findAvailableByRestaurantUniqueCode(OwnerController.uniqueCodeNow).stream()
+                foodOrderService.findAvailableByRestaurantUniqueCode(uniqueCodeNow).stream()
                         .sorted(Comparator.comparing(FoodOrder::getReceivedDateTime))
                         .toList()
         );

@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
+import static org.app.api.controller.CustomerController.*;
+
 @Controller
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @NoArgsConstructor
@@ -37,7 +39,7 @@ public class CreateOpinionController {
 
     private static String foodOrderNumber;
 
-    @GetMapping(value = ADD_OPINION)
+    @GetMapping(value = CUSTOMER + ADD_OPINION)
     public String opinionPage(
             Model model,
             @Valid @ModelAttribute("variableDTO") VariableDTO variableDTO
@@ -47,7 +49,7 @@ public class CreateOpinionController {
         return "create_opinion";
     }
 
-    @PostMapping(value = SUBMIT_OPINION)
+    @PostMapping(value = CUSTOMER + SUBMIT_OPINION)
     public String submitOpinion(
             @Valid @ModelAttribute("opinionDTO") OpinionDTO opinionDTO
     ) {
@@ -59,7 +61,7 @@ public class CreateOpinionController {
                         .text(opinionDTO.getOpinionText())
                         .stars(opinionDTO.getOpinionStars())
                         .dateTime(OffsetDateTime.now(ZoneOffset.UTC))
-                        .customer(customerService.findCustomerByEmail(CustomerController.emailCustomer))
+                        .customer(customerService.findCustomerByEmail(emailCustomer))
                         .restaurant(byFoodOrderNumber.getRestaurant())
                 .build());
         return "add_opinion_success";
