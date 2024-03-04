@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static org.app.api.controller.OwnerController.*;
+
 @Controller
 @AllArgsConstructor
 public class ManageStreetDeliveryController {
@@ -27,26 +29,26 @@ public class ManageStreetDeliveryController {
     private StreetDeliveryService streetDeliveryService;
     private ZipCodeDAO zipCodeDAO;
 
-    @GetMapping(value = MANAGE_STREET_DELIVERY)
+    @GetMapping(value = OWNER + MANAGE_STREET_DELIVERY)
     public ModelAndView manageStreetDeliveryPage(Model model) {
         model.addAttribute("postalCodeDTO", new PostalCodeDTO());
         Map<String, ?> modelPostalCode = preparePostalCode();
         return new ModelAndView("street_delivery_manage", modelPostalCode);
     }
 
-    @PostMapping(value = ADD_STREET_DELIVERY)
+    @PostMapping(value = OWNER + ADD_STREET_DELIVERY)
     public String addStreetDeliveryByPostalCode(
             @Valid @ModelAttribute("postalCodeDTO") PostalCodeDTO postalCodeDTO
     ) {
         zipCodeDAO.getStreetDeliveryByZipCode(postalCodeDTO.getPostalCode());
-        streetDeliveryService.saveNewStreetsDelivery(postalCodeDTO.getPostalCode(), OwnerController.uniqueCodeNow);
+        streetDeliveryService.saveNewStreetsDelivery(postalCodeDTO.getPostalCode(), uniqueCodeNow);
 
-        return "redirect:/manage_street_delivery";
+        return "redirect:/owner/manage_street_delivery";
     }
 
     private Map<String, ?> preparePostalCode() {
         var postalCodes = streetDeliveryService
-                .postalCodeByRestaurantUniqueCode(OwnerController.uniqueCodeNow)
+                .postalCodeByRestaurantUniqueCode(uniqueCodeNow)
                 .stream()
                 .collect(Collectors.groupingBy(StreetDelivery::getPostalCode))
                 .keySet();

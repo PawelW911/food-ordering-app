@@ -11,7 +11,7 @@
 </head>
 <div class="container">
     <h2>Please enter restaurant details.</h2>
-    <form action="#" th:action="@{/restaurant/add_new_restaurant_submit}" method="POST" th:object="${restaurantDTO}">
+    <form action="#" th:action="@{/owner/restaurant/add_new_restaurant_submit}" method="POST" th:object="${restaurantDTO}">
         <div class="row mt-3">
             <div class="col-md-6">
                 <div class="row mt-3">
@@ -86,16 +86,6 @@
                     </div>
                     <div class="col-md-3">
                         <input type="text" id="restaurantAddressCity" th:field="*{restaurantAddressCity}">
-                    </div>
-                </div>
-                <br>
-                <p>Owner email:</p>
-                <div class="row mt-3">
-                    <div class="col-md-3">
-                        <label for="ownerEmail">Customer email:</label>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="text" id="ownerEmail" th:field="*{ownerEmail}">
                     </div>
                 </div>
             </div>

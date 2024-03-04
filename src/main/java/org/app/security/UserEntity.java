@@ -37,7 +37,7 @@ public class UserEntity {
 
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "food_ordering_app_user_role",
             joinColumns = @JoinColumn(name = "user_id"),

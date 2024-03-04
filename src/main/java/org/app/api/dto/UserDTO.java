@@ -9,11 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDTO {
 
-    boolean userType;
     String name;
     String surname;
     String email;
     String phone;
     String userName;
     String password;
+    Boolean active;
+    String street;
+    String localNumber;
+    String postalCode;
+    String city;
 }

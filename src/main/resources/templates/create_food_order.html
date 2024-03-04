@@ -14,7 +14,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <a th:href="@{/choose_street_delivery}" class="btn btn-info" role="button">Back</a>
+            <a th:href="@{/customer/choose_street_delivery}" class="btn btn-info" role="button">Back</a>
         </div>
     </div>
     <br>
@@ -63,7 +63,7 @@
         </b>
     </p>
     <br>
-    <form action="#" th:action="@{/submit_order}" method="POST">
+    <form action="#" th:action="@{/customer/submit_order}" method="POST">
     <div class="row mt-5">
         <div class="col-md-4">
             <input type="submit" value="Submit order" class="btn btn-success">
@@ -93,7 +93,7 @@
                 </tbody>
             </table>
             <div class="row mt-5">
-                <form action="#" th:action="@{/add_appetizer_to_order}" method="POST" th:object="${appetizerDTO}">
+                <form action="#" th:action="@{/customer/add_appetizer_to_order}" method="POST" th:object="${appetizerDTO}">
                     <div class="col-md-4">
                         <label for="appetizerId">Select name:</label>
                         <select id="appetizerId" th:field="*{appetizerId}">
@@ -136,7 +136,7 @@
                 </tbody>
             </table>
             <div class="row mt-5">
-                <form action="#" th:action="@{/add_soup_to_order}" method="POST" th:object="${soupDTO}">
+                <form action="#" th:action="@{/customer/add_soup_to_order}" method="POST" th:object="${soupDTO}">
                     <div class="col-md-4">
                         <label for="soupId">Select name:</label>
                         <select id="soupId" th:field="*{soupId}">
@@ -179,7 +179,7 @@
                 </tbody>
             </table>
             <div class="row mt-5">
-                <form action="#" th:action="@{/add_main_meal_to_order}" method="POST" th:object="${mainMealDTO}">
+                <form action="#" th:action="@{/customer/add_main_meal_to_order}" method="POST" th:object="${mainMealDTO}">
                     <div class="col-md-4">
                         <label for="mainMealId">Select name:</label>
                         <select id="mainMealId" th:field="*{mainMealId}">
@@ -222,7 +222,7 @@
                 </tbody>
             </table>
             <div class="row mt-5">
-                <form action="#" th:action="@{/add_desert_to_order}" method="POST" th:object="${desertDTO}">
+                <form action="#" th:action="@{/customer/add_desert_to_order}" method="POST" th:object="${desertDTO}">
                     <div class="col-md-4">
                         <label for="desertId">Select name:</label>
                         <select id="desertId" th:field="*{desertId}">
@@ -265,7 +265,7 @@
                 </tbody>
             </table>
             <div class="row mt-5">
-                <form action="#" th:action="@{/add_drink_to_order}" method="POST" th:object="${drinkDTO}">
+                <form action="#" th:action="@{/customer/add_drink_to_order}" method="POST" th:object="${drinkDTO}">
                     <div class="col-md-4">
                         <label for="drinkId">Select name:</label>
                         <select id="drinkId" th:field="*{drinkId}">

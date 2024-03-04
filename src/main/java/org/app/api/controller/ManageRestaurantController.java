@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
+import static org.app.api.controller.OwnerController.*;
+
 @Controller
 @AllArgsConstructor
 public class ManageRestaurantController {
@@ -20,12 +22,12 @@ public class ManageRestaurantController {
 
     private MenuPosition menuPosition;
 
-    @GetMapping(value = RESTAURANT + MANAGE)
+    @GetMapping(value = OWNER + RESTAURANT + MANAGE)
     public String manageRestaurantPage() {
         return "manage_restaurant";
     }
 
-    @GetMapping(value = RESTAURANT + MANAGE + MENU)
+    @GetMapping(value = OWNER + RESTAURANT + MANAGE + MENU)
     public ModelAndView manageRestaurantManageMenuPage(Model model) {
         model.addAttribute("appetizerDTO", new AppetizerDTO());
         model.addAttribute("soupDTO", new SoupDTO());
@@ -33,7 +35,7 @@ public class ManageRestaurantController {
         model.addAttribute("desertDTO", new DesertDTO());
         model.addAttribute("drinkDTO", new DrinkDTO());
         model.addAttribute("menuDTO", new MenuDTO());
-        Map<String, ?> modelMenu = menuPosition.prepareMenuPositions(OwnerController.uniqueCodeNow);
+        Map<String, ?> modelMenu = menuPosition.prepareMenuPositions(uniqueCodeNow);
         return new ModelAndView("manage_restaurant_menu", modelMenu);
     }
 

@@ -14,7 +14,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <a th:href="@{/restaurant/manage}" class="btn btn-info" role="button">Back</a>
+            <a th:href="@{/owner/restaurant/manage}" class="btn btn-info" role="button">Back</a>
         </div>
     </div>
     <h1>Menu</h1>
@@ -34,7 +34,7 @@
             </tbody>
         </table>
         <div class="row mt-3">
-            <form action="#" th:action="@{/update_menu}" method="POST" th:object="${menuDTO}">
+            <form action="#" th:action="@{/owner/update_menu}" method="POST" th:object="${menuDTO}">
                 <input type="hidden" name="_method" value="put">
                 <div class="col-md-4">
                     <div class="row mt-3">
@@ -45,8 +45,8 @@
                                 <label for="menuName">Name:</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="menuName" +>
-,                           </div>
+                                <input type="text" id="menuName" th:field="*{menuName}">
+                           </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-3">
@@ -71,7 +71,7 @@
     <h2>Appetizers</h2>
     <div>
         <table class="table">
- 0          <thead class="table-dark">
+           <thead class="table-dark">
             <tr>
                     <th>name</th>
                 <th>composition</th>
@@ -87,7 +87,7 @@
             </tbody>
         </table>
         <div class="row mt-3">
-            <form action="#" th:action="@{/add_appetizer}" method="POST" th:object="${appetizerDTO}">
+            <form action="#" th:action="@{/owner/add_appetizer}" method="POST" th:object="${appetizerDTO}">
                 <div class="col-md-4">
                     <div class="row mt-3">
                         <br>
@@ -125,7 +125,7 @@
                 </div>
             </form>
             <div class="row mt-5">
-            <form action="#" th:action="@{/delete_appetizer}" method="POST" th:object="${appetizerDTO}">
+            <form action="#" th:action="@{/owner/delete_appetizer}" method="POST" th:object="${appetizerDTO}">
                 <input type="hidden" name="_method" value="delete">
                 <div class="col-md-4">
                     <label for="appetizerId">Select name:</label>
@@ -165,7 +165,7 @@
             </tbody>
         </table>
         <div class="row mt-3">
-            <form action="#" th:action="@{/add_soup}" method="POST" th:object="${soupDTO}">
+            <form action="#" th:action="@{/owner/add_soup}" method="POST" th:object="${soupDTO}">
                 <div class="col-md-4">
                     <div class="row mt-3">
                         <br>
@@ -203,7 +203,7 @@
                 </div>
             </form>
             <div class="row mt-5">
-            <form action="#" th:action="@{/delete_soup}" method="POST" th:object="${soupDTO}">
+            <form action="#" th:action="@{/owner/delete_soup}" method="POST" th:object="${soupDTO}">
                 <input type="hidden" name="_method" value="delete">
                 <div class="col-md-4">
                     <label for="soupId">Select name:</label>
@@ -243,7 +243,7 @@
             </tbody>
         </table>
         <div class="row mt-3">
-            <form action="#" th:action="@{/add_main_meal}" method="POST" th:object="${mainMealDTO}">
+            <form action="#" th:action="@{/owner/add_main_meal}" method="POST" th:object="${mainMealDTO}">
                 <div class="col-md-4">
                     <div class="row mt-3">
                         <br>
@@ -281,7 +281,7 @@
                 </div>
             </form>
             <div class="row mt-5">
-            <form action="#" th:action="@{/delete_main_meal}" method="POST" th:object="${mainMealDTO}">
+            <form action="#" th:action="@{/owner/delete_main_meal}" method="POST" th:object="${mainMealDTO}">
                 <input type="hidden" name="_method" value="delete">
                 <div class="col-md-4">
                     <label for="mainMealId">Select name:</label>
@@ -321,7 +321,7 @@
             </tbody>
         </table>
         <div class="row mt-3">
-            <form action="#" th:action="@{/add_desert}" method="POST" th:object="${desertDTO}">
+            <form action="#" th:action="@{/owner/add_desert}" method="POST" th:object="${desertDTO}">
                 <div class="col-md-4">
                     <div class="row mt-3">
                         <br>
@@ -359,7 +359,7 @@
                 </div>
             </form>
             <div class="row mt-5">
-            <form action="#" th:action="@{/delete_desert}" method="POST" th:object="${desertDTO}">
+            <form action="#" th:action="@{/owner/delete_desert}" method="POST" th:object="${desertDTO}">
                 <input type="hidden" name="_method" value="delete">
                 <div class="col-md-4">
                     <label for="desertId">Select name:</label>
@@ -401,7 +401,7 @@
             </tbody>
         </table>
         <div class="row mt-3">
-            <form action="#" th:action="@{/add_drink}" method="POST" th:object="${drinkDTO}">
+            <form action="#" th:action="@{/owner/add_drink}" method="POST" th:object="${drinkDTO}">
                 <div class="col-md-4">
                     <div class="row mt-3">
                         <br>
@@ -448,7 +448,7 @@
                 </div>
             </form>
             <div class="row mt-5">
-            <form action="#" th:action="@{/delete_drink}" method="POST" th:object="${drinkDTO}">
+            <form action="#" th:action="@{/owner/delete_drink}" method="POST" th:object="${drinkDTO}">
                 <input type="hidden" name="_method" value="delete">
                 <div class="col-md-4">
                     <label for="drinkId">Select name:</label>

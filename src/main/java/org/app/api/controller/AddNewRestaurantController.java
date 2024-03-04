@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.UUID;
 
+import static org.app.api.controller.OwnerController.*;
+
 @Controller
 @AllArgsConstructor
 @NoArgsConstructor
@@ -44,14 +46,14 @@ public class AddNewRestaurantController {
 
     private static String uniqueCode;
 
-    @GetMapping(value = RESTAURANT + ADD_NEW_RESTAURANT)
+    @GetMapping(value = OWNER + RESTAURANT + ADD_NEW_RESTAURANT)
     public String restaurantAddNewPage(ModelMap model) {
         model.addAttribute("restaurantDTO", new RestaurantDTO());
 
         return "add_new_restaurant";
     }
 
-    @PostMapping(value = RESTAURANT + ADD_NEW_RESTAURANT_SUBMIT)
+    @PostMapping(value = OWNER + RESTAURANT + ADD_NEW_RESTAURANT_SUBMIT)
     public String addRestaurant(
             @Valid @ModelAttribute("restaurantDTO") RestaurantDTO restaurantDTO,
             ModelMap model
@@ -59,7 +61,7 @@ public class AddNewRestaurantController {
         Restaurant restaurant = restaurantService.saveNewRestaurant(restaurantDTOMapper
                 .mapFromDTO(
                         restaurantDTO,
-                        ownerService.findByEmail(restaurantDTO.getOwnerEmail()),
+                        ownerService.findByEmail(ownerEmail),
                         UUID.randomUUID().toString()
                 ));
         RestaurantDTO restaurantDTOFind =
@@ -84,7 +86,7 @@ public class AddNewRestaurantController {
         return "add_restaurant_done";
     }
 
-    @PostMapping(value = RESTAURANT + ADD_MENU)
+    @PostMapping(value = OWNER + RESTAURANT + ADD_MENU)
     public String addMenu(
             @Valid @ModelAttribute("menuDTO") MenuDTO menuDTO,
             ModelMap model

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static org.app.api.controller.OwnerController.*;
+
 @Controller
 @AllArgsConstructor
 public class MainMealController {
@@ -29,7 +31,7 @@ public class MainMealController {
     MenuService menuService;
     RestaurantService restaurantService;
 
-    @PostMapping(value = ADD_MAIN_MEAL)
+    @PostMapping(value = OWNER + ADD_MAIN_MEAL)
     public String addMainMeal(
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
     ) {
@@ -38,18 +40,18 @@ public class MainMealController {
                 mainMealDTO,
                 0,
                 menuService.findByRestaurant(restaurantService
-                        .findByUniqueCode(OwnerController.uniqueCodeNow))
+                        .findByUniqueCode(uniqueCodeNow))
         ));
-        return "redirect:/restaurant/manage/menu";
+        return "redirect:/owner/restaurant/manage/menu";
     }
 
-    @DeleteMapping(value = DELETE_MAIN_MEAL)
+    @DeleteMapping(value = OWNER + DELETE_MAIN_MEAL)
     public String deleteMainMeal(
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
     ) {
         Integer mainMealId = mainMealDTO.getMainMealId();
         mainMealService.deleteMainMeal(mainMealDTO.getMainMealId());
-        return "redirect:/restaurant/manage/menu";
+        return "redirect:/owner/restaurant/manage/menu";
     }
 
 

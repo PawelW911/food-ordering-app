@@ -29,4 +29,6 @@ public interface OpinionMapper {
                 .restaurant(restaurantMapper.mapFromEntity(opinionEntity.getRestaurant(), addressMapper, ownerMapper))
                 .build();
     }
+
+    Opinion mapFromEntity(OpinionEntity opinion);
 }
