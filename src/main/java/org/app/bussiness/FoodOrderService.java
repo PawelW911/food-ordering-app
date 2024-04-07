@@ -1,22 +1,25 @@
 package org.app.bussiness;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.app.api.controller.dataForController.ForFoodOrderChoose;
 import org.app.bussiness.dao.FoodOrderDAO;
 import org.app.domain.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.app.domain.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.app.api.controller.dataForController.ForFoodOrderChoose.*;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class FoodOrderService {
@@ -31,24 +34,39 @@ public class FoodOrderService {
 
     public FoodOrder saveNewFoodOrder(FoodOrder foodOrder) {
         foodOrder.setSumCost(calculateCost(foodOrder));
-        FoodOrder foodOrderSaved = saveOrder(foodOrder);
+        FoodOrder foodOrderSaved = saveFoodOrder(foodOrder);
         return assignDishesToTheFoodOrder(foodOrder, foodOrderSaved);
     }
 
     @Transactional
-    private FoodOrder saveOrder(FoodOrder foodOrder) {
-        return foodOrderDAO.saveFoodOrder(foodOrder);
+    private FoodOrder saveFoodOrder(FoodOrder foodOrder) {
+        FoodOrder savedFoodOrder = foodOrderDAO.saveFoodOrder(foodOrder);
+        if (savedFoodOrder == null) {
+            log.error("The attempt to save the food order wasn't a success");
+        } else {
+            log.info("Save food order a success, id: [{}]", savedFoodOrder.getFoodOrderId());
+        }
+        return savedFoodOrder;
     }
 
     public Set<FoodOrder> findFoodOrdersByCustomer(Customer customer) {
-        return foodOrderDAO.findByCustomer(customer);
+        Set<FoodOrder> foodOrders = foodOrderDAO.findByCustomer(customer);
+        log.info("Placed food orders by customer with id: [{}], is [{}]", customer.getCustomerId(), foodOrders.size());
+        return foodOrders;
     }
 
     public FoodOrder findByFoodOrderNumber(String foodOrderNumber, String chooseMapper) {
-        return foodOrderDAO.findByFoodOrderNumber(
+        FoodOrder foodOrder = foodOrderDAO.findByFoodOrderNumber(
                 foodOrderNumber,
                 chooseMapper
         );
+        if (foodOrder == null) {
+            throw new NotFoundException(
+                    "Food order with order number: [%s] does not exist.".formatted(foodOrderNumber));
+        } else {
+            log.info("Food order with order number: [{}] is found", foodOrderNumber);
+        }
+        return foodOrder;
     }
 
     @Transactional
@@ -58,10 +76,44 @@ public class FoodOrderService {
                 MAP_ONLY_SET_DISHES.toString()
         ));
         foodOrderDAO.updateSumCost(newSumCost, foodOrderNumber);
+        BigDecimal sumCostAfterUpdate = foodOrderDAO.findByFoodOrderNumber(
+                foodOrderNumber,
+                MAP_WITHOUT_SET_DISHES.toString()
+        ).getSumCost();
+        if (Objects.equals(sumCostAfterUpdate, newSumCost)) {
+            log.info(
+                    "Update sum cost: [{}] in food order with order number: [{}] is successfully",
+                    newSumCost,
+                    foodOrderNumber
+            );
+        } else {
+            log.error("Update sum cost: [{}] in food order with order number: [{}] is failed",
+                    newSumCost,
+                    foodOrderNumber);
+        }
     }
 
     public Set<FoodOrder> findAvailableByRestaurantUniqueCode(String uniqueCodeRestaurant) {
-        return foodOrderDAO.findAvailableByRestaurant(restaurantService.findByUniqueCode(uniqueCodeRestaurant));
+        Set<FoodOrder> foodOrders = foodOrderDAO
+                .findAvailableByRestaurant(restaurantService.findByUniqueCode(uniqueCodeRestaurant));
+        log.info(
+                "Found food orders in restaurant with unique code: [{}] is [{}]",
+                uniqueCodeRestaurant,
+                foodOrders.size()
+        );
+        return foodOrders;
+    }
+
+    @Transactional
+    public void updateCompletedDateTime(String orderNumber) {
+        foodOrderDAO.updateCompletedDateTime(orderNumber, OffsetDateTime.now(ZoneOffset.UTC));
+        OffsetDateTime completedDateTime = foodOrderDAO.
+                findByFoodOrderNumber(orderNumber, MAP_WITHOUT_SET_DISHES.toString()).getCompletedDateTime();
+        if(completedDateTime == null) {
+            log.error("Update completed date time in food order with order number: [{}] is failed", orderNumber);
+        } else {
+            log.info("Update completed date time in food order with order number: [{}] is successfully", orderNumber);
+        }
     }
 
     public BigDecimal calculateCost(FoodOrder foodOrder) {
@@ -112,10 +164,5 @@ public class FoodOrderService {
                         foodOrder.getSoups().stream()
                                 .map(soup -> soup.withFoodOrder(foodOrderSaved))
                                 .toList())));
-    }
-
-    @Transactional
-    public void updateCompletedDateTime(String orderNumber) {
-        foodOrderDAO.updateCompletedDateTime(orderNumber, OffsetDateTime.now(ZoneOffset.UTC));
     }
 }

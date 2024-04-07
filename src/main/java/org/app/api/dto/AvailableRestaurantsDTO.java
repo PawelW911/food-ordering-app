@@ -4,17 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.app.domain.Restaurant;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class MenuDTO {
+@AllArgsConstructor
+public class AvailableRestaurantsDTO {
 
-    private String menuId;
-    private String menuName;
-    private String menuDescription;
-
+    List<RestaurantRestDTO> availableRestaurants;
 }

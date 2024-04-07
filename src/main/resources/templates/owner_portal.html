@@ -10,25 +10,34 @@
     <title>Food Ordering Application</title>
 </head>
 <div class="container">
-
-    <h1>Your restaurants</h1>
-
-    <div>
-        <table class="table">
-            <thead class="table-dark">
-            <tr>
-                <th>unique code</th>
-                <th>name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="restaurant : ${availableRestaurantDTOs}">
-                <td th:text="${restaurant.uniqueCode}"></td>
-                <td th:text="${restaurant.restaurantName}"></td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a th:href="@{/logout}" class="btn btn-info" role="button">Logout</a>
+        </div>
     </div>
+</div>
+
+
+<h1>Your restaurants</h1>
+
+<div>
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>unique code</th>
+            <th>name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="restaurant : ${availableRestaurantDTOs}">
+            <td th:text="${restaurant.uniqueCode}"></td>
+            <td th:text="${restaurant.restaurantName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 
 <div class="container">
@@ -38,19 +47,21 @@
             <div class="col-md-4">
                 <label for="uniqueCode">Select restaurant:</label>
                 <select id="uniqueCode" th:field="*{uniqueCode}">
-                    <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${restaurant.uniqueCode}" th:text="${restaurant.restaurantName}"></option>
+                    <option th:each="restaurant : ${availableRestaurantDTOs}" th:value="${restaurant.uniqueCode}"
+                            th:text="${restaurant.restaurantName}"></option>
                 </select>
             </div>
         </div>
-    <div class="row mt-5">
-        <div class="col-md-4">
-            <input type="submit" value="Manage restaurant" class="btn btn-info">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <input type="submit" value="Manage restaurant" class="btn btn-info">
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <a th:href="@{/owner/restaurant/add_new_restaurant}" class="btn btn-info" role="button">Add new
+                    restaurant</a>
+            </div>
         </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <a th:href="@{/owner/restaurant/add_new_restaurant}" class="btn btn-info" role="button">Add new restaurant</a>
-        </div>
-    </div>
     </form>
 </div>
 </html>

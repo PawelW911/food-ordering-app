@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.app.bussiness.dao.SoupDAO;
 import org.app.domain.Menu;
 import org.app.domain.Soup;
+import org.app.domain.exception.NotFoundException;
 import org.app.infrastructure.database.entity.SoupEntity;
 import org.app.infrastructure.database.repository.jpa.SoupJpaRepository;
 import org.app.infrastructure.database.repository.mapper.MenuMapper;
@@ -11,6 +12,7 @@ import org.app.infrastructure.database.repository.mapper.SoupMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,7 +58,9 @@ public class SoupRepository implements SoupDAO {
 
     @Override
     public Soup findById(Integer soupId) {
-        return soupMapper.mapFromEntity(soupJpaRepository.findById(soupId).orElseThrow());
+        return soupMapper.mapFromEntity(soupJpaRepository.findById(soupId).orElseThrow(
+                () -> new NotFoundException("Not found soup entity with id: [%s]".formatted(soupId))
+        ));
     }
 
     @Override

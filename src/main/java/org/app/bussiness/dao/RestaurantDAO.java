@@ -14,4 +14,6 @@ public interface RestaurantDAO {
     List<Restaurant> findAvailableRestaurantByOwner(Owner ownerExample);
 
     Restaurant findByUniqueCode(String uniqueCode);
+
+    List<Restaurant> findAvailableRestaurant();
 }

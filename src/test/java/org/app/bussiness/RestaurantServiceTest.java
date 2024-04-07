@@ -14,7 +14,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.app.util.RestaurantFixtures.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RestaurantServiceTest {
@@ -28,7 +31,7 @@ public class RestaurantServiceTest {
     @Test
     void checkCorrectlySaveNewRestaurant() {
         // given
-        Restaurant restaurantExample = RestaurantFixtures.someRestaurant1();
+        Restaurant restaurantExample = someRestaurant1();
 
         Mockito.when(restaurantDAO.saveRestaurant(Mockito.any(Restaurant.class))).thenReturn(restaurantExample);
         // when
@@ -42,9 +45,9 @@ public class RestaurantServiceTest {
     @Test
     void checkCorrectlyFindAvailableRestaurantByStreetDelivery() {
         // given
-        List<Restaurant> restaurantsExample = List.of(RestaurantFixtures.someRestaurant1());
+        List<Restaurant> restaurantsExample = List.of(someRestaurant1());
         StreetDelivery streetDelivery =
-                RestaurantFixtures.someRestaurant1().getStreetDelivery().stream().toList().get(0);
+                someRestaurant1().getStreetDelivery().stream().toList().get(0);
 
         Mockito.when(restaurantDAO
                 .findRestaurantByStreetDelivery(Mockito.any(StreetDelivery.class))).thenReturn(restaurantsExample);
@@ -58,7 +61,7 @@ public class RestaurantServiceTest {
     @Test
     void checkCorrectlyFindRestaurantByOwner() {
         // given
-        List<Restaurant> restaurantsExample = List.of(RestaurantFixtures.someRestaurant1());
+        List<Restaurant> restaurantsExample = List.of(someRestaurant1());
         Owner ownerExample = OwnerFixtures.someOwner1();
 
         Mockito.when(restaurantDAO
@@ -73,7 +76,7 @@ public class RestaurantServiceTest {
     @Test
     void checkCorrectlyFindRestaurantByUniqueCode() {
         // given
-        Restaurant restaurantExample = RestaurantFixtures.someRestaurant1();
+        Restaurant restaurantExample = someRestaurant1();
         String uniqueCode = restaurantExample.getUniqueCode();
 
         Mockito.when(restaurantDAO.findByUniqueCode(Mockito.anyString())).thenReturn(restaurantExample);
@@ -84,5 +87,18 @@ public class RestaurantServiceTest {
         // then
         Assertions.assertNotNull(restaurant);
         Assertions.assertEquals(uniqueCode, restaurant.getUniqueCode());
+    }
+
+    @Test
+    void checkCorrectlyFindAvailableRestaurant() {
+        // given
+        List<Restaurant> exampleRestaurant = List.of(someRestaurant1(), someRestaurant2());
+
+        Mockito.when(restaurantDAO.findAvailableRestaurant()).thenReturn(exampleRestaurant);
+        // when
+        List<Restaurant> availableRestaurants = restaurantService.findAvailableRestaurant();
+
+        // then
+        Assertions.assertEquals(exampleRestaurant.size(), availableRestaurants.size());
     }
 }

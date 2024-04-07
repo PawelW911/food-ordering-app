@@ -78,7 +78,7 @@ public class OwnerFoodOrderController {
     @PutMapping(value = OWNER + CHOOSE_ORDER_TO_COMPLETE)
     public String chooseToCompleteOrder() {
         foodOrderService.updateCompletedDateTime(orderNumber);
-        return "redirect:/owner/manage/food_order_owner" + FOOD_ORDER_OWNER;
+        return "redirect:/owner/manage/food_order_owner";
     }
 
 

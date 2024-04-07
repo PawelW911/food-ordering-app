@@ -5,6 +5,7 @@ import org.app.domain.Soup;
 import org.app.infrastructure.database.entity.SoupEntity;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface SoupDAO {
