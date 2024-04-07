@@ -14,7 +14,10 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class FoodOrderingAppUserDetailsService implements UserDetailsService {
+public class FoodOrderingAppUserDetailsService
+        implements
+        UserDetailsService
+{
 
     private final UserRepository userRepository;
 

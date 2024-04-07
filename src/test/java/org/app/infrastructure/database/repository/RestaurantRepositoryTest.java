@@ -27,8 +27,11 @@ public class RestaurantRepositoryTest extends CleanDatabaseBeforeRepositoryTestA
     private void saveOwner() {
         ownerRepository.saveOwner(OwnerFixtures.someOwner1());
     }
-    private void saveRestaurant() {
+    private void saveRestaurantFirst() {
         restaurantRepository.saveRestaurant(RestaurantFixtures.someRestaurant1());
+    }
+    private void saveRestaurantSecond() {
+        restaurantRepository.saveRestaurant(RestaurantFixtures.someRestaurant2());
     }
 
     @Test
@@ -48,7 +51,7 @@ public class RestaurantRepositoryTest extends CleanDatabaseBeforeRepositoryTestA
     @Test
     void correctlyFindRestaurantByCityAndStreetDeliveryAvailable() {
         saveOwner();
-        saveRestaurant();
+        saveRestaurantFirst();
         // given
         Restaurant restaurantExample = RestaurantFixtures.someRestaurant1();
         StreetDelivery streetDeliveryExample = restaurantExample.getStreetDelivery().stream().toList().get(0);
@@ -64,7 +67,7 @@ public class RestaurantRepositoryTest extends CleanDatabaseBeforeRepositoryTestA
     @Test
     void correctlyFindRestaurantByOwner() {
         saveOwner();
-        saveRestaurant();
+        saveRestaurantFirst();
         // given
         Owner ownerExample = OwnerFixtures.someOwner1();
 
@@ -78,7 +81,7 @@ public class RestaurantRepositoryTest extends CleanDatabaseBeforeRepositoryTestA
     @Test
     void correctlyFindRestaurantByUniqueCode() {
         saveOwner();
-        saveRestaurant();
+        saveRestaurantFirst();
         // given
         String uniqueCode = RestaurantFixtures.someRestaurant1().getUniqueCode();
 
@@ -88,5 +91,21 @@ public class RestaurantRepositoryTest extends CleanDatabaseBeforeRepositoryTestA
         // then
         Assertions.assertThatObject(restaurant).isNotNull();
         Assertions.assertThat(restaurant.getUniqueCode()).isEqualTo(uniqueCode);
+    }
+
+    @Test
+    void correctlyFindAvailableRestaurant() {
+        saveOwner();
+        saveRestaurantFirst();
+        saveRestaurantSecond();
+        // given
+        int quantityRestaurants = 2;
+
+        // when
+        List<Restaurant> availableRestaurant = restaurantRepository.findAvailableRestaurant();
+
+        // given
+        Assertions.assertThat(availableRestaurant).hasSize(quantityRestaurants);
+
     }
 }

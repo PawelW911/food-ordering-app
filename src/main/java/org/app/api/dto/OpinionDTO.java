@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OpinionDTO {
 
-    String opinionText;
-    Integer opinionStars;
+    private String opinionText;
+    private Integer opinionStars;
 }

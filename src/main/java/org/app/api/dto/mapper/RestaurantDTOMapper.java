@@ -1,6 +1,8 @@
 package org.app.api.dto.mapper;
 
+import org.app.api.dto.AvailableRestaurantsDTO;
 import org.app.api.dto.RestaurantDTO;
+import org.app.api.dto.RestaurantRestDTO;
 import org.app.domain.Address;
 import org.app.domain.Owner;
 import org.app.domain.Restaurant;
@@ -21,6 +23,23 @@ public interface RestaurantDTOMapper {
                 .restaurantAddressLocalNumber(restaurant.getAddress().getLocalNumber())
                 .restaurantAddressPostalCode(restaurant.getAddress().getPostalCode())
                 .restaurantAddressCity(restaurant.getAddress().getCity())
+                .build();
+    }
+
+    default RestaurantRestDTO mapToRestDTO(Restaurant restaurant) {
+        return RestaurantRestDTO.builder()
+                .uniqueCode(restaurant.getUniqueCode())
+                .name(restaurant.getName())
+                .typeFood(restaurant.getTypeFood())
+                .email(restaurant.getEmail())
+                .phone(restaurant.getPhone())
+                .openingHours(restaurant.getOpeningHours())
+                .address(Address.builder()
+                        .street(restaurant.getAddress().getStreet())
+                        .localNumber(restaurant.getAddress().getLocalNumber())
+                        .postalCode(restaurant.getAddress().getPostalCode())
+                        .city(restaurant.getAddress().getCity())
+                        .build())
                 .build();
     }
 

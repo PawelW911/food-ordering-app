@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.app.util.StreetDeliveryFixtures.someStreetDelivery1;
@@ -79,11 +80,26 @@ public class StreetDeliveryServiceTest {
         String street = streetDeliveryList.get(0).getStreet();
         String city = streetDeliveryList.get(0).getCity();
 
-        Mockito.when(streetDeliveryDAO.findByStreetAndCity(street, city)).thenReturn(streetDeliveryList.get(0));
+        Mockito.when(streetDeliveryDAO.findByStreetAndCity(street, city))
+                .thenReturn(Optional.of(streetDeliveryList.get(0)));
         // when
         StreetDelivery streetDelivery = streetDeliveryService.findByStreetAndCity(street, city);
 
         // then
         Assertions.assertEquals(StreetDelivery.class, streetDelivery.getClass());
+    }
+
+    @Test
+    void checkCorrectlyFindAvailableStreetsDelivery() {
+        // given
+        Set<StreetDelivery> streetDeliveries = someStreetDelivery1();
+
+        Mockito.when(streetDeliveryDAO.findAvailableStreetsDelivery()).thenReturn(streetDeliveries);
+
+        // when
+        Set<StreetDelivery> streetDeliverySet = streetDeliveryService.findAvailableStreetsDelivery();
+
+        // then
+        Assertions.assertEquals(streetDeliveries.size(), streetDeliverySet.size());
     }
 }

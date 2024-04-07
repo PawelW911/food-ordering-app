@@ -16,8 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class HomeController {
 
-    RoleRepository roleRepository;
-    static final String HOME ="/";
+    public static final String HOME ="/";
+
+    private RoleRepository roleRepository;
 
     @RequestMapping(value = HOME, method = RequestMethod.GET)
     public String homePage() {

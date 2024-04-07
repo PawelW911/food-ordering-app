@@ -4,6 +4,7 @@ import org.app.domain.Restaurant;
 import org.app.domain.StreetDelivery;
 import org.app.infrastructure.database.entity.StreetDeliveryEntity;
 
+import java.util.Optional;
 import java.util.Set;
 
 public interface StreetDeliveryDAO {
@@ -13,5 +14,7 @@ public interface StreetDeliveryDAO {
 
     Set<StreetDelivery> findPostalCodeByRestaurant(Restaurant restaurant);
 
-    StreetDelivery findByStreetAndCity(String street, String city);
+    Optional<StreetDelivery> findByStreetAndCity(String street, String city);
+
+    Set<StreetDelivery> findAvailableStreetsDelivery();
 }

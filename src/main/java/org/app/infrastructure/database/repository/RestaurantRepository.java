@@ -54,4 +54,12 @@ public class RestaurantRepository implements RestaurantDAO {
         System.out.println(byUniqueCode.getStreetsDelivery());
         return restaurantMapper.mapFromEntity(byUniqueCode);
     }
+
+    @Override
+    public List<Restaurant> findAvailableRestaurant() {
+        List<RestaurantEntity> restaurantEntities = restaurantJpaRepository.findAll();
+        return restaurantEntities.stream()
+                .map(restaurantMapper::mapFromEntity)
+                .toList();
+    }
 }

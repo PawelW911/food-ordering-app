@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChooseStreetDeliveryDTO {
 
-    String chooseStreet;
-    String chooseCity;
+    private String chooseStreet;
+    private String chooseCity;
 }

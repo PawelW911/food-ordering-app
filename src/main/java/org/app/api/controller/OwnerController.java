@@ -2,6 +2,7 @@ package org.app.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.app.api.dto.AvailableRestaurantsDTO;
 import org.app.api.dto.RestaurantDTO;
 import org.app.api.dto.VariableDTO;
 import org.app.api.dto.mapper.OwnerDTOMapper;

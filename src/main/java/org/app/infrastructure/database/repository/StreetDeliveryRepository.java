@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class StreetDeliveryRepository implements StreetDeliveryDAO {
 
-    StreetDeliveryJpaRepository streetDeliveryJpaRepository;
-    StreetDeliveryMapper streetDeliveryMapper;
-    RestaurantMapper restaurantMapper;
+    private final StreetDeliveryJpaRepository streetDeliveryJpaRepository;
+    private final StreetDeliveryMapper streetDeliveryMapper;
+    private final RestaurantMapper restaurantMapper;
 
     @Override
     public Set<StreetDelivery> saveStreetDeliveries(Set<StreetDelivery> streetDeliveries, Restaurant restaurant) {
@@ -68,7 +68,15 @@ public class StreetDeliveryRepository implements StreetDeliveryDAO {
     }
 
     @Override
-    public StreetDelivery findByStreetAndCity(String street, String city) {
-        return streetDeliveryMapper.mapFromEntity(streetDeliveryJpaRepository.findByStreetAndCity(street, city));
+    public Optional<StreetDelivery> findByStreetAndCity(String street, String city) {
+        return Optional.of(
+                streetDeliveryMapper.mapFromEntity(streetDeliveryJpaRepository.findByStreetAndCity(street, city)));
+    }
+
+    @Override
+    public Set<StreetDelivery> findAvailableStreetsDelivery() {
+        return streetDeliveryJpaRepository.findAll().stream()
+                .map(streetDeliveryMapper::mapFromEntity)
+                .collect(Collectors.toSet());
     }
 }

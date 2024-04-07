@@ -93,7 +93,6 @@ public class AddNewRestaurantController {
     ) {
         Menu menu = menuService
                 .saveNewMenu(menuMapperDTO.mapFromDTO(menuDTO, restaurantService.findByUniqueCode(uniqueCode)));
-
         MenuDTO menuDTOFind = menuMapperDTO.mapToDto(menu);
 
         model.addAttribute("menuName", menuDTOFind.getMenuName());

@@ -5,16 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MenuDTO {
+public class StreetDeliveryDTO {
 
-    private String menuId;
-    private String menuName;
-    private String menuDescription;
-
+    private String street;
+    private String city;
+    private String postalCode;
 }

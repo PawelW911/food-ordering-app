@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VariableDTO {
 
-    String uniqueCode;
-    String foodOrderNumber;
+    private String uniqueCode;
+    private String foodOrderNumber;
 }

@@ -135,11 +135,25 @@ public class StreetDeliveryRepositoryTest extends CleanDatabaseBeforeRepositoryT
         String postalCode = streetDeliveryList.get(0).getPostalCode();
 
         // when
-        StreetDelivery streetDelivery = streetDeliveryRepository.findByStreetAndCity(street, city);
+        StreetDelivery streetDelivery = streetDeliveryRepository.findByStreetAndCity(street, city).orElseThrow();
 
         // then
         Assertions.assertThat(streetDelivery.getStreet()).isEqualTo(street);
         Assertions.assertThat(streetDelivery.getCity()).isEqualTo(city);
         Assertions.assertThat(streetDelivery.getPostalCode()).isEqualTo(postalCode);
+    }
+
+    @Test
+    void correctlyFindAvailableStreetDelivery() {
+        saveRestaurantAndOwnerAndStreetDelivery();
+        // given
+        Set<StreetDelivery> streetDeliveriesToCheck = someStreetDelivery1();
+
+        // when
+        Set<StreetDelivery> streetDeliveries = streetDeliveryRepository.findAvailableStreetsDelivery();
+
+        // then
+        Assertions.assertThat(streetDeliveries).hasSize(streetDeliveriesToCheck.size());
+
     }
 }
