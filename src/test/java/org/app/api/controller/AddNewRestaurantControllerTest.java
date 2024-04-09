@@ -7,6 +7,7 @@ import org.app.api.dto.mapper.RestaurantDTOMapper;
 import org.app.bussiness.MenuService;
 import org.app.bussiness.OwnerService;
 import org.app.bussiness.RestaurantService;
+import org.app.domain.Menu;
 import org.app.domain.Restaurant;
 import org.app.util.RestaurantDTOFixtures;
 import org.app.util.RestaurantFixtures;
@@ -63,18 +64,29 @@ public class AddNewRestaurantControllerTest {
         when(restaurantService.saveNewRestaurant(restaurantDTOMapper.mapFromDTO(
                 restaurantDTO, restaurant.getOwner(), restaurant.getUniqueCode())))
                 .thenReturn(restaurant);
-
-//        RestaurantDTO restaurantDTOFind = RestaurantDTOFixtures.someRestaurantDTO();
-        when(restaurantDTOMapper.mapToDTO(restaurant))
-                .thenReturn(restaurantDTO);
-        when(restaurantDTOFind.getUniqueCode()).thenReturn(restaurantDTO.getUniqueCode());
-
-        // Mockowanie obiektu RestaurantDTO
+        
         RestaurantDTO restaurantDTOFind = Mockito.mock(RestaurantDTO.class);
-        String expectedUniqueCode = "someUniqueCode";
+        String expectedUniqueCode = restaurantDTO.getUniqueCode();
         when(restaurantDTOFind.getUniqueCode()).thenReturn(expectedUniqueCode);
+        String expectedRestaurantName = restaurantDTO.getRestaurantName();
+        when(restaurantDTOFind.getRestaurantName()).thenReturn(expectedRestaurantName);
+        String expectedRestaurantTypeFood = restaurantDTO.getRestaurantTypeFood();
+        when(restaurantDTOFind.getRestaurantTypeFood()).thenReturn(expectedRestaurantTypeFood);
+        String expectedRestaurantEmail = restaurantDTO.getRestaurantEmail();
+        when(restaurantDTOFind.getRestaurantEmail()).thenReturn(expectedRestaurantEmail);
+        String expectedRestaurantPhone = restaurantDTO.getRestaurantPhone();
+        when(restaurantDTOFind.getRestaurantPhone()).thenReturn(expectedRestaurantPhone);
+        String expectedRestaurantOpeningHours = restaurantDTO.getRestaurantOpeningHours();
+        when(restaurantDTOFind.getRestaurantOpeningHours()).thenReturn(expectedRestaurantOpeningHours);
+        String expectedRestaurantAddressStreet = restaurantDTO.getRestaurantAddressStreet();
+        when(restaurantDTOFind.getRestaurantAddressStreet()).thenReturn(expectedRestaurantAddressStreet);
+        String expectedRestaurantAddressLocalNumber = restaurantDTO.getRestaurantAddressLocalNumber();
+        when(restaurantDTOFind.getRestaurantAddressLocalNumber()).thenReturn(expectedRestaurantAddressLocalNumber);
+        String expectedRestaurantAddressPostalCode = restaurantDTO.getRestaurantAddressPostalCode();
+        when(restaurantDTOFind.getRestaurantAddressPostalCode()).thenReturn(expectedRestaurantAddressPostalCode);
+        String expectedRestaurantAddressCity = restaurantDTO.getRestaurantAddressCity();
+        when(restaurantDTOFind.getRestaurantAddressCity()).thenReturn(expectedRestaurantAddressCity);
 
-        // Konfiguracja zachowania mocka restaurantDTOMapper
         when(restaurantDTOMapper.mapToDTO(any()))
                 .thenReturn(restaurantDTOFind);
 
@@ -84,15 +96,14 @@ public class AddNewRestaurantControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(view().name("add_restaurant_done"))
                 .andExpect(model().attribute("restaurantUniqueCode", expectedUniqueCode))
-                .andExpect(model().attributeExists("restaurantName"))
-                .andExpect(model().attributeExists("restaurantTypeFood"))
-                .andExpect(model().attributeExists("restaurantEmail"))
-                .andExpect(model().attributeExists("restaurantPhone"))
-                .andExpect(model().attributeExists("restaurantOpeningHours"))
-                .andExpect(model().attributeExists("restaurantAddressStreet"))
-                .andExpect(model().attributeExists("restaurantAddressLocalNumber"))
-                .andExpect(model().attributeExists("restaurantAddressPostalCode"))
-                .andExpect(model().attributeExists("restaurantAddressCity"))
-                .andExpect(model().attributeExists("menuDTO"));
+                .andExpect(model().attribute("restaurantName", expectedRestaurantName))
+                .andExpect(model().attribute("restaurantTypeFood", expectedRestaurantTypeFood))
+                .andExpect(model().attribute("restaurantEmail", expectedRestaurantEmail))
+                .andExpect(model().attribute("restaurantPhone", expectedRestaurantPhone))
+                .andExpect(model().attribute("restaurantOpeningHours", expectedRestaurantOpeningHours))
+                .andExpect(model().attribute("restaurantAddressStreet", expectedRestaurantAddressStreet))
+                .andExpect(model().attribute("restaurantAddressLocalNumber", expectedRestaurantAddressLocalNumber))
+                .andExpect(model().attribute("restaurantAddressPostalCode", expectedRestaurantAddressPostalCode))
+                .andExpect(model().attribute("restaurantAddressCity", expectedRestaurantAddressCity));
     }
 }
