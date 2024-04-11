@@ -7,7 +7,6 @@ import org.app.api.dto.mapper.RestaurantDTOMapper;
 import org.app.bussiness.MenuService;
 import org.app.bussiness.OwnerService;
 import org.app.bussiness.RestaurantService;
-import org.app.domain.Menu;
 import org.app.domain.Restaurant;
 import org.app.util.RestaurantDTOFixtures;
 import org.app.util.RestaurantFixtures;
@@ -47,7 +46,7 @@ public class AddNewRestaurantControllerTest {
     private RestaurantDTO restaurantDTOFind;
 
     @Test
-    void restaurantAddNewPage_ReturnsCorrectViewAndModelAttribute() throws Exception {
+    void restaurantAddNewPageReturnsCorrectViewAndModelAttribute() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/owner/restaurant/add_new_restaurant"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(view().name("add_new_restaurant"))

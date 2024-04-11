@@ -35,12 +35,9 @@ public class ChooseRestaurantToFoodOrderController {
     private StreetDeliveryService streetDeliveryService;
     private RestaurantService restaurantService;
     private MenuPosition menuPosition;
-    private FoodOrderService foodOrderService;
-    private CustomerService customerService;
     private OpinionService opinionService;
 
     private static StreetDelivery streetDelivery;
-    protected static String numberOrderFood;
     protected static String uniqueCodeRestaurantToOrderFood;
 
     @GetMapping(value = CUSTOMER + CHOOSE_STREET_DELIVERY)

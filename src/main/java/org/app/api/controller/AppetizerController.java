@@ -31,13 +31,13 @@ public class AppetizerController {
     public String addAppetizerToMenu(
             @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
     ) {
-        Appetizer appetizer = appetizerService.saveNewAppetizer(appetizerMapperDTO
-        .mapFromDTO(
-                appetizerDTO,
-                0,
-                menuService.findByRestaurant(restaurantService
-                        .findByUniqueCode(uniqueCodeNow))
-        ));
+        appetizerService.saveNewAppetizer(appetizerMapperDTO
+                .mapFromDTO(
+                        appetizerDTO,
+                        0,
+                        menuService.findByRestaurant(restaurantService
+                                .findByUniqueCode(uniqueCodeNow))
+                ));
         return "redirect:/owner/restaurant/manage/menu";
     }
 
@@ -45,11 +45,7 @@ public class AppetizerController {
     public String deleteAppetizer(
             @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
     ) {
-        Integer appetizerId = appetizerDTO.getAppetizerId();
         appetizerService.deleteAppetizer(appetizerDTO.getAppetizerId());
         return "redirect:/owner/restaurant/manage/menu";
     }
-
-
-
 }
