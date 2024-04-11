@@ -97,12 +97,4 @@ public class OwnerControllerTest {
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/owner/restaurant/manage"));
     }
 
-//    @Test
-//    void chooseRestaurantToManageInvalidInputThrowsException() throws Exception {
-//        String uniqueCode = "";
-//
-//        mockMvc.perform(MockMvcRequestBuilders.post("/owner/choose_restaurant")
-//                        .param("uniqueCode", uniqueCode))
-//                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-//    }
 }

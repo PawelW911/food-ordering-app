@@ -5,15 +5,18 @@ import lombok.*;
 import java.util.Set;
 
 @With
-@Value
+//@Value
+@Data
 @Builder
 @EqualsAndHashCode
 @ToString(of = {"streetDeliveryId", "street", "city", "postalCode", "restaurant"})
+@AllArgsConstructor
+@NoArgsConstructor
 public class StreetDelivery {
 
-    Integer streetDeliveryId;
-    String street;
-    String city;
-    String postalCode;
-    Set<Restaurant> restaurant;
+    private Integer streetDeliveryId;
+    private String street;
+    private String city;
+    private String postalCode;
+    private Set<Restaurant> restaurant;
 }
