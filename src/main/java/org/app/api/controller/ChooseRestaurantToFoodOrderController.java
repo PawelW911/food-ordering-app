@@ -97,7 +97,7 @@ public class ChooseRestaurantToFoodOrderController {
         );
     }
 
-    private Map<String, ?> prepareAvailableRestaurant(StreetDelivery streetDelivery) {
+    protected Map<String, ?> prepareAvailableRestaurant(StreetDelivery streetDelivery) {
         Map<String, ?> mapRestaurant = new HashMap<>();
         if(streetDelivery == null) {
             return Map.of();
