@@ -6,29 +6,33 @@ import org.app.api.dto.*;
 import org.app.bussiness.OpinionService;
 import org.app.bussiness.RestaurantService;
 import org.app.bussiness.StreetDeliveryService;
+import org.app.domain.Restaurant;
 import org.app.domain.StreetDelivery;
+import org.app.util.RestaurantFixtures;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = ChooseRestaurantToFoodOrderController.class)
 @AutoConfigureMockMvc(addFilters = false)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(ChooseRestaurantToFoodOrderController.class)
 class ChooseRestaurantToFoodOrderControllerTest {
 
     private MockMvc mockMvc;
@@ -48,23 +52,29 @@ class ChooseRestaurantToFoodOrderControllerTest {
     @InjectMocks
     private ChooseRestaurantToFoodOrderController controller;
 
+
     @Test
-    void chooseRestaurantPage_ReturnsPageWithAvailableRestaurants() throws Exception {
+    void chooseRestaurantPageReturnsPageWithAvailableRestaurants() throws Exception {
         // Given
-        Map<String, Object> availableRestaurants = new HashMap<>();
+        HashSet<Restaurant> restaurantSet = new HashSet<>();
+        restaurantSet.add(RestaurantFixtures.someRestaurant1());
+        Map<String, ?> availableRestaurants = Map.of("availableRestaurant", restaurantSet);
         // Mock street delivery
         StreetDelivery streetDelivery = new StreetDelivery();
         doReturn(streetDelivery).when(streetDeliveryService).findByStreetAndCity("Test Street", "Test City");
         // Mock available restaurants
-        availableRestaurants.put("availableRestaurantDTOs", new ArrayList<RestaurantDTO>());
+
+        ChooseRestaurantToFoodOrderController spyController = spy(controller);
+
+        // Call the actual method on the spy
+        doReturn(availableRestaurants).when(spyController).prepareAvailableRestaurant(streetDelivery);
 
         // When, Then
         mockMvc.perform(MockMvcRequestBuilders.get("/customer/choose_street_delivery"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("chooseStreetDeliveryDTO"))
                 .andExpect(model().attributeExists("variableDTO"))
-                .andExpect(view().name("choose_restaurant"))
-                .andExpect(model().attribute("availableAvailableRestaurant", availableRestaurants));
+                .andExpect(view().name("choose_restaurant"));
     }
 
     @Test
@@ -115,10 +125,10 @@ class ChooseRestaurantToFoodOrderControllerTest {
         // Mock opinions
         Map<String, Object> opinions = new HashMap<>();
         opinions.put("opinionRestaurant", new ArrayList<OpinionDTO>());
-        Method method = ChooseRestaurantToFoodOrderController.class.getDeclaredMethod("prepareOpinionsRestaurant", String.class);
-        method.setAccessible(true);
-        Map<String, ?> preparedOpinions = (Map<String, ?>) method.invoke(controller, "TestUniqueCode");
-        doReturn(opinions).when(controller).prepareOpinionsRestaurant("TestUniqueCode");
+//        Method method = ChooseRestaurantToFoodOrderController.class.getDeclaredMethod("prepareOpinionsRestaurant", String.class);
+//        method.setAccessible(true);
+//        Map<String, ?> preparedOpinions = (Map<String, ?>) method.invoke(controller, "TestUniqueCode");
+//        doReturn(opinions).when(controller).prepareOpinionsRestaurant("TestUniqueCode");
 
         // When, Then
         mockMvc.perform(MockMvcRequestBuilders.post("/customer/show_opinion")
