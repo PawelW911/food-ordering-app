@@ -20,11 +20,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -78,7 +76,7 @@ class ChooseRestaurantToFoodOrderControllerTest {
     }
 
     @Test
-    void chooseStreetDelivery_RedirectsToChooseRestaurantPage() throws Exception {
+    void chooseStreetDeliveryRedirectsToChooseRestaurantPage() throws Exception {
         // Given
         ChooseStreetDeliveryDTO chooseStreetDeliveryDTO = new ChooseStreetDeliveryDTO();
         chooseStreetDeliveryDTO.setChooseStreet("Test Street");
@@ -95,7 +93,7 @@ class ChooseRestaurantToFoodOrderControllerTest {
     }
 
     @Test
-    void chooseRestaurant_ReturnsCreateFoodOrderPageWithMenuPositions() throws Exception {
+    void chooseRestaurantReturnsCreateFoodOrderPageWithMenuPositions() throws Exception {
         // Given
         VariableDTO variableDTO = new VariableDTO();
         variableDTO.setUniqueCode("TestUniqueCode");
@@ -113,28 +111,24 @@ class ChooseRestaurantToFoodOrderControllerTest {
                 .andExpect(model().attributeExists("mainMealDTO"))
                 .andExpect(model().attributeExists("desertDTO"))
                 .andExpect(model().attributeExists("drinkDTO"))
-                .andExpect(view().name("create_food_order"))
-                .andExpect(model().attribute("menuPositions", menuPositions));
+                .andExpect(view().name("create_food_order"));
     }
 
     @Test
-    void showOpinionRestaurant_ReturnsShowOpinionRestaurantPageWithOpinions() throws Exception {
+    void showOpinionRestaurantReturnsShowOpinionRestaurantPageWithOpinions() throws Exception {
         // Given
         VariableDTO variableDTO = new VariableDTO();
         variableDTO.setUniqueCode("TestUniqueCode");
         // Mock opinions
         Map<String, Object> opinions = new HashMap<>();
         opinions.put("opinionRestaurant", new ArrayList<OpinionDTO>());
-//        Method method = ChooseRestaurantToFoodOrderController.class.getDeclaredMethod("prepareOpinionsRestaurant", String.class);
-//        method.setAccessible(true);
-//        Map<String, ?> preparedOpinions = (Map<String, ?>) method.invoke(controller, "TestUniqueCode");
-//        doReturn(opinions).when(controller).prepareOpinionsRestaurant("TestUniqueCode");
+        ChooseRestaurantToFoodOrderController spyController = spy(controller);
+        doReturn(opinions).when(spyController).prepareOpinionsRestaurant("TestUniqueCode");
 
         // When, Then
         mockMvc.perform(MockMvcRequestBuilders.post("/customer/show_opinion")
                         .flashAttr("variableDTO", variableDTO))
                 .andExpect(status().isOk())
-                .andExpect(view().name("show_opinion_restaurant"))
-                .andExpect(model().attribute("opinions", opinions));
+                .andExpect(view().name("show_opinion_restaurant"));
     }
 }

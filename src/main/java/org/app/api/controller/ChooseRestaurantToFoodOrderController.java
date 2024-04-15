@@ -91,7 +91,7 @@ public class ChooseRestaurantToFoodOrderController {
         return new ModelAndView("show_opinion_restaurant", opinions);
     }
 
-    private Map<String, ?> prepareOpinionsRestaurant(String uniqueCodeRestaurantToOrderFood) {
+    protected Map<String, ?> prepareOpinionsRestaurant(String uniqueCodeRestaurantToOrderFood) {
         return Map.of(
                 "opinionRestaurant", opinionService.findOpinionByRestaurant(uniqueCodeRestaurantToOrderFood)
         );
