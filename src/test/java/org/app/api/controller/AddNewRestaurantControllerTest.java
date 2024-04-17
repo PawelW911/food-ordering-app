@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = AddNewRestaurantController.class)
 @AutoConfigureMockMvc(addFilters = false)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class AddNewRestaurantControllerTest {
+class AddNewRestaurantControllerTest {
 
     private MockMvc mockMvc;
 
