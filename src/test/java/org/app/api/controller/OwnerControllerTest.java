@@ -41,7 +41,7 @@ import static org.mockito.Mockito.when;
 @WebMvcTest(controllers = OwnerController.class)
 @AutoConfigureMockMvc(addFilters = false)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class OwnerControllerTest {
+class OwnerControllerTest {
 
     private MockMvc mockMvc;
 
