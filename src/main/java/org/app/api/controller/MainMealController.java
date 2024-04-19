@@ -26,10 +26,10 @@ public class MainMealController {
     public static final String ADD_MAIN_MEAL = "/add_main_meal";
     public static final String DELETE_MAIN_MEAL = "/delete_main_meal";
 
-    MainMealService mainMealService;
-    MainMealMapperDTO mainMealMapperDTO;
-    MenuService menuService;
-    RestaurantService restaurantService;
+    private MainMealService mainMealService;
+    private MainMealMapperDTO mainMealMapperDTO;
+    private MenuService menuService;
+    private RestaurantService restaurantService;
 
     @PostMapping(value = OWNER + ADD_MAIN_MEAL)
     public String addMainMeal(

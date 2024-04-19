@@ -26,10 +26,10 @@ public class DrinkController {
     public static final String ADD_DRINK = "/add_drink";
     public static final String DELETE_DRINK = "/delete_drink";
 
-    DrinkService drinkService;
-    DrinkMapperDTO drinkMapperDTO;
-    MenuService menuService;
-    RestaurantService restaurantService;
+    private DrinkService drinkService;
+    private DrinkMapperDTO drinkMapperDTO;
+    private MenuService menuService;
+    private RestaurantService restaurantService;
 
     @PostMapping(value = OWNER + ADD_DRINK)
     public String addDrink(

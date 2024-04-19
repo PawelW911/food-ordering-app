@@ -49,7 +49,6 @@ public class DesertController {
     public String deleteDesert(
             @Valid @ModelAttribute("desertDTO") DesertDTO desertDTO
     ) {
-        Integer desertId = desertDTO.getDesertId();
         desertService.deleteDesert(desertDTO.getDesertId());
         return "redirect:/owner/restaurant/manage/menu";
     }

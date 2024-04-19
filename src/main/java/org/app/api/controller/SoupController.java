@@ -26,10 +26,10 @@ public class SoupController {
     public static final String ADD_SOUP = "/add_soup";
     public static final String DELETE_SOUP = "/delete_soup";
 
-    SoupService soupService;
-    SoupMapperDTO soupMapperDTO;
-    MenuService menuService;
-    RestaurantService restaurantService;
+    private SoupService soupService;
+    private SoupMapperDTO soupMapperDTO;
+    private MenuService menuService;
+    private RestaurantService restaurantService;
 
     @PostMapping(value = OWNER + ADD_SOUP)
     public String addSoup(
