@@ -19,7 +19,6 @@ public class CustomerController {
 
     public static final String CUSTOMER = "/customer";
 
-    private CustomerService customerService;
     private UserRepository userRepository;
 
     protected static String emailCustomer;
