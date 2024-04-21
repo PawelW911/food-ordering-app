@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -71,13 +72,20 @@ public class CustomerOrderFoodController {
             foodOrderNumber = variableDTO.getFoodOrderNumber();
         }
         foodOrderService.updateSumCost(foodOrderNumber);
+        FoodOrder foodOrder = foodOrderService.findByFoodOrderNumber(
+                foodOrderNumber, MAP_WITHOUT_SET_DISHES.toString());
+        BigDecimal sumCost;
+        if (foodOrder == null) {
+            sumCost = BigDecimal.ZERO;
+        } else {
+            sumCost = foodOrder.getSumCost();
+        }
         model.addAttribute("appetizerDTO", new AppetizerDTO());
         model.addAttribute("soupDTO", new SoupDTO());
         model.addAttribute("mainMealDTO", new MainMealDTO());
         model.addAttribute("desertDTO", new DesertDTO());
         model.addAttribute("drinkDTO", new DrinkDTO());
-        model.addAttribute("sumCost", foodOrderService.findByFoodOrderNumber(
-                foodOrderNumber, MAP_WITHOUT_SET_DISHES.toString()).getSumCost());
+        model.addAttribute("sumCost", sumCost);
 
         Map<String, ?> orderDishes = prepareOrderDishesAndAvailableDishes();
         return new ModelAndView("update_order", orderDishes);
@@ -110,8 +118,6 @@ public class CustomerOrderFoodController {
             Model model,
             @Valid @ModelAttribute("appetizerDTO") AppetizerDTO appetizerDTO
     ) {
-        Appetizer appetizerFound = appetizerService.findById(appetizerDTO.getAppetizerId());
-
         if (appetizerDTO.getQuantity() == 0) {
             appetizerService.deleteAppetizer(appetizerDTO.getAppetizerId());
         } else {
@@ -148,8 +154,6 @@ public class CustomerOrderFoodController {
             Model model,
             @Valid @ModelAttribute("soupDTO") SoupDTO soupDTO
     ) {
-        Soup soupFound = soupService.findById(soupDTO.getSoupId());
-
         if (soupDTO.getQuantity() == 0) {
             soupService.deleteSoup(soupDTO.getSoupId());
         } else {
@@ -186,8 +190,6 @@ public class CustomerOrderFoodController {
             Model model,
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
     ) {
-        MainMeal mainMealFound = mainMealService.findById(mainMealDTO.getMainMealId());
-
         if (mainMealDTO.getQuantity() == 0) {
             mainMealService.deleteMainMeal(mainMealDTO.getMainMealId());
         } else {
@@ -224,8 +226,6 @@ public class CustomerOrderFoodController {
             Model model,
             @Valid @ModelAttribute("desertDTO") DesertDTO desertDTO
     ) {
-        Desert desertFound = desertService.findById(desertDTO.getDesertId());
-
         if (desertDTO.getQuantity() == 0) {
             desertService.deleteDesert(desertDTO.getDesertId());
         } else {
@@ -262,8 +262,6 @@ public class CustomerOrderFoodController {
             Model model,
             @Valid @ModelAttribute("drinkDTO") DrinkDTO drinkDTO
     ) {
-        Drink drinkFound = drinkService.findById(drinkDTO.getDrinkId());
-
         if (drinkDTO.getQuantity() == 0) {
             drinkService.deleteDrink(drinkDTO.getDrinkId());
         } else {
@@ -275,37 +273,41 @@ public class CustomerOrderFoodController {
 
 
 
-    private Map<String, ?> prepareOrderDishesAndAvailableDishes() {
+    protected Map<String, ?> prepareOrderDishesAndAvailableDishes() {
         FoodOrder foodOrder = foodOrderService.findByFoodOrderNumber(
                 foodOrderNumber,
                 MAP_ONLY_SET_DISHES.toString()
         );
-        var appetizers = foodOrder.getAppetizers();
-        var soups = foodOrder.getSoups();
-        var mainMeals = foodOrder.getMainMeals();
-        var deserts = foodOrder.getDeserts();
-        var drinks = foodOrder.getDrinks();
-        String uniqueCode = foodOrder.getRestaurant().getUniqueCode();
-        var availableAppetizers = appetizerService.findAvailable(uniqueCode);
-        var availableSoups = soupService.findAvailable(uniqueCode);
-        var availableMainMeals = mainMealService.findAvailable(uniqueCode);
-        var availableDeserts = desertService.findAvailable(uniqueCode);
-        var availableDrinks  = drinkService.findAvailable(uniqueCode);
-        return Map.of(
-                "orderAppetizersDTOs", appetizers,
-                "orderSoupsDTOs", soups,
-                "orderMainMealsDTOs", mainMeals,
-                "orderDesertsDTOs", deserts,
-                "orderDrinksDTOs", drinks,
-                "appetizerDTOs", availableAppetizers,
-                "soupDTOs", availableSoups,
-                "mainMealDTOs", availableMainMeals,
-                "desertDTOs", availableDeserts,
-                "drinkDTOs", availableDrinks
-        );
+        if (foodOrder == null) {
+            return Map.of();
+        } else {
+            var appetizers = foodOrder.getAppetizers();
+            var soups = foodOrder.getSoups();
+            var mainMeals = foodOrder.getMainMeals();
+            var deserts = foodOrder.getDeserts();
+            var drinks = foodOrder.getDrinks();
+            String uniqueCode = foodOrder.getRestaurant().getUniqueCode();
+            var availableAppetizers = appetizerService.findAvailable(uniqueCode);
+            var availableSoups = soupService.findAvailable(uniqueCode);
+            var availableMainMeals = mainMealService.findAvailable(uniqueCode);
+            var availableDeserts = desertService.findAvailable(uniqueCode);
+            var availableDrinks = drinkService.findAvailable(uniqueCode);
+            return Map.of(
+                    "orderAppetizersDTOs", appetizers,
+                    "orderSoupsDTOs", soups,
+                    "orderMainMealsDTOs", mainMeals,
+                    "orderDesertsDTOs", deserts,
+                    "orderDrinksDTOs", drinks,
+                    "appetizerDTOs", availableAppetizers,
+                    "soupDTOs", availableSoups,
+                    "mainMealDTOs", availableMainMeals,
+                    "desertDTOs", availableDeserts,
+                    "drinkDTOs", availableDrinks
+            );
+        }
     }
 
-    private Map<String, Set<FoodOrder>> prepareCustomerOrders() {
+    protected Map<String, Set<FoodOrder>> prepareCustomerOrders() {
         var availableOrders = foodOrderService
                 .findFoodOrdersByCustomer(customerService.findCustomerByEmail(emailCustomer));
         return Map.of("foodOrderDTOs", availableOrders);
