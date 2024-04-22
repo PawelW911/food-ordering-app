@@ -160,7 +160,7 @@ public class FoodOrderController {
     }
 
 
-    private Map<String, ?> prepareAddedDishesAndSumCost() {
+    protected Map<String, ?> prepareAddedDishesAndSumCost() {
         var availableAppetizers = appetizerService.findAvailable(
                 ChooseRestaurantToFoodOrderController.uniqueCodeRestaurantToOrderFood);
         var availableSoups = soupService.findAvailable(
