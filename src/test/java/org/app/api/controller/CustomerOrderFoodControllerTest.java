@@ -61,7 +61,8 @@ class CustomerOrderFoodControllerTest {
         // given
         CustomerOrderFoodController spyController = spy(controller);
 
-        doReturn(Map.of("foodOrderDTOs", Set.of(CustomerFixtures.someCustomer1()))).when(spyController).prepareCustomerOrders();
+        doReturn(Map.of("foodOrderDTOs", Set.of(CustomerFixtures.someCustomer1())))
+                .when(spyController).prepareCustomerOrders();
 
         // when, then
         mockMvc.perform(MockMvcRequestBuilders.get("/customer/customer_orders"))

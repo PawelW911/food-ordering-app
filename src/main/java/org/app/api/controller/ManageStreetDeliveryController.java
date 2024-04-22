@@ -46,7 +46,7 @@ public class ManageStreetDeliveryController {
         return "redirect:/owner/manage_street_delivery";
     }
 
-    private Map<String, ?> preparePostalCode() {
+    protected Map<String, ?> preparePostalCode() {
         var postalCodes = streetDeliveryService
                 .postalCodeByRestaurantUniqueCode(uniqueCodeNow)
                 .stream()
