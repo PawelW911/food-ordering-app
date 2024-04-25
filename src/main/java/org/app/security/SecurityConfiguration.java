@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
-public class SecurityConfiguration{
+public class SecurityConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -46,15 +46,16 @@ public class SecurityConfiguration{
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(
-                                "/",
-                                "/create_user_owner",
-                                "/submit_user_owner",
-                                "/create_user_customer",
-                                "/submit_user_customer"
-                        ).permitAll()
-                        .requestMatchers("/customer/**").hasAnyAuthority("CUSTOMER")
-                        .requestMatchers("/owner/**").hasAnyAuthority("OWNER")
+                                .requestMatchers(
+                                        "/",
+                                        "/create_user_owner",
+                                        "/submit_user_owner",
+                                        "/create_user_customer",
+                                        "/submit_user_customer",
+                                        "/api/**"
+                                ).permitAll()
+                                .requestMatchers("/customer/**").hasAnyAuthority("CUSTOMER")
+                                .requestMatchers("/owner/**").hasAnyAuthority("OWNER")
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .logout(logout -> logout

@@ -19,9 +19,9 @@ public class MenuController {
 
     public static final String UPDATE_MENU = "/update_menu";
 
-    MenuService menuService;
-    MenuMapperDTO menuMapperDTO;
-    RestaurantService restaurantService;
+    private MenuService menuService;
+    private MenuMapperDTO menuMapperDTO;
+    private RestaurantService restaurantService;
 
     @PutMapping(value = OWNER + UPDATE_MENU)
     public String updateMenu(
