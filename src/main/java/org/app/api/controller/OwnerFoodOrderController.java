@@ -61,6 +61,12 @@ public class OwnerFoodOrderController {
         return new ModelAndView("manage_food_order", prepareDishesForFoodOrder(foodOrderDishes));
     }
 
+    @PutMapping(value = OWNER + CHOOSE_ORDER_TO_COMPLETE)
+    public String chooseToCompleteOrder() {
+        foodOrderService.updateCompletedDateTime(orderNumber);
+        return "redirect:/owner/manage/food_order_owner";
+    }
+
     private Map<String, ?> prepareDishesForFoodOrder(FoodOrder foodOrderDishes) {
         return Map.of(
                 "dishesDTOs", Stream.of(
@@ -73,12 +79,6 @@ public class OwnerFoodOrderController {
                         .flatMap(Set::stream)
                         .collect(Collectors.toSet())
         );
-    }
-
-    @PutMapping(value = OWNER + CHOOSE_ORDER_TO_COMPLETE)
-    public String chooseToCompleteOrder() {
-        foodOrderService.updateCompletedDateTime(orderNumber);
-        return "redirect:/owner/manage/food_order_owner";
     }
 
 

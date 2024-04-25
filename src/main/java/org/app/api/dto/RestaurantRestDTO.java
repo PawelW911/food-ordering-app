@@ -8,6 +8,7 @@ import org.app.domain.StreetDelivery;
 import java.util.Set;
 
 @Data
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
