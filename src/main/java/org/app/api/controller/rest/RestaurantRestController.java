@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping(RestaurantRestController.API_RESTAURANT)
@@ -27,18 +29,9 @@ public class RestaurantRestController {
 
     @GetMapping(value = AVAILABLE_RESTAURANTS)
     public AvailableRestaurantsDTO availableRestaurantsDTO() {
-        return AvailableRestaurantsDTO.builder()
-                .availableRestaurants(restaurantService.findAvailableRestaurant().stream()
-                        .map(restaurantDTOMapper::mapToRestDTO)
-                        .toList())
-                .build();
+        List<RestaurantRestDTO> list = restaurantService.findAvailableRestaurant().stream()
+                .map(restaurantDTOMapper::mapToRestDTO)
+                .toList();
+        return restaurantDTOMapper.mapToRestDTOList(list);
     }
-
-//    protected AvailableRestaurantsDTO getAvailableRestaurants() {
-//        return AvailableRestaurantsDTO.builder()
-//                .availableRestaurants(restaurantService.findAvailableRestaurant().stream()
-//                        .map(restaurantDTOMapper::mapToRestDTO)
-//                        .toList())
-//                .build();
-//    }
 }

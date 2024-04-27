@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -37,14 +38,13 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = RestaurantRestController.class)
 @AutoConfigureMockMvc(addFilters = false)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(RestaurantRestController.class)
 class RestaurantRestControllerTest {
 
     private MockMvc mockMvc;
@@ -55,40 +55,30 @@ class RestaurantRestControllerTest {
     @MockBean
     private final RestaurantDTOMapper restaurantDTOMapper;
 
-    @InjectMocks
-    private RestaurantRestController controller;
-
     @Test
     void checkAvailableRestaurantsDTO() throws Exception {
         // given
-        RestaurantRestController spyController = spy(controller);
         RestaurantRestDTO restaurantRestDTO = RestaurantDTOFixtures.someRestaurantRestDTO();
-        String responseBody = objectMapper.writeValueAsString(restaurantRestDTO);
         List<RestaurantRestDTO> list = new ArrayList<>();
         list.add(restaurantRestDTO);
-
         AvailableRestaurantsDTO availableRestaurantsDTO = new AvailableRestaurantsDTO(list);
-        System.out.println(availableRestaurantsDTO);
+        String responseBody = objectMapper.writeValueAsString(availableRestaurantsDTO);
 
-        when(restaurantDTOMapper.mapToRestDTO(any(Restaurant.class))).thenReturn(restaurantRestDTO);
-
-
+        when(restaurantDTOMapper.mapToRestDTOList(new ArrayList<>())).thenReturn(availableRestaurantsDTO);
         // when, then
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/restaurant/available_restaurants"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.availableRestaurants", equalTo(availableRestaurantsDTO)))
-//                .andExpect(jsonPath("$.uniqueCode", is(restaurantRestDTO.getUniqueCode())))
-//                .andExpect(jsonPath("$.name", is(restaurantRestDTO.getName())))
-//                .andExpect(jsonPath("$.typeFood", is(restaurantRestDTO.getTypeFood())))
-//                .andExpect(jsonPath("$.email", is(restaurantRestDTO.getEmail())))
-//                .andExpect(jsonPath("$.phone", is(restaurantRestDTO.getPhone())))
-//                .andExpect(jsonPath("$.openingHours", is(restaurantRestDTO.getOpeningHours())))
-//                .andExpect(jsonPath("$.address", is(restaurantRestDTO.getAddress())))
-//                .andExpect(jsonPath("$.street", is(restaurantRestDTO.getAddress().getStreet())))
-//                .andExpect(jsonPath("$.localNumber", is(restaurantRestDTO.getAddress().getLocalNumber())))
-//                .andExpect(jsonPath("$.postalCode", is(restaurantRestDTO.getAddress().getPostalCode())))
-//                .andExpect(jsonPath("$.city", is(restaurantRestDTO.getAddress().getCity())))
+                .andExpect(jsonPath("$.availableRestaurants[0].uniqueCode", is(restaurantRestDTO.getUniqueCode())))
+                .andExpect(jsonPath("$.availableRestaurants[0].name", is(restaurantRestDTO.getName())))
+                .andExpect(jsonPath("$.availableRestaurants[0].typeFood", is(restaurantRestDTO.getTypeFood())))
+                .andExpect(jsonPath("$.availableRestaurants[0].email", is(restaurantRestDTO.getEmail())))
+                .andExpect(jsonPath("$.availableRestaurants[0].phone", is(restaurantRestDTO.getPhone())))
+                .andExpect(jsonPath("$.availableRestaurants[0].openingHours", is(restaurantRestDTO.getOpeningHours())))
+                .andExpect(jsonPath("$.availableRestaurants[0].address.street", is(restaurantRestDTO.getAddress().getStreet())))
+                .andExpect(jsonPath("$.availableRestaurants[0].address.localNumber", is(restaurantRestDTO.getAddress().getLocalNumber())))
+                .andExpect(jsonPath("$.availableRestaurants[0].address.postalCode", is(restaurantRestDTO.getAddress().getPostalCode())))
+                .andExpect(jsonPath("$.availableRestaurants[0].address.city", is(restaurantRestDTO.getAddress().getCity())))
                 .andReturn();
 
         assertThat(mvcResult.getResponse().getContentAsString()).isEqualTo(responseBody);

@@ -9,6 +9,8 @@ import org.app.domain.Restaurant;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RestaurantDTOMapper {
     default RestaurantDTO mapToDTO(Restaurant restaurant) {
@@ -59,5 +61,9 @@ public interface RestaurantDTOMapper {
                         .build())
                 .owner(owner)
                 .build();
+    }
+
+    default AvailableRestaurantsDTO mapToRestDTOList(List<RestaurantRestDTO> list) {
+        return new AvailableRestaurantsDTO(list);
     }
 }
