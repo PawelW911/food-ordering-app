@@ -2,7 +2,6 @@ package org.app.util;
 
 import lombok.experimental.UtilityClass;
 import org.app.domain.Drink;
-import org.app.infrastructure.database.entity.DrinkEntity;
 
 import java.math.BigDecimal;
 import java.util.HashSet;

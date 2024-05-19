@@ -1,18 +1,18 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.domain.Appetizer;
 import org.app.domain.Desert;
 import org.app.domain.Menu;
-import org.app.domain.Soup;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.DesertEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
-import org.app.infrastructure.database.entity.SoupEntity;
 import org.app.infrastructure.database.repository.jpa.DesertJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
-import org.app.util.*;
+import org.app.util.DesertFixtures;
+import org.app.util.MenuFixtures;
+import org.app.util.OwnerFixtures;
+import org.app.util.RestaurantFixtures;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

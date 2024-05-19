@@ -1,18 +1,18 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.domain.Appetizer;
 import org.app.domain.Drink;
 import org.app.domain.Menu;
-import org.app.domain.Soup;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.DrinkEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
-import org.app.infrastructure.database.entity.SoupEntity;
 import org.app.infrastructure.database.repository.jpa.DrinkJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
-import org.app.util.*;
+import org.app.util.DrinkFixtures;
+import org.app.util.MenuFixtures;
+import org.app.util.OwnerFixtures;
+import org.app.util.RestaurantFixtures;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,7 +138,7 @@ public class DrinkRepositoryTest extends CleanDatabaseBeforeRepositoryTestAndCon
         Integer quantity = 5;
 
         // when
-        Drink drink = drinkRepository.updateQuantityDrink(drinkId, quantity);
+        drinkRepository.updateQuantityDrink(drinkId, quantity);
 
         // then
         Integer quantityUpdate = drinkJpaRepository.findById(drinkId).orElseThrow().getQuantity();

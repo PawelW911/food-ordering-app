@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface OpinionJpaRepository extends JpaRepository<OpinionEntity, Integer> {
 
-
     List<OpinionEntity> findByRestaurant(RestaurantEntity byUniqueCode);
 }

@@ -9,7 +9,7 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MenuMapperDTO {
     default Menu mapFromDTO(MenuDTO menuDTO, Restaurant restaurant) {
-        if (!(menuDTO.getMenuId()==null)) {
+        if (!(menuDTO.getMenuId() == null)) {
             return Menu.builder()
                     .menuId(restaurant.getMenu().getMenuId())
                     .name(menuDTO.getMenuName())

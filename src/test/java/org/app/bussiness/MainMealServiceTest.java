@@ -1,11 +1,9 @@
 package org.app.bussiness;
 
 import org.app.bussiness.dao.MainMealDAO;
-import org.app.domain.Appetizer;
 import org.app.domain.MainMeal;
 import org.app.domain.Menu;
 import org.app.domain.Restaurant;
-import org.app.util.AppetizerFixtures;
 import org.app.util.MainMealFixtures;
 import org.app.util.MenuFixtures;
 import org.app.util.RestaurantFixtures;

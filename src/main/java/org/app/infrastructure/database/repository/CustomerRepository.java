@@ -13,9 +13,9 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 public class CustomerRepository implements CustomerDAO {
 
-    private CustomerJpaRepository customerJpaRepository;
-    private CustomerMapper customerMapper;
-    private PasswordEncoder passwordEncoder;
+    private final CustomerJpaRepository customerJpaRepository;
+    private final CustomerMapper customerMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Customer saveCustomer(Customer customer) {

@@ -44,5 +44,4 @@ public class OwnerEntity {
     private Set<RestaurantEntity> restaurants;
 
 
-
 }

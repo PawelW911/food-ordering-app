@@ -2,10 +2,6 @@ package org.app.api.dto;
 
 import lombok.*;
 import org.app.domain.Address;
-import org.app.domain.Menu;
-import org.app.domain.StreetDelivery;
-
-import java.util.Set;
 
 @Data
 @Getter

@@ -1,18 +1,18 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.domain.Appetizer;
 import org.app.domain.MainMeal;
 import org.app.domain.Menu;
-import org.app.domain.Soup;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.MainMealEntity;
 import org.app.infrastructure.database.entity.OwnerEntity;
-import org.app.infrastructure.database.entity.SoupEntity;
 import org.app.infrastructure.database.repository.jpa.MainMealJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
-import org.app.util.*;
+import org.app.util.MainMealFixtures;
+import org.app.util.MenuFixtures;
+import org.app.util.OwnerFixtures;
+import org.app.util.RestaurantFixtures;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,7 +139,7 @@ public class MainMealRepositoryTest extends CleanDatabaseBeforeRepositoryTestAnd
         Integer quantity = 5;
 
         // when
-        MainMeal mainMeal = mainMealRepository.updateQuantityMainMeal(mainMealId, quantity);
+        mainMealRepository.updateQuantityMainMeal(mainMealId, quantity);
 
         // then
         Integer quantityUpdate = mainMealJpaRepository.findById(mainMealId).orElseThrow().getQuantity();

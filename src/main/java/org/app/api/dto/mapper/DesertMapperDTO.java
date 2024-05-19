@@ -1,7 +1,6 @@
 package org.app.api.dto.mapper;
 
 import org.app.api.dto.DesertDTO;
-import org.app.domain.Appetizer;
 import org.app.domain.Desert;
 import org.app.domain.Menu;
 import org.mapstruct.Mapper;
@@ -17,7 +16,6 @@ public interface DesertMapperDTO {
                 .quantity(quantity)
                 .menu(menu)
                 .build();
-
     }
 
     Desert mapFromDTO(DesertDTO desertDTO);

@@ -2,7 +2,6 @@ package org.app.util;
 
 import lombok.experimental.UtilityClass;
 import org.app.domain.StreetDelivery;
-import org.app.infrastructure.database.entity.StreetDeliveryEntity;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,8 +1,12 @@
 package org.app.bussiness;
 
 import org.app.bussiness.dao.DrinkDAO;
-import org.app.domain.*;
-import org.app.util.*;
+import org.app.domain.Drink;
+import org.app.domain.Menu;
+import org.app.domain.Restaurant;
+import org.app.util.DrinkFixtures;
+import org.app.util.MenuFixtures;
+import org.app.util.RestaurantFixtures;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

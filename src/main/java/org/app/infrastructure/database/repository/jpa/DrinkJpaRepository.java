@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public interface DrinkJpaRepository extends JpaRepository<DrinkEntity, Integer> {
 
-
     List<DrinkEntity> findByMenu(MenuEntity menuEntity);
 
     @Modifying(clearAutomatically = true)

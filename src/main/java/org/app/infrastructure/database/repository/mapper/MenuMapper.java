@@ -11,7 +11,6 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MenuMapper {
 
-
     default MenuEntity mapToEntity(Menu menu, RestaurantEntity restaurantEntity) {
         return MenuEntity.builder()
                 .name(menu.getName())

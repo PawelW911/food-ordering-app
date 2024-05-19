@@ -1,7 +1,6 @@
 package org.app.api.dto.mapper;
 
 import org.app.api.dto.DrinkDTO;
-import org.app.domain.Appetizer;
 import org.app.domain.Drink;
 import org.app.domain.Menu;
 import org.mapstruct.Mapper;
@@ -11,7 +10,7 @@ import org.mapstruct.ReportingPolicy;
 public interface DrinkMapperDTO {
 
     default Drink mapFromDTO(DrinkDTO drinkDTO, int quantity, Menu menu) {
-        if(drinkDTO.getAlcoholFree()==null) {
+        if (drinkDTO.getAlcoholFree() == null) {
             drinkDTO.setAlcoholFree(false);
         }
         return Drink.builder()

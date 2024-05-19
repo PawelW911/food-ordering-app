@@ -1,13 +1,14 @@
 package org.app.infrastructure.database.repository.mapper;
 
 import org.app.domain.*;
-import org.app.infrastructure.database.entity.*;
+import org.app.infrastructure.database.entity.CustomerEntity;
+import org.app.infrastructure.database.entity.FoodOrderEntity;
+import org.app.infrastructure.database.entity.RestaurantEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface FoodOrderMapper {

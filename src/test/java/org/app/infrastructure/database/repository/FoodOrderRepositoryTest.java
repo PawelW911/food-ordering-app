@@ -15,7 +15,6 @@ import org.app.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.CustomerMapper;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
-import org.app.security.RoleEntity;
 import org.app.security.RoleRepository;
 import org.app.util.CustomerFixtures;
 import org.app.util.FoodOrderFixtures;
@@ -68,7 +67,7 @@ public class FoodOrderRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
 
         // when
         List<FoodOrderEntity> allFoodOrdersBeforeSave = foodOrderJpaRepository.findAll();
-        FoodOrder foodOrder1 = foodOrderRepository.saveFoodOrder(foodOrder);
+        foodOrderRepository.saveFoodOrder(foodOrder);
         List<FoodOrderEntity> allFoodOrdersAfterSave = foodOrderJpaRepository.findAll();
 
         // then

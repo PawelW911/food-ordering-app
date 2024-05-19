@@ -6,7 +6,6 @@ import org.app.infrastructure.database.repository.jpa.*;
 import org.app.security.RoleEntity;
 import org.app.security.RoleRepository;
 import org.app.security.UserRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -14,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.event.annotation.BeforeTestExecution;
 
 @ActiveProfiles("test")
 @SpringBootTest

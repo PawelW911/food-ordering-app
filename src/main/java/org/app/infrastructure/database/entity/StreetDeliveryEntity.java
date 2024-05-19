@@ -30,9 +30,6 @@ public class StreetDeliveryEntity {
     @Column(name = "postal_code")
     private String postalCode;
 
-//
-//    @ManyToMany(targetEntity = RestaurantEntity.class, mappedBy = "streetsDelivery", cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
-//    private Set<RestaurantEntity> restaurant;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "restaurant_street_delivery",

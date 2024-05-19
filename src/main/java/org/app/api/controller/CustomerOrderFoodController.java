@@ -19,8 +19,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.app.api.controller.CustomerController.*;
-import static org.app.api.controller.dataForController.ForFoodOrderChoose.*;
+import static org.app.api.controller.CustomerController.CUSTOMER;
+import static org.app.api.controller.CustomerController.emailCustomer;
+import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_ONLY_SET_DISHES;
+import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_WITHOUT_SET_DISHES;
 
 @Controller
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -270,7 +272,6 @@ public class CustomerOrderFoodController {
         model.addAttribute("variableDTO", new VariableDTO());
         return "redirect:/customer/update_order";
     }
-
 
 
     protected Map<String, ?> prepareOrderDishesAndAvailableDishes() {

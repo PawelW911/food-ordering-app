@@ -1,7 +1,6 @@
 package org.app.domain;
 
 import lombok.*;
-import org.app.infrastructure.database.entity.CustomerEntity;
 
 import java.time.OffsetDateTime;
 

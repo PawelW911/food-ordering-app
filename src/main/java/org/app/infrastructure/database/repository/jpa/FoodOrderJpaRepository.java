@@ -1,6 +1,5 @@
 package org.app.infrastructure.database.repository.jpa;
 
-import org.app.domain.FoodOrder;
 import org.app.infrastructure.database.entity.CustomerEntity;
 import org.app.infrastructure.database.entity.FoodOrderEntity;
 import org.app.infrastructure.database.entity.RestaurantEntity;
@@ -16,7 +15,6 @@ import java.util.Set;
 
 @Repository
 public interface FoodOrderJpaRepository extends JpaRepository<FoodOrderEntity, Integer> {
-
 
     FoodOrderEntity findByFoodOrderNumber(String orderNumber);
 
@@ -37,5 +35,5 @@ public interface FoodOrderJpaRepository extends JpaRepository<FoodOrderEntity, I
     void updateCompletedDateTime(
             @Param("completedDateTime") OffsetDateTime completedDateTime,
             @Param("foodOrderNumber") String foodOrderNumber
-            );
+    );
 }

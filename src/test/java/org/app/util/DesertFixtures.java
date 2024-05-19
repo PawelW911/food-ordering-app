@@ -2,7 +2,6 @@ package org.app.util;
 
 import lombok.experimental.UtilityClass;
 import org.app.domain.Desert;
-import org.app.infrastructure.database.entity.DesertEntity;
 
 import java.math.BigDecimal;
 import java.util.HashSet;

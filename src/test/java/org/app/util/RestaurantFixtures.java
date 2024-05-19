@@ -2,7 +2,6 @@ package org.app.util;
 
 import lombok.experimental.UtilityClass;
 import org.app.domain.Restaurant;
-import org.app.infrastructure.database.entity.RestaurantEntity;
 
 @UtilityClass
 public class RestaurantFixtures {

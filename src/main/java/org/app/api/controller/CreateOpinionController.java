@@ -12,7 +12,6 @@ import org.app.bussiness.FoodOrderService;
 import org.app.bussiness.OpinionService;
 import org.app.domain.FoodOrder;
 import org.app.domain.Opinion;
-import org.app.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-import static org.app.api.controller.CustomerController.*;
+import static org.app.api.controller.CustomerController.CUSTOMER;
+import static org.app.api.controller.CustomerController.emailCustomer;
 
 @Controller
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -43,7 +43,7 @@ public class CreateOpinionController {
     public String opinionPage(
             Model model,
             @Valid @ModelAttribute("variableDTO") VariableDTO variableDTO
-            ) {
+    ) {
         foodOrderNumber = variableDTO.getFoodOrderNumber();
         model.addAttribute("opinionDTO", new OpinionDTO());
         return "create_opinion";
@@ -58,11 +58,11 @@ public class CreateOpinionController {
                 ForFoodOrderChoose.MAP_WITHOUT_SET_DISHES.toString());
 
         opinionService.saveNewOpinion(Opinion.builder()
-                        .text(opinionDTO.getOpinionText())
-                        .stars(opinionDTO.getOpinionStars())
-                        .dateTime(OffsetDateTime.now(ZoneOffset.UTC))
-                        .customer(customerService.findCustomerByEmail(emailCustomer))
-                        .restaurant(byFoodOrderNumber.getRestaurant())
+                .text(opinionDTO.getOpinionText())
+                .stars(opinionDTO.getOpinionStars())
+                .dateTime(OffsetDateTime.now(ZoneOffset.UTC))
+                .customer(customerService.findCustomerByEmail(emailCustomer))
+                .restaurant(byFoodOrderNumber.getRestaurant())
                 .build());
         return "add_opinion_success";
     }

@@ -20,9 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
-import static org.app.api.controller.CustomerController.*;
+import static org.app.api.controller.CustomerController.CUSTOMER;
+import static org.app.api.controller.CustomerController.emailCustomer;
 
 @Data
 @Controller
@@ -105,7 +109,7 @@ public class FoodOrderController {
     ) {
         Appetizer appetizerFound = appetizerService.findById(appetizerDTO.getAppetizerId());
 
-        if(appetizerDTO.getQuantity()>0) {
+        if (appetizerDTO.getQuantity() > 0) {
             appetizerSet.add(appetizerFound.withAppetizerId(null).withQuantity(appetizerDTO.getQuantity()));
         }
         return "redirect:/customer/create_food_order";
@@ -117,7 +121,7 @@ public class FoodOrderController {
     ) {
         Soup soupFound = soupService.findById(soupDTO.getSoupId());
 
-        if(soupDTO.getQuantity()>0) {
+        if (soupDTO.getQuantity() > 0) {
             soupSet.add(soupFound.withSoupId(null).withQuantity(soupDTO.getQuantity()));
         }
         return "redirect:/customer/create_food_order";
@@ -129,7 +133,7 @@ public class FoodOrderController {
     ) {
         MainMeal mainMealFound = mainMealService.findById(mainMealDTO.getMainMealId());
 
-        if(mainMealDTO.getQuantity()>0) {
+        if (mainMealDTO.getQuantity() > 0) {
             mainMealSet.add(mainMealFound.withMainMealId(null).withQuantity(mainMealDTO.getQuantity()));
         }
         return "redirect:/customer/create_food_order";
@@ -141,7 +145,7 @@ public class FoodOrderController {
     ) {
         Desert desertFound = desertService.findById(desertDTO.getDesertId());
 
-        if(desertDTO.getQuantity()>0) {
+        if (desertDTO.getQuantity() > 0) {
             desertSet.add(desertFound.withDesertId(null).withQuantity(desertDTO.getQuantity()));
         }
         return "redirect:/customer/create_food_order";
@@ -153,7 +157,7 @@ public class FoodOrderController {
     ) {
         Drink drinkFound = drinkService.findById(drinkDTO.getDrinkId());
 
-        if(drinkDTO.getQuantity()>0) {
+        if (drinkDTO.getQuantity() > 0) {
             drinkSet.add(drinkFound.withDrinkId(null).withQuantity(drinkDTO.getQuantity()));
         }
         return "redirect:/customer/create_food_order";

@@ -3,7 +3,8 @@ package org.app.bussiness;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.app.bussiness.dao.MenuDAO;
-import org.app.domain.*;
+import org.app.domain.Menu;
+import org.app.domain.Restaurant;
 import org.app.domain.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,9 +44,9 @@ public class MenuService {
         Menu menu = menuDAO.updateMenu(menuToUpdate);
         if (
                 !(menu == null) &&
-                menuToUpdate.getName().equals(menu.getName()) &&
-                menuToUpdate.getDescription().equals(menu.getDescription()
-                )) {
+                        menuToUpdate.getName().equals(menu.getName()) &&
+                        menuToUpdate.getDescription().equals(menu.getDescription()
+                        )) {
             log.info("Update menu with id: [{}], menu is succes", menu.getMenuId());
         } else {
             log.error("Update menu with id: [{}], doesn't successfully", menuToUpdate.getMenuId());

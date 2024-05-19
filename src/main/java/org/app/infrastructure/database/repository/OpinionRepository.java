@@ -16,14 +16,14 @@ import java.util.List;
 @AllArgsConstructor
 public class OpinionRepository implements OpinionDAO {
 
-    OpinionJpaRepository opinionJpaRepository;
-    CustomerJpaRepository customerJpaRepository;
-    RestaurantJpaRepository restaurantJpaRepository;
-    CustomerMapper customerMapper;
-    OpinionMapper opinionMapper;
-    RestaurantMapper restaurantMapper;
-    AddressMapper addressMapper;
-    OwnerMapper ownerMapper;
+    private final OpinionJpaRepository opinionJpaRepository;
+    private final CustomerJpaRepository customerJpaRepository;
+    private final RestaurantJpaRepository restaurantJpaRepository;
+    private final CustomerMapper customerMapper;
+    private final OpinionMapper opinionMapper;
+    private final RestaurantMapper restaurantMapper;
+    private final AddressMapper addressMapper;
+    private final OwnerMapper ownerMapper;
 
     @Override
     public Opinion saveOpinion(Opinion opinion) {
@@ -42,7 +42,7 @@ public class OpinionRepository implements OpinionDAO {
         List<OpinionEntity> opinionEntities =
                 opinionJpaRepository.findByRestaurant(restaurantJpaRepository.findByUniqueCode(restaurantUniqueCode));
         return opinionEntities.stream()
-                .map(opinion -> opinionMapper.mapFromEntity(opinion))
+                .map(opinionMapper::mapFromEntity)
                 .toList();
     }
 }

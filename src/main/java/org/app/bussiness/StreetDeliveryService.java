@@ -7,14 +7,12 @@ import org.app.bussiness.dao.ZipCodeDAO;
 import org.app.domain.Restaurant;
 import org.app.domain.StreetDelivery;
 import org.app.domain.exception.NotFoundException;
-import org.app.infrastructure.zipCode.ZipCodeImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service

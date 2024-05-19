@@ -10,5 +10,4 @@ import lombok.Value;
 public class ExceptionMessage {
 
     String errorId;
-
 }

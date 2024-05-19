@@ -3,13 +3,13 @@ package org.app.infrastructure.zipCode;
 import lombok.AllArgsConstructor;
 import org.app.bussiness.dao.ZipCodeDAO;
 import org.app.domain.StreetDelivery;
+import org.app.domain.exception.NotFoundException;
 import org.openapitools.client.api.DefaultApi;
 import org.openapitools.client.model.ZipCodeEntry;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -18,8 +18,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ZipCodeImpl implements ZipCodeDAO {
 
-    private DefaultApi defaultApi;
-    private ZipCodeMapper zipCodeMapper;
+    private final DefaultApi defaultApi;
+    private final ZipCodeMapper zipCodeMapper;
 
     @Override
     public List<StreetDelivery> getStreetDeliveryByZipCode(String zipCode) {
@@ -36,9 +36,12 @@ public class ZipCodeImpl implements ZipCodeDAO {
                     }
                 })
                 .block();
-//                .subscribe(zipCodeEntryList::addAll, Throwable::printStackTrace);
-        return zipCodeEntryList.stream()
-                .map(zipCodeEntry -> zipCodeMapper.map(zipCodeEntry))
-                .toList();
+        if (zipCodeEntryList != null) {
+            return zipCodeEntryList.stream()
+                    .map(zipCodeMapper::map)
+                    .toList();
+        } else {
+            throw new NotFoundException(String.format("Not found by zip code: %s", zipCode));
+        }
     }
 }

@@ -1,13 +1,11 @@
 package org.app.api.controller;
 
 import lombok.AllArgsConstructor;
-import org.app.api.dto.DrinkDTO;
 import org.app.api.dto.MainMealDTO;
 import org.app.api.dto.mapper.MainMealMapperDTO;
 import org.app.bussiness.MainMealService;
 import org.app.bussiness.MenuService;
 import org.app.bussiness.RestaurantService;
-import org.app.domain.Drink;
 import org.app.domain.MainMeal;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.app.util.DrinkFixtures.someDrinksForPolishFood;
 import static org.app.util.MainMealFixtures.someMainMealsForPolishFood;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
