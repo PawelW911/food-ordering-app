@@ -5,7 +5,6 @@ import org.app.domain.Owner;
 import org.app.domain.Restaurant;
 import org.app.domain.StreetDelivery;
 import org.app.util.OwnerFixtures;
-import org.app.util.RestaurantFixtures;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,10 +13,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.app.util.RestaurantFixtures.*;
+import static org.app.util.RestaurantFixtures.someRestaurant1;
+import static org.app.util.RestaurantFixtures.someRestaurant2;
 
 @ExtendWith(MockitoExtension.class)
 public class RestaurantServiceTest {

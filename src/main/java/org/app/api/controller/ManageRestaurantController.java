@@ -10,7 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
-import static org.app.api.controller.OwnerController.*;
+import static org.app.api.controller.OwnerController.OWNER;
+import static org.app.api.controller.OwnerController.uniqueCodeNow;
 
 @Controller
 @AllArgsConstructor
@@ -38,8 +39,6 @@ public class ManageRestaurantController {
         Map<String, ?> modelMenu = menuPosition.prepareMenuPositions(uniqueCodeNow);
         return new ModelAndView("manage_restaurant_menu", modelMenu);
     }
-
-
 
 
 }

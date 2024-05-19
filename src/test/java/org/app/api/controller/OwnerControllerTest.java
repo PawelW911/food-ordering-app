@@ -1,25 +1,15 @@
 package org.app.api.controller;
 
 import lombok.AllArgsConstructor;
-import org.app.api.dto.OwnerDTO;
-import org.app.api.dto.RestaurantDTO;
 import org.app.api.dto.mapper.OwnerDTOMapper;
 import org.app.api.dto.mapper.RestaurantDTOMapper;
 import org.app.bussiness.OwnerService;
 import org.app.bussiness.RestaurantService;
-import org.app.domain.Owner;
-import org.app.infrastructure.database.repository.mapper.OwnerMapper;
-import org.app.infrastructure.zipCode.ZipCodeImpl;
 import org.app.security.UserEntity;
 import org.app.security.UserRepository;
-import org.app.util.OwnerFixtures;
-import org.app.util.RestaurantFixtures;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -32,8 +22,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;

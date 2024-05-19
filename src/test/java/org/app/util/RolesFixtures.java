@@ -1,7 +1,6 @@
 package org.app.util;
 
 import org.app.domain.Role;
-import org.app.security.RoleEntity;
 
 import java.util.Set;
 

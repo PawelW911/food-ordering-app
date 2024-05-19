@@ -11,11 +11,9 @@ import org.app.infrastructure.database.repository.jpa.FoodOrderJpaRepository;
 import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.mapper.FoodOrderMapper;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
-import org.app.security.RoleEntity;
 import org.app.security.RoleRepository;
 import org.app.util.*;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -158,7 +156,7 @@ public class AppetizerRepositoryTest extends CleanDatabaseBeforeRepositoryTestAn
         Integer quantity = 5;
 
         // when
-        Appetizer appetizer = appetizerRepository.updateQuantityAppetizer(appetizerId, quantity);
+        appetizerRepository.updateQuantityAppetizer(appetizerId, quantity);
 
         // then
         Integer quantityUpdate = appetizerJpaRepository.findById(appetizerId).orElseThrow().getQuantity();

@@ -1,7 +1,6 @@
 package org.app.api.dto.mapper;
 
 import org.app.api.dto.MainMealDTO;
-import org.app.domain.Appetizer;
 import org.app.domain.MainMeal;
 import org.app.domain.Menu;
 import org.mapstruct.Mapper;

@@ -22,17 +22,17 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class FoodOrderRepository implements FoodOrderDAO {
 
-    private FoodOrderJpaRepository foodOrderJpaRepository;
-    private RestaurantJpaRepository restaurantJpaRepository;
-    private CustomerJpaRepository customerJpaRepository;
-    private FoodOrderMapper foodOrderMapper;
-    private CustomerMapper customerMapper;
-    private AppetizerMapper appetizerMapper;
-    private SoupMapper soupMapper;
-    private MainMealMapper mainMealMapper;
-    private DesertMapper desertMapper;
-    private DrinkMapper drinkMapper;
-    private RestaurantMapper restaurantMapper;
+    private final FoodOrderJpaRepository foodOrderJpaRepository;
+    private final RestaurantJpaRepository restaurantJpaRepository;
+    private final CustomerJpaRepository customerJpaRepository;
+    private final FoodOrderMapper foodOrderMapper;
+    private final CustomerMapper customerMapper;
+    private final AppetizerMapper appetizerMapper;
+    private final SoupMapper soupMapper;
+    private final MainMealMapper mainMealMapper;
+    private final DesertMapper desertMapper;
+    private final DrinkMapper drinkMapper;
+    private final RestaurantMapper restaurantMapper;
 
 
     @Override
@@ -51,11 +51,8 @@ public class FoodOrderRepository implements FoodOrderDAO {
     public Set<FoodOrder> findByCustomer(Customer customer) {
         Set<FoodOrderEntity> foodOrderEntities =
                 foodOrderJpaRepository.findByCustomer(customerMapper.mapToEntity(customer));
-        if (foodOrderEntities != null) {
-            System.out.println("non-null");
-        }
         return foodOrderEntities.stream()
-                .map(foodOrder -> foodOrderMapper.mapFromEntity(foodOrder))
+                .map(foodOrderMapper::mapFromEntity)
                 .collect(Collectors.toSet());
     }
 
@@ -68,19 +65,19 @@ public class FoodOrderRepository implements FoodOrderDAO {
                     .mapFromEntityWithOnlySetDishes(
                             byFoodOrderNumber.getRestaurant().getUniqueCode(),
                             byFoodOrderNumber.getAppetizers().stream()
-                                    .map(a -> appetizerMapper.mapFromEntity(a))
+                                    .map(appetizerMapper::mapFromEntity)
                                     .collect(Collectors.toSet()),
                             byFoodOrderNumber.getSoups().stream()
-                                    .map(a -> soupMapper.mapFromEntity(a))
+                                    .map(soupMapper::mapFromEntity)
                                     .collect(Collectors.toSet()),
                             byFoodOrderNumber.getMainMeals().stream()
-                                    .map(a -> mainMealMapper.mapFromEntity(a))
+                                    .map(mainMealMapper::mapFromEntity)
                                     .collect(Collectors.toSet()),
                             byFoodOrderNumber.getDeserts().stream()
-                                    .map(a -> desertMapper.mapFromEntity(a))
+                                    .map(desertMapper::mapFromEntity)
                                     .collect(Collectors.toSet()),
                             byFoodOrderNumber.getDrinks().stream()
-                                    .map(a -> drinkMapper.mapFromEntity(a))
+                                    .map(drinkMapper::mapFromEntity)
                                     .collect(Collectors.toSet())
                     );
         } else {

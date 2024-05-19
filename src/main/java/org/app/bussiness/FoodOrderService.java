@@ -2,7 +2,6 @@ package org.app.bussiness;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.app.api.controller.dataForController.ForFoodOrderChoose;
 import org.app.bussiness.dao.FoodOrderDAO;
 import org.app.domain.*;
 import org.app.domain.exception.NotFoundException;
@@ -17,7 +16,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static org.app.api.controller.dataForController.ForFoodOrderChoose.*;
+import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_ONLY_SET_DISHES;
+import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_WITHOUT_SET_DISHES;
 
 @Slf4j
 @Service
@@ -109,7 +109,7 @@ public class FoodOrderService {
         foodOrderDAO.updateCompletedDateTime(orderNumber, OffsetDateTime.now(ZoneOffset.UTC));
         OffsetDateTime completedDateTime = foodOrderDAO.
                 findByFoodOrderNumber(orderNumber, MAP_WITHOUT_SET_DISHES.toString()).getCompletedDateTime();
-        if(completedDateTime == null) {
+        if (completedDateTime == null) {
             log.error("Update completed date time in food order with order number: [{}] is failed", orderNumber);
         } else {
             log.info("Update completed date time in food order with order number: [{}] is successfully", orderNumber);

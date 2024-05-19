@@ -2,7 +2,6 @@ package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.app.domain.Opinion;
-import org.app.domain.Restaurant;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.CustomerEntity;
 import org.app.infrastructure.database.entity.OpinionEntity;
@@ -17,7 +16,6 @@ import org.app.util.OpinionFixtures;
 import org.app.util.OwnerFixtures;
 import org.app.util.RestaurantFixtures;
 import org.assertj.core.api.Assertions;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

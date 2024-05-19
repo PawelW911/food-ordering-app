@@ -1,9 +1,6 @@
 package org.app.domain;
 
-import jakarta.persistence.*;
 import lombok.*;
-import org.app.security.RoleEntity;
-import org.hibernate.validator.constraints.Length;
 
 import java.util.Set;
 

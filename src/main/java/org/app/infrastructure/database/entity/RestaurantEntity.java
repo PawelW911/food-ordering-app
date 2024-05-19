@@ -46,14 +46,6 @@ public class RestaurantEntity {
 
     @ManyToMany(mappedBy = "restaurants", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Set<StreetDeliveryEntity> streetsDelivery;
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-//    @JoinTable(
-//            name = "restaurant_street_delivery",
-//            joinColumns = @JoinColumn(name = "street_delivery_id"),
-//            inverseJoinColumns = @JoinColumn(name = "restaurant_id")
-//    )
-//    private Set<StreetDeliveryEntity> streetsDelivery;
-
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")

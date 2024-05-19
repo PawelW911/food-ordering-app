@@ -3,21 +3,17 @@ package org.app.api.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.app.api.dto.DesertDTO;
-import org.app.api.dto.MainMealDTO;
 import org.app.api.dto.mapper.DesertMapperDTO;
-import org.app.api.dto.mapper.MainMealMapperDTO;
 import org.app.bussiness.DesertService;
-import org.app.bussiness.MainMealService;
 import org.app.bussiness.MenuService;
 import org.app.bussiness.RestaurantService;
-import org.app.domain.Desert;
-import org.app.domain.MainMeal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static org.app.api.controller.OwnerController.*;
+import static org.app.api.controller.OwnerController.OWNER;
+import static org.app.api.controller.OwnerController.uniqueCodeNow;
 
 @Controller
 @AllArgsConstructor
@@ -35,13 +31,13 @@ public class DesertController {
     public String addDesert(
             @Valid @ModelAttribute("desertDTO") DesertDTO desertDTO
     ) {
-        Desert desert = desertService.saveNewDesert(desertMapperDTO
-        .mapFromDTO(
-                desertDTO,
-                0,
-                menuService.findByRestaurant(restaurantService
-                        .findByUniqueCode(uniqueCodeNow))
-        ));
+        desertService.saveNewDesert(desertMapperDTO
+                .mapFromDTO(
+                        desertDTO,
+                        0,
+                        menuService.findByRestaurant(restaurantService
+                                .findByUniqueCode(uniqueCodeNow))
+                ));
         return "redirect:/owner/restaurant/manage/menu";
     }
 
@@ -52,7 +48,6 @@ public class DesertController {
         desertService.deleteDesert(desertDTO.getDesertId());
         return "redirect:/owner/restaurant/manage/menu";
     }
-
 
 
 }

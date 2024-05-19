@@ -2,7 +2,6 @@ package org.app.util;
 
 import lombok.experimental.UtilityClass;
 import org.app.domain.Appetizer;
-import org.app.infrastructure.database.entity.AppetizerEntity;
 
 import java.math.BigDecimal;
 import java.util.HashSet;

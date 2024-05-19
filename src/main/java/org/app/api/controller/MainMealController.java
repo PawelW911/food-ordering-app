@@ -3,21 +3,18 @@ package org.app.api.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.app.api.dto.MainMealDTO;
-import org.app.api.dto.SoupDTO;
 import org.app.api.dto.mapper.MainMealMapperDTO;
-import org.app.api.dto.mapper.SoupMapperDTO;
 import org.app.bussiness.MainMealService;
 import org.app.bussiness.MenuService;
 import org.app.bussiness.RestaurantService;
-import org.app.bussiness.SoupService;
 import org.app.domain.MainMeal;
-import org.app.domain.Soup;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static org.app.api.controller.OwnerController.*;
+import static org.app.api.controller.OwnerController.OWNER;
+import static org.app.api.controller.OwnerController.uniqueCodeNow;
 
 @Controller
 @AllArgsConstructor
@@ -36,12 +33,12 @@ public class MainMealController {
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
     ) {
         MainMeal mainMeal = mainMealService.saveNewMainMeal(mainMealMapperDTO
-        .mapFromDTO(
-                mainMealDTO,
-                0,
-                menuService.findByRestaurant(restaurantService
-                        .findByUniqueCode(uniqueCodeNow))
-        ));
+                .mapFromDTO(
+                        mainMealDTO,
+                        0,
+                        menuService.findByRestaurant(restaurantService
+                                .findByUniqueCode(uniqueCodeNow))
+                ));
         return "redirect:/owner/restaurant/manage/menu";
     }
 
@@ -49,11 +46,9 @@ public class MainMealController {
     public String deleteMainMeal(
             @Valid @ModelAttribute("mainMealDTO") MainMealDTO mainMealDTO
     ) {
-        Integer mainMealId = mainMealDTO.getMainMealId();
         mainMealService.deleteMainMeal(mainMealDTO.getMainMealId());
         return "redirect:/owner/restaurant/manage/menu";
     }
-
 
 
 }

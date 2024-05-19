@@ -102,7 +102,7 @@ public class FoodOrderServiceTest {
                 ))
                 .thenReturn(foodOrderExample);
         // when
-        FoodOrder foodOrder = foodOrderService.findByFoodOrderNumber(
+        foodOrderService.findByFoodOrderNumber(
                 foodOrderNumber,
                 ForFoodOrderChoose.MAP_WITHOUT_SET_DISHES.toString()
         );

@@ -2,10 +2,8 @@ package org.app.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.app.api.dto.AvailableRestaurantsDTO;
 import org.app.api.dto.RestaurantDTO;
 import org.app.api.dto.VariableDTO;
-import org.app.api.dto.mapper.OwnerDTOMapper;
 import org.app.api.dto.mapper.RestaurantDTOMapper;
 import org.app.bussiness.OwnerService;
 import org.app.bussiness.RestaurantService;
@@ -31,7 +29,6 @@ public class OwnerController {
 
     private final RestaurantService restaurantService;
     private final RestaurantDTOMapper restaurantDTOMapper;
-    private final OwnerDTOMapper ownerDTOMapper;
     private final OwnerService ownerService;
     private final UserRepository userRepository;
 
@@ -40,13 +37,12 @@ public class OwnerController {
 
     @GetMapping(value = OWNER)
     public String ownerPage(Model model) {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         String username = userDetails.getUsername();
-                UserEntity userLogNow = userRepository.findByUserName(username);
-                ownerEmail = userLogNow.getEmail();
+        UserEntity userLogNow = userRepository.findByUserName(username);
+        ownerEmail = userLogNow.getEmail();
         List<RestaurantDTO> availableRestaurant = restaurantService
                 .findAvailableRestaurantByOwner(ownerService.findByEmail(ownerEmail))
                 .stream()

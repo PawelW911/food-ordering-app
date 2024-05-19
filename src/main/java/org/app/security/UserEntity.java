@@ -35,8 +35,6 @@ public class UserEntity {
     @Column(name = "active")
     private Boolean active;
 
-
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "food_ordering_app_user_role",

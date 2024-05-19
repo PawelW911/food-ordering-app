@@ -1,14 +1,10 @@
 package org.app.api.controller;
 
 import lombok.AllArgsConstructor;
-import org.app.bussiness.CustomerService;
-import org.app.domain.Address;
-import org.app.domain.Customer;
 import org.app.security.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

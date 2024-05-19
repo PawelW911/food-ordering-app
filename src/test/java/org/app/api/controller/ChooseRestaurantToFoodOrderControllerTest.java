@@ -2,7 +2,10 @@ package org.app.api.controller;
 
 import lombok.AllArgsConstructor;
 import org.app.api.controller.dataForController.MenuPosition;
-import org.app.api.dto.*;
+import org.app.api.dto.ChooseStreetDeliveryDTO;
+import org.app.api.dto.MenuDTO;
+import org.app.api.dto.OpinionDTO;
+import org.app.api.dto.VariableDTO;
 import org.app.bussiness.OpinionService;
 import org.app.bussiness.RestaurantService;
 import org.app.bussiness.StreetDeliveryService;
@@ -21,9 +24,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = ChooseRestaurantToFoodOrderController.class)

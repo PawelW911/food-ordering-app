@@ -4,8 +4,9 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.app.api.controller.dataForController.MenuPosition;
 import org.app.api.dto.*;
-import org.app.bussiness.*;
-import org.app.domain.FoodOrder;
+import org.app.bussiness.OpinionService;
+import org.app.bussiness.RestaurantService;
+import org.app.bussiness.StreetDeliveryService;
 import org.app.domain.StreetDelivery;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import static org.app.api.controller.CustomerController.*;
+import static org.app.api.controller.CustomerController.CUSTOMER;
 
 @Controller
 @AllArgsConstructor
@@ -62,8 +59,8 @@ public class ChooseRestaurantToFoodOrderController {
     @PostMapping(value = CUSTOMER + CHOOSE_RESTAURANT_TO_ORDER_FOOD)
     public ModelAndView chooseRestaurant(
             Model model,
-            @Valid @ModelAttribute("variableDTO")VariableDTO variableDTO
-            ) {
+            @Valid @ModelAttribute("variableDTO") VariableDTO variableDTO
+    ) {
 
         uniqueCodeRestaurantToOrderFood = variableDTO.getUniqueCode();
 
@@ -81,8 +78,8 @@ public class ChooseRestaurantToFoodOrderController {
     @PostMapping(value = CUSTOMER + SHOW_OPINION)
     public ModelAndView showOpinionRestaurant(
             Model model,
-            @Valid @ModelAttribute("variableDTO")VariableDTO variableDTO
-            ) {
+            @Valid @ModelAttribute("variableDTO") VariableDTO variableDTO
+    ) {
 
         uniqueCodeRestaurantToOrderFood = variableDTO.getUniqueCode();
 
@@ -99,7 +96,7 @@ public class ChooseRestaurantToFoodOrderController {
 
     protected Map<String, ?> prepareAvailableRestaurant(StreetDelivery streetDelivery) {
         Map<String, ?> mapRestaurant = new HashMap<>();
-        if(streetDelivery == null) {
+        if (streetDelivery == null) {
             return Map.of();
         } else {
             return Map.of(

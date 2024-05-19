@@ -9,7 +9,6 @@ import org.app.infrastructure.database.entity.OwnerEntity;
 import org.app.infrastructure.database.entity.RestaurantEntity;
 import org.app.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import org.app.infrastructure.database.repository.mapper.AddressMapper;
-import org.app.infrastructure.database.repository.mapper.OwnerMapper;
 import org.app.infrastructure.database.repository.mapper.RestaurantMapper;
 import org.springframework.stereotype.Repository;
 
@@ -19,12 +18,11 @@ import java.util.List;
 @AllArgsConstructor
 public class RestaurantRepository implements RestaurantDAO {
 
-    RestaurantJpaRepository restaurantJpaRepository;
-    OwnerRepository ownerRepository;
-    StreetDeliveryRepository streetDeliveryRepository;
-    RestaurantMapper restaurantMapper;
-    OwnerMapper ownerMapper;
-    AddressMapper addressMapper;
+    private final RestaurantJpaRepository restaurantJpaRepository;
+    private final OwnerRepository ownerRepository;
+    private final StreetDeliveryRepository streetDeliveryRepository;
+    private final RestaurantMapper restaurantMapper;
+    private final AddressMapper addressMapper;
 
     @Override
     public Restaurant saveRestaurant(Restaurant restaurant) {

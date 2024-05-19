@@ -6,7 +6,6 @@ import org.app.api.dto.VariableDTO;
 import org.app.bussiness.CustomerService;
 import org.app.bussiness.FoodOrderService;
 import org.app.bussiness.OpinionService;
-import org.app.domain.FoodOrder;
 import org.app.domain.Opinion;
 import org.app.util.FoodOrderFixtures;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

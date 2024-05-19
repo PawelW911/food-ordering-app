@@ -7,13 +7,13 @@ import org.app.api.dto.mapper.AppetizerMapperDTO;
 import org.app.bussiness.AppetizerService;
 import org.app.bussiness.MenuService;
 import org.app.bussiness.RestaurantService;
-import org.app.domain.Appetizer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static org.app.api.controller.OwnerController.*;
+import static org.app.api.controller.OwnerController.OWNER;
+import static org.app.api.controller.OwnerController.uniqueCodeNow;
 
 @Controller
 @AllArgsConstructor

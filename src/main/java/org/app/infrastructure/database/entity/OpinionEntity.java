@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 
-
 import java.time.OffsetDateTime;
 
 @Getter
@@ -42,8 +41,6 @@ public class OpinionEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     RestaurantEntity restaurant;
-
-
 
 
 }

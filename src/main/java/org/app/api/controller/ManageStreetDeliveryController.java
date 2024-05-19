@@ -2,7 +2,6 @@ package org.app.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.app.api.dto.AppetizerDTO;
 import org.app.api.dto.PostalCodeDTO;
 import org.app.bussiness.StreetDeliveryService;
 import org.app.bussiness.dao.ZipCodeDAO;
@@ -17,7 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.app.api.controller.OwnerController.*;
+import static org.app.api.controller.OwnerController.OWNER;
+import static org.app.api.controller.OwnerController.uniqueCodeNow;
 
 @Controller
 @AllArgsConstructor

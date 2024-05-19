@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "email")
-@ToString(of = {"customerId", "name", "surname", "email", "phone", "userEntity"})
+@ToString(of = {"customerId", "name", "surname", "email", "phone", "user"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -2,9 +2,10 @@ package org.app.api.controller;
 
 import lombok.AllArgsConstructor;
 import org.app.api.dto.UserDTO;
-import org.app.bussiness.CustomerService;
 import org.app.bussiness.OwnerService;
-import org.app.domain.*;
+import org.app.domain.Owner;
+import org.app.domain.Role;
+import org.app.domain.User;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;

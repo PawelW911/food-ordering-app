@@ -3,7 +3,6 @@ package org.app.api.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.app.api.controller.dataForController.ForFoodOrderChoose;
 import org.app.api.dto.VariableDTO;
 import org.app.bussiness.FoodOrderService;
 import org.app.domain.FoodOrder;
@@ -22,7 +21,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.app.api.controller.OwnerController.*;
+import static org.app.api.controller.OwnerController.OWNER;
+import static org.app.api.controller.OwnerController.uniqueCodeNow;
 import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_ONLY_SET_DISHES;
 import static org.app.api.controller.dataForController.ForFoodOrderChoose.MAP_WITHOUT_SET_DISHES;
 
@@ -70,11 +70,11 @@ public class OwnerFoodOrderController {
     private Map<String, ?> prepareDishesForFoodOrder(FoodOrder foodOrderDishes) {
         return Map.of(
                 "dishesDTOs", Stream.of(
-                        foodOrderDishes.getAppetizers(),
-                        foodOrderDishes.getSoups(),
-                        foodOrderDishes.getMainMeals(),
-                        foodOrderDishes.getDeserts(),
-                        foodOrderDishes.getDrinks()
+                                foodOrderDishes.getAppetizers(),
+                                foodOrderDishes.getSoups(),
+                                foodOrderDishes.getMainMeals(),
+                                foodOrderDishes.getDeserts(),
+                                foodOrderDishes.getDrinks()
                         )
                         .flatMap(Set::stream)
                         .collect(Collectors.toSet())

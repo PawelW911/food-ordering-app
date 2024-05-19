@@ -3,7 +3,6 @@ package org.app.bussiness;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.app.bussiness.dao.SoupDAO;
-import org.app.domain.Appetizer;
 import org.app.domain.Menu;
 import org.app.domain.Restaurant;
 import org.app.domain.Soup;
@@ -67,11 +66,11 @@ public class SoupService {
 
     public Soup findById(Integer soupId) {
         Soup soup = soupDAO.findById(soupId);
-                if (soup == null) {
-                    throw new NotFoundException("Soup with id: [%s] does not exist.".formatted(soupId));
-                } else {
-                    log.info("Soup with id: [{}] is found", soupId);
-                }
+        if (soup == null) {
+            throw new NotFoundException("Soup with id: [%s] does not exist.".formatted(soupId));
+        } else {
+            log.info("Soup with id: [{}] is found", soupId);
+        }
         return soup;
     }
 

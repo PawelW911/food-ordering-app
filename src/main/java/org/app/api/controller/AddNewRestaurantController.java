@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.UUID;
 
-import static org.app.api.controller.OwnerController.*;
+import static org.app.api.controller.OwnerController.OWNER;
+import static org.app.api.controller.OwnerController.ownerEmail;
 
 @Controller
 @AllArgsConstructor

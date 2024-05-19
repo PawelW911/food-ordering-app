@@ -6,8 +6,6 @@ import org.app.infrastructure.database.entity.OwnerEntity;
 public interface OwnerDAO {
     Owner saveOwner(Owner owner);
 
-    OwnerEntity saveOwnerAndReturnEntity(Owner owner);
-
     OwnerEntity findByEmailAndReturnEntity(String email);
 
     Owner findByEmail(String email);

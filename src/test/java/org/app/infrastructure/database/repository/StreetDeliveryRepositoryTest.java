@@ -1,7 +1,6 @@
 package org.app.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
-import org.app.domain.Restaurant;
 import org.app.domain.StreetDelivery;
 import org.app.infrastructure.configuration.CleanDatabaseBeforeRepositoryTestAndConfiguration;
 import org.app.infrastructure.database.entity.OwnerEntity;
@@ -10,7 +9,6 @@ import org.app.infrastructure.database.repository.jpa.OwnerJpaRepository;
 import org.app.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import org.app.infrastructure.database.repository.jpa.StreetDeliveryJpaRepository;
 import org.app.infrastructure.database.repository.mapper.OwnerMapper;
-import org.app.infrastructure.database.repository.mapper.RestaurantMapper;
 import org.app.util.OwnerFixtures;
 import org.app.util.RestaurantFixtures;
 import org.app.util.StreetDeliveryFixtures;
@@ -23,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.app.util.StreetDeliveryFixtures.*;
+import static org.app.util.StreetDeliveryFixtures.someStreetDelivery1;
 
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))

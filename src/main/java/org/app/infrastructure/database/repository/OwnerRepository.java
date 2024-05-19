@@ -15,7 +15,7 @@ public class OwnerRepository implements OwnerDAO {
 
     private final OwnerJpaRepository ownerJpaRepository;
     private final OwnerMapper ownerMapper;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Owner saveOwner(Owner owner) {
@@ -23,12 +23,6 @@ public class OwnerRepository implements OwnerDAO {
         toSave.getUser().setPassword(passwordEncoder.encode(toSave.getUser().getPassword()));
         OwnerEntity saved = ownerJpaRepository.saveAndFlush(toSave);
         return ownerMapper.mapFromEntity(saved);
-    }
-
-    @Override
-    public OwnerEntity saveOwnerAndReturnEntity(Owner owner) {
-        OwnerEntity toSave = ownerMapper.mapToEntity(owner);
-        return ownerJpaRepository.saveAndFlush(toSave);
     }
 
     @Override

@@ -10,9 +10,6 @@ import java.util.List;
 @Repository
 public interface StreetDeliveryJpaRepository extends JpaRepository<StreetDeliveryEntity, Integer> {
 
-
-
-
     StreetDeliveryEntity findByStreetAndCity(String street, String city);
 
     List<StreetDeliveryEntity> findByRestaurants(RestaurantEntity restaurantEntity);

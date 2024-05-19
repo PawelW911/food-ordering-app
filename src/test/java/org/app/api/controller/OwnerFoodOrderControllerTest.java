@@ -3,13 +3,9 @@ package org.app.api.controller;
 import lombok.AllArgsConstructor;
 import org.app.api.dto.VariableDTO;
 import org.app.bussiness.FoodOrderService;
-import org.app.util.FoodOrderFixtures;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,8 +13,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.app.util.FoodOrderFixtures.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.app.util.FoodOrderFixtures.someFoodOrder1;
+import static org.app.util.FoodOrderFixtures.someFoodOrder2;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 

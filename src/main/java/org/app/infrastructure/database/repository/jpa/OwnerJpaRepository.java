@@ -7,8 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OwnerJpaRepository extends JpaRepository<OwnerEntity, Integer> {
 
-
     OwnerEntity findByEmail(String email);
-
-    void deleteByEmail(String email);
 }

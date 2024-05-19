@@ -7,7 +7,6 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OwnerDTOMapper {
-    OwnerDTO mapToDTO(Owner owner);
 
     Owner mapFromDTO(OwnerDTO ownerDTO);
 }

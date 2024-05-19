@@ -1,7 +1,9 @@
 package org.app.api.dto;
 
 import jakarta.validation.constraints.Digits;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.app.domain.FoodOrder;
 import org.app.domain.Menu;
 
